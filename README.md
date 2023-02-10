@@ -8,7 +8,7 @@ An online E-store system built in Java 11=> and ___ _replace with other platform
 - Yaroslav Khalitov 
 - Nate Saunders
 - Jeremy Smart
-- MEMBER4
+- Jerry Chen
 
 
 ## Prerequisites
