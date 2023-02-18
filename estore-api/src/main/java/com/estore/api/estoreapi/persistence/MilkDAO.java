@@ -16,7 +16,7 @@ public interface MilkDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Milk[] getMilk() throws IOException;
+    Milk[] getMilks() throws IOException;
 
     /**
      * Finds all {@linkplain Milk milks} whose name contains the given text

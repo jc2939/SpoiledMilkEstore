@@ -71,18 +71,18 @@ public class MilkController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Hero heroes}
+     * Responds to the GET request for all {@linkplain Milk listOfMilks}
      * 
-     * @return ResponseEntity with array of {@link Hero hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<Milk[]> getHeroes() {
+    public ResponseEntity<Milk[]> getMilks() {
         LOG.info("GET /milk");
         try {
-            Milk heroes[] = milkDao.getMilk();
-            return new ResponseEntity<Milk[]>(heroes,HttpStatus.OK);
+            Milk listOfMilks[] = milkDao.getMilks();
+            return new ResponseEntity<Milk[]>(listOfMilks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

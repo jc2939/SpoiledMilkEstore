@@ -141,7 +141,7 @@ public class MilkFileDAO implements MilkDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Milk[] getMilk() {
+    public Milk[] getMilks() {
         synchronized(milks) {
             return getMilkArray();
         }
