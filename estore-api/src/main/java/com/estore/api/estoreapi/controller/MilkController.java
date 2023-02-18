@@ -32,35 +32,35 @@ import com.estore.api.estoreapi.model.Milk;
 @RequestMapping("milk")
 public class MilkController {
     private static final Logger LOG = Logger.getLogger(MilkController.class.getName());
-    private MilkDAO heroDao;
+    private MilkDAO milkDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link HeroDAO Hero Data Access Object} to perform CRUD operations
+     * @param heroDao The {@link MilkDAO Hero Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public MilkController(MilkDAO heroDao) {
-        this.heroDao = heroDao;
+    public MilkController(MilkDAO milkDao) {
+        this.milkDao = milkDao;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Hero hero} for the given id
+     * Responds to the GET request for a {@linkplain Milk milk} for the given id
      * 
-     * @param id The id used to locate the {@link Hero hero}
+     * @param id The id used to locate the {@link Milk milk}
      * 
-     * @return ResponseEntity with {@link Hero hero} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Milk milk} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Milk> getHero(@PathVariable int id) {
+    public ResponseEntity<Milk> getMilk(@PathVariable int id) {
         LOG.info("GET /milk/" + id);
         try {
-            Milk hero = heroDao.getMilk(id);
-            if (hero != null)
-                return new ResponseEntity<Milk>(hero,HttpStatus.OK);
+            Milk milk = milkDao.getMilk(id);
+            if (milk != null)
+                return new ResponseEntity<Milk>(milk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -80,10 +80,8 @@ public class MilkController {
     @GetMapping("")
     public ResponseEntity<Milk[]> getHeroes() {
         LOG.info("GET /milk");
-
-        // Replace below with your implementation
         try {
-            Milk heroes[] = heroDao.getMilk();
+            Milk heroes[] = milkDao.getMilk();
             return new ResponseEntity<Milk[]>(heroes,HttpStatus.OK);
         }
         catch(IOException e) {
@@ -111,7 +109,7 @@ public class MilkController {
 
         // Replace below with your implementation
         try {
-            Milk heroes[] = heroDao.findMilk(name);
+            Milk heroes[] = milkDao.findMilk(name);
             return new ResponseEntity<Milk[]>(heroes,HttpStatus.OK);
         }
         catch(IOException e) {
@@ -121,22 +119,22 @@ public class MilkController {
     }
 
     /**
-     * Creates a {@linkplain Hero hero} with the provided hero object
+     * Creates a {@linkplain Milk milk} with the provided hero object
      * 
-     * @param hero - The {@link Hero hero} to create
+     * @param milk - The {@link Milk milk} to create
      * 
-     * @return ResponseEntity with created {@link Hero hero} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Hero hero} object already exists<br>
+     * @return ResponseEntity with created {@link Milk milk} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Milk milk} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Milk> createHero(@RequestBody Milk hero) {
-        LOG.info("POST /heroes " + hero);
+    public ResponseEntity<Milk> createMilk(@RequestBody Milk milk) {
+        LOG.info("POST /milks " + milk);
 
         // Replace below with your implementation
         try {
-            Milk newHero = heroDao.createMilk(hero);
-            return new ResponseEntity<Milk>(newHero,HttpStatus.OK);
+            Milk newMilk = milkDao.createMilk(milk);
+            return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -159,7 +157,7 @@ public class MilkController {
 
         // Replace below with your implementation
         try {
-            Milk newHero = heroDao.updateMilk(hero);
+            Milk newHero = milkDao.updateMilk(hero);
             if (newHero != null)
                 return new ResponseEntity<Milk>(newHero,HttpStatus.OK);
             else
@@ -172,21 +170,19 @@ public class MilkController {
     }
 
     /**
-     * Deletes a {@linkplain Hero hero} with the given id
+     * Deletes a {@linkplain Milk milk} with the given id
      * 
-     * @param id The id of the {@link Hero hero} to deleted
+     * @param id The id of the {@link Milk milk} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Milk> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk> deleteMilk(@PathVariable int id) {
+        LOG.info("DELETE /milks/" + id);
         try {
-            boolean deleted = heroDao.deleteMilk(id);
+            boolean deleted = milkDao.deleteMilk(id);
             if (deleted)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
@@ -196,6 +192,5 @@ public class MilkController {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        //return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

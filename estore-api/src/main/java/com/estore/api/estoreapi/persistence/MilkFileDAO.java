@@ -25,7 +25,7 @@ import com.estore.api.estoreapi.model.Milk;
 @Component
 public class MilkFileDAO implements MilkDAO {
     private static final Logger LOG = Logger.getLogger(MilkFileDAO.class.getName());
-    Map<Integer,Milk> milk;   // Provides a local cache of the hero objects
+    Map<Integer,Milk> milks;   // Provides a local cache of the hero objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Milk
@@ -80,7 +80,7 @@ public class MilkFileDAO implements MilkDAO {
     private Milk[] getMilkArray(String containsText) { // if containsText == null, no filter
         ArrayList<Milk> heroArrayList = new ArrayList<>();
 
-        for (Milk hero : milk.values()) {
+        for (Milk hero : milks.values()) {
             if (containsText == null || hero.getType().contains(containsText)) {
                 heroArrayList.add(hero);
             }
@@ -92,24 +92,24 @@ public class MilkFileDAO implements MilkDAO {
     }
 
     /**
-     * Saves the {@linkplain Milk heroes} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Milk milks} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link Milk heroes} were written successfully
+     * @return true if the {@link Milk milks} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
-        Milk[] heroArray = getMilkArray();
+        Milk[] milkArray = getMilkArray();
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
         // with the file or reading from the file
-        objectMapper.writeValue(new File(filename),heroArray);
+        objectMapper.writeValue(new File(filename),milkArray);
         return true;
     }
 
     /**
-     * Loads {@linkplain Milk heroes} from the JSON file into the map
+     * Loads {@linkplain Milk milks} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
@@ -118,19 +118,19 @@ public class MilkFileDAO implements MilkDAO {
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
-        milk = new TreeMap<>();
+        milks = new TreeMap<>();
         nextId = 0;
 
         // Deserializes the JSON objects from the file into an array of heroes
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
-        Milk[] heroArray = objectMapper.readValue(new File(filename),Milk[].class);
+        Milk[] milkArray = objectMapper.readValue(new File(filename),Milk[].class);
 
-        // Add each hero to the tree map and keep track of the greatest id
-        for (Milk hero : heroArray) {
-            milk.put(hero.getId(),hero);
-            if (hero.getId() > nextId)
-                nextId = hero.getId();
+        // Add each milk to the tree map and keep track of the greatest id
+        for (Milk milk : milkArray) {
+            milks.put(milk.getId(),milk);
+            if (milk.getId() > nextId)
+                nextId = milk.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;
@@ -142,7 +142,7 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public Milk[] getMilk() {
-        synchronized(milk) {
+        synchronized(milks) {
             return getMilkArray();
         }
     }
@@ -152,7 +152,7 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public Milk[] findMilk(String containsText) {
-        synchronized(milk) {
+        synchronized(milks) {
             return getMilkArray(containsText);
         }
     }
@@ -162,9 +162,9 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public Milk getMilk(int id) {
-        synchronized(milk) {
-            if (milk.containsKey(id))
-                return milk.get(id);
+        synchronized(milks) {
+            if (milks.containsKey(id))
+                return milks.get(id);
             else
                 return null;
         }
@@ -175,11 +175,11 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public Milk createMilk(Milk milk) throws IOException {
-        synchronized(this.milk) {
+        synchronized(this.milks) {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
             Milk newHero = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume());
-            this.milk.put(newHero.getId(),newHero);
+            this.milks.put(newHero.getId(),newHero);
             save(); // may throw an IOException
             return newHero;
         }
@@ -190,11 +190,11 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public Milk updateMilk(Milk hero) throws IOException {
-        synchronized(milk) {
-            if (milk.containsKey(hero.getId()) == false)
+        synchronized(milks) {
+            if (milks.containsKey(hero.getId()) == false)
                 return null;  // hero does not exist
 
-            milk.put(hero.getId(),hero);
+            milks.put(hero.getId(),hero);
             save(); // may throw an IOException
             return hero;
         }
@@ -205,9 +205,9 @@ public class MilkFileDAO implements MilkDAO {
      */
     @Override
     public boolean deleteMilk(int id) throws IOException {
-        synchronized(milk) {
-            if (milk.containsKey(id)) {
-                milk.remove(id);
+        synchronized(milks) {
+            if (milks.containsKey(id)) {
+                milks.remove(id);
                 return save();
             }
             else

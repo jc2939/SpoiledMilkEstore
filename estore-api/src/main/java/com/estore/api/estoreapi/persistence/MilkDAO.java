@@ -10,46 +10,46 @@ import com.estore.api.estoreapi.model.Milk;
  */
 public interface MilkDAO {
     /**
-     * Retrieves all {@linkplain Milk heroes}
+     * Retrieves all {@linkplain Milk milks}
      * 
-     * @return An array of {@link Milk hero} objects, may be empty
+     * @return An array of {@link Milk milk} objects, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     Milk[] getMilk() throws IOException;
 
     /**
-     * Finds all {@linkplain Milk heroes} whose name contains the given text
+     * Finds all {@linkplain Milk milks} whose name contains the given text
      * 
      * @param containsText The text to match against
      * 
-     * @return An array of {@link Milk heroes} whose nemes contains the given text, may be empty
+     * @return An array of {@link Milk milks} whose names contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
     Milk[] findMilk(String containsText) throws IOException;
 
     /**
-     * Retrieves a {@linkplain Milk hero} with the given id
+     * Retrieves a {@linkplain Milk milk} with the given id
      * 
-     * @param id The id of the {@link Milk hero} to get
+     * @param id The id of the {@link Milk milk} to get
      * 
-     * @return a {@link Milk hero} object with the matching id
+     * @return a {@link Milk milk} object with the matching id
      * <br>
-     * null if no {@link Milk hero} with a matching id is found
+     * null if no {@link Milk milk} with a matching id is found
      * 
      * @throws IOException if an issue with underlying storage
      */
     Milk getMilk(int id) throws IOException;
 
     /**
-     * Creates and saves a {@linkplain Milk hero}
+     * Creates and saves a {@linkplain Milk milk}
      * 
-     * @param hero {@linkplain Milk hero} object to be created and saved
+     * @param milk {@linkplain Milk milk} object to be created and saved
      * <br>
-     * The id of the hero object is ignored and a new uniqe id is assigned
+     * The id of the milk object is ignored and a new uniqe id is assigned
      *
-     * @return new {@link Milk hero} if successful, false otherwise 
+     * @return new {@link Milk milk} if successful, false otherwise 
      * 
      * @throws IOException if an issue with underlying storage
      */
@@ -68,13 +68,13 @@ public interface MilkDAO {
     Milk updateMilk(Milk hero) throws IOException;
 
     /**
-     * Deletes a {@linkplain Milk hero} with the given id
+     * Deletes a {@linkplain Milk milk} with the given id
      * 
-     * @param id The id of the {@link Milk hero}
+     * @param id The id of the {@link Milk milk}
      * 
-     * @return true if the {@link Milk hero} was deleted
+     * @return true if the {@link Milk milk} was deleted
      * <br>
-     * false if hero with the given id does not exist
+     * false if milk with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
