@@ -25,13 +25,13 @@ import com.estore.api.estoreapi.model.Milk;
 @Component
 public class MilkFileDAO implements MilkDAO {
     private static final Logger LOG = Logger.getLogger(MilkFileDAO.class.getName());
-    Map<Integer,Milk> milks;   // Provides a local cache of the hero objects
+    Map<Integer,Milk> milks;   // Provides a local cache of the milk objects
                                 // so that we don't need to read from the file
                                 // each time
     private ObjectMapper objectMapper;  // Provides conversion between Milk
                                         // objects and JSON text format written
                                         // to the file
-    private static int nextId;  // The next Id to assign to a new hero
+    private static int nextId;  // The next Id to assign to a new milk
     private String filename;    // Filename to read from and write to
 
     /**
@@ -45,11 +45,11 @@ public class MilkFileDAO implements MilkDAO {
     public MilkFileDAO(@Value("${milk.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the heroes from the file
+        load();  // load the milks from the file
     }
 
     /**
-     * Generates the next id for a new {@linkplain Milk hero}
+     * Generates the next id for a new {@linkplain Milk milk}
      * 
      * @return The next id
      */
@@ -60,9 +60,9 @@ public class MilkFileDAO implements MilkDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Milk heroes} from the tree map
+     * Generates an array of {@linkplain Milk milks} from the tree map
      * 
-     * @return  The array of {@link Milk heroes}, may be empty
+     * @return  The array of {@link Milk milks}, may be empty
      */
     private Milk[] getMilkArray() {
         return getMilkArray(null);
