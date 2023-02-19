@@ -21,13 +21,13 @@ public interface MilkDAO {
     /**
      * Finds all {@linkplain Milk milks} whose name contains the given text
      * 
-     * @param containsText The text to match against
+     * @param type The type parameter which contains the text used to find the {@link Milk milks}
      * 
      * @return An array of {@link Milk milks} whose names contains the given text, may be empty
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Milk[] findMilk(String containsText) throws IOException;
+    Milk[] searchMilks(String type) throws IOException;
 
     /**
      * Retrieves a {@linkplain Milk milk} with the given id

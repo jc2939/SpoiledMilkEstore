@@ -69,26 +69,26 @@ public class MilkFileDAO implements MilkDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Milk heroes} from the tree map for any
-     * {@linkplain Milk heroes} that contains the text specified by containsText
+     * Generates an array of {@linkplain Milk milkArrayList} from the tree map for any
+     * {@linkplain Milk milks} that contains the text specified by type
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Milk heroes}
+     * If type is null, the array contains all of the {@linkplain Milk milks}
      * in the tree map
      * 
-     * @return  The array of {@link Milk heroes}, may be empty
+     * @return  The array of {@link Milk milkArray}, may be empty
      */
-    private Milk[] getMilkArray(String containsText) { // if containsText == null, no filter
-        ArrayList<Milk> heroArrayList = new ArrayList<>();
+    private Milk[] getMilkArray(String type) { // if type == null, no filter
+        ArrayList<Milk> milkArrayList = new ArrayList<>();
 
-        for (Milk hero : milks.values()) {
-            if (containsText == null || hero.getType().contains(containsText)) {
-                heroArrayList.add(hero);
+        for (Milk milk : milks.values()) {
+            if (type == null || milk.getType().contains(type)) {
+                milkArrayList.add(milk);
             }
         }
 
-        Milk[] heroArray = new Milk[heroArrayList.size()];
-        heroArrayList.toArray(heroArray);
-        return heroArray;
+        Milk[] milkArray = new Milk[milkArrayList.size()];
+        milkArrayList.toArray(milkArray);
+        return milkArray;
     }
 
     /**
@@ -151,9 +151,9 @@ public class MilkFileDAO implements MilkDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Milk[] findMilk(String containsText) {
+    public Milk[] searchMilks(String type) {
         synchronized(milks) {
-            return getMilkArray(containsText);
+            return getMilkArray(type);
         }
     }
 

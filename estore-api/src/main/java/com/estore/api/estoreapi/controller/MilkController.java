@@ -91,26 +91,23 @@ public class MilkController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Hero heroes} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain Milk milks} whose name contains
+     * the text in type
      * 
-     * @param name The name parameter which contains the text used to find the {@link Hero heroes}
+     * @param type The type parameter which contains the text used to find the {@link Milk milks}
      * 
-     * @return ResponseEntity with array of {@link Hero hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Milk milks} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Milk[]> searchHeroes(@RequestParam String name) {
-        LOG.info("GET /heroes/?name="+name);
+    public ResponseEntity<Milk[]> searchMilks(@RequestParam String type) {
+        LOG.info("GET /milks/?type="+type);
 
         // Replace below with your implementation
         try {
-            Milk heroes[] = milkDao.findMilk(name);
-            return new ResponseEntity<Milk[]>(heroes,HttpStatus.OK);
+            Milk milks[] = milkDao.searchMilks(type);
+            return new ResponseEntity<Milk[]>(milks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
