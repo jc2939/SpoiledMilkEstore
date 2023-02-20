@@ -53,19 +53,19 @@ public interface MilkDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    Milk createMilk(Milk hero) throws IOException;
+    Milk createMilk(Milk milk) throws IOException;
 
     /**
-     * Updates and saves a {@linkplain Milk hero}
+     * Updates and saves a {@linkplain Milk  milk}
      * 
-     * @param {@link Milk hero} object to be updated and saved
+     * @param {@link Milk milk} object to be updated and saved
      * 
-     * @return updated {@link Milk hero} if successful, null if
-     * {@link Milk hero} could not be found
+     * @return updated {@link Milk milk} if successful, null if
+     * {@link Milk milk} could not be found
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Milk updateMilk(Milk hero) throws IOException;
+    Milk updateMilk(Milk milk) throws IOException;
 
     /**
      * Deletes a {@linkplain Milk milk} with the given id
