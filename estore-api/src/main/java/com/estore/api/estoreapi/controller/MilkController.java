@@ -149,7 +149,7 @@ public class MilkController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Milk> updateHero(@RequestBody Milk hero) {
+    public ResponseEntity<Milk> updateHero(@RequestBody Milk hero) { 
         LOG.info("PUT /heroes " + hero);
 
         // Replace below with your implementation
