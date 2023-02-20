@@ -56,7 +56,7 @@ public class MilkController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Milk> getMilk(@PathVariable int id) {
-        LOG.info("GET /milk/" + id);
+        LOG.info("GET /milks/" + id);
         try {
             Milk milk = milkDao.getMilk(id);
             if (milk != null)
