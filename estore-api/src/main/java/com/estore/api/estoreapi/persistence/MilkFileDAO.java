@@ -176,7 +176,7 @@ public class MilkFileDAO implements MilkDAO {
     @Override
     public Milk createMilk(Milk milk) throws IOException {
         synchronized(this.milks) {
-            // We create a new hero object because the id field is immutable
+            // We create a new milk object because the id field is immutable
             // and we need to assign the next unique id
             Milk newMilk = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume());
             this.milks.put(newMilk.getId(),newMilk);
