@@ -20,7 +20,7 @@ import com.estore.api.estoreapi.persistence.MilkDAO;
 import com.estore.api.estoreapi.model.Milk;
 
 /**
- * Handles the REST API requests for the Hero resource
+ * Handles the REST API requests for the Milk resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -37,7 +37,7 @@ public class MilkController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link MilkDAO Hero Data Access Object} to perform CRUD operations
+     * @param milkDao The {@link MilkDAO Milk Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -116,7 +116,7 @@ public class MilkController {
     }
 
     /**
-     * Creates a {@linkplain Milk milk} with the provided hero object
+     * Creates a {@linkplain Milk milk} with the provided milk object
      * 
      * @param milk - The {@link Milk milk} to create
      * 
@@ -140,23 +140,23 @@ public class MilkController {
     }
 
     /**
-     * Updates the {@linkplain Hero hero} with the provided {@linkplain Hero hero} object, if it exists
+     * Updates the {@linkplain Milk milk} with the provided {@linkplain Milk milk} object, if it exists
      * 
-     * @param hero The {@link Hero hero} to update
+     * @param milk The {@link Milk milk} to update
      * 
-     * @return ResponseEntity with updated {@link Hero hero} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link Milk milk} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Milk> updateHero(@RequestBody Milk hero) { 
-        LOG.info("PUT /heroes " + hero);
+    public ResponseEntity<Milk> updateMilk(@RequestBody Milk milk) { 
+        LOG.info("PUT /milks " + milk);
 
         // Replace below with your implementation
         try {
-            Milk newHero = milkDao.updateMilk(hero);
-            if (newHero != null)
-                return new ResponseEntity<Milk>(newHero,HttpStatus.OK);
+            Milk newMilk = milkDao.updateMilk(milk);
+            if (newMilk != null)
+                return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
