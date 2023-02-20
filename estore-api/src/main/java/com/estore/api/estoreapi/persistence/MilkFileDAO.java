@@ -121,7 +121,7 @@ public class MilkFileDAO implements MilkDAO {
         milks = new TreeMap<>();
         nextId = 0;
 
-        // Deserializes the JSON objects from the file into an array of heroes
+        // Deserializes the JSON objects from the file into an array of milkArray
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         Milk[] milkArray = objectMapper.readValue(new File(filename),Milk[].class);
@@ -178,10 +178,10 @@ public class MilkFileDAO implements MilkDAO {
         synchronized(this.milks) {
             // We create a new hero object because the id field is immutable
             // and we need to assign the next unique id
-            Milk newHero = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume());
-            this.milks.put(newHero.getId(),newHero);
+            Milk newMilk = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume());
+            this.milks.put(newMilk.getId(),newMilk);
             save(); // may throw an IOException
-            return newHero;
+            return newMilk;
         }
     }
 
@@ -189,14 +189,14 @@ public class MilkFileDAO implements MilkDAO {
     ** {@inheritDoc}
      */
     @Override
-    public Milk updateMilk(Milk hero) throws IOException {
+    public Milk updateMilk(Milk milk) throws IOException {
         synchronized(milks) {
-            if (milks.containsKey(hero.getId()) == false)
-                return null;  // hero does not exist
+            if (milks.containsKey(milk.getId()) == false)
+                return null;  // milk does not exist
 
-            milks.put(hero.getId(),hero);
+            milks.put(milk.getId(),milk);
             save(); // may throw an IOException
-            return hero;
+            return milk;
         }
     }
 
