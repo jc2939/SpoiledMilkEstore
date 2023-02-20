@@ -1,4 +1,4 @@
-package com.heroes.api.heroesapi.controller;
+package com.estore.api.estoreapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.heroes.api.heroesapi.persistence.HeroDAO;
-import com.heroes.api.heroesapi.model.Hero;
+import com.estore.api.estoreapi.persistence.MilkDAO;
+import com.estore.api.estoreapi.model.Milk;
 
 /**
- * Handles the REST API requests for the Hero resource
+ * Handles the REST API requests for the Milk resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
@@ -29,38 +29,38 @@ import com.heroes.api.heroesapi.model.Hero;
  */
 
 @RestController
-@RequestMapping("heroes")
-public class HeroController {
-    private static final Logger LOG = Logger.getLogger(HeroController.class.getName());
-    private HeroDAO heroDao;
+@RequestMapping("milk")
+public class MilkController {
+    private static final Logger LOG = Logger.getLogger(MilkController.class.getName());
+    private MilkDAO milkDao;
 
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param heroDao The {@link HeroDAO Hero Data Access Object} to perform CRUD operations
+     * @param milkDao The {@link MilkDAO Milk Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
-    public HeroController(HeroDAO heroDao) {
-        this.heroDao = heroDao;
+    public MilkController(MilkDAO milkDao) {
+        this.milkDao = milkDao;
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Hero hero} for the given id
+     * Responds to the GET request for a {@linkplain Milk milk} for the given id
      * 
-     * @param id The id used to locate the {@link Hero hero}
+     * @param id The id used to locate the {@link Milk milk}
      * 
-     * @return ResponseEntity with {@link Hero hero} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Milk milk} object and HTTP status of OK if found<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Hero> getHero(@PathVariable int id) {
-        LOG.info("GET /heroes/" + id);
+    public ResponseEntity<Milk> getMilk(@PathVariable int id) {
+        LOG.info("GET /milks/" + id);
         try {
-            Hero hero = heroDao.getHero(id);
-            if (hero != null)
-                return new ResponseEntity<Hero>(hero,HttpStatus.OK);
+            Milk milk = milkDao.getMilk(id);
+            if (milk != null)
+                return new ResponseEntity<Milk>(milk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -71,20 +71,18 @@ public class HeroController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Hero heroes}
+     * Responds to the GET request for all {@linkplain Milk listOfMilks}
      * 
-     * @return ResponseEntity with array of {@link Hero hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
-    public ResponseEntity<Hero[]> getHeroes() {
-        LOG.info("GET /heroes");
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk[]> getMilks() {
+        LOG.info("GET /milks");
         try {
-            Hero heroes[] = heroDao.getHeroes();
-            return new ResponseEntity<Hero[]>(heroes,HttpStatus.OK);
+            Milk listOfMilks[] = milkDao.getMilks();
+            return new ResponseEntity<Milk[]>(listOfMilks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -93,26 +91,21 @@ public class HeroController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Hero heroes} whose name contains
-     * the text in name
+     * Responds to the GET request for all {@linkplain Milk milks} whose name contains
+     * the text in type
      * 
-     * @param name The name parameter which contains the text used to find the {@link Hero heroes}
+     * @param type The type parameter which contains the text used to find the {@link Milk milks}
      * 
-     * @return ResponseEntity with array of {@link Hero hero} objects (may be empty) and
+     * @return ResponseEntity with array of {@link Milk milks} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
-     * Example: Find all heroes that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
      */
     @GetMapping("/")
-    public ResponseEntity<Hero[]> searchHeroes(@RequestParam String name) {
-        LOG.info("GET /heroes/?name="+name);
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk[]> searchMilks(@RequestParam String type) {
+        LOG.info("GET /milks/?type="+type);
         try {
-            Hero heroes[] = heroDao.findHeroes(name);
-            return new ResponseEntity<Hero[]>(heroes,HttpStatus.OK);
+            Milk milks[] = milkDao.searchMilks(type);
+            return new ResponseEntity<Milk[]>(milks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -121,22 +114,20 @@ public class HeroController {
     }
 
     /**
-     * Creates a {@linkplain Hero hero} with the provided hero object
+     * Creates a {@linkplain Milk milk} with the provided milk object
      * 
-     * @param hero - The {@link Hero hero} to create
+     * @param milk - The {@link Milk milk} to create
      * 
-     * @return ResponseEntity with created {@link Hero hero} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Hero hero} object already exists<br>
+     * @return ResponseEntity with created {@link Milk milk} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Milk milk} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Hero> createHero(@RequestBody Hero hero) {
-        LOG.info("POST /heroes " + hero);
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk> createMilk(@RequestBody Milk milk) {
+        LOG.info("POST /milks " + milk);
         try {
-            Hero newHero = heroDao.createHero(hero);
-            return new ResponseEntity<Hero>(newHero,HttpStatus.OK);
+            Milk newMilk = milkDao.createMilk(milk);
+            return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -145,23 +136,21 @@ public class HeroController {
     }
 
     /**
-     * Updates the {@linkplain Hero hero} with the provided {@linkplain Hero hero} object, if it exists
+     * Updates the {@linkplain Milk milk} with the provided {@linkplain Milk milk} object, if it exists
      * 
-     * @param hero The {@link Hero hero} to update
+     * @param milk The {@link Milk milk} to update
      * 
-     * @return ResponseEntity with updated {@link Hero hero} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated {@link Milk milk} object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
-    public ResponseEntity<Hero> updateHero(@RequestBody Hero hero) {
-        LOG.info("PUT /heroes " + hero);
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk> updateMilk(@RequestBody Milk milk) { 
+        LOG.info("PUT /milks " + milk);
         try {
-            Hero newHero = heroDao.updateHero(hero);
-            if (newHero != null)
-                return new ResponseEntity<Hero>(newHero,HttpStatus.OK);
+            Milk newMilk = milkDao.updateMilk(milk);
+            if (newMilk != null)
+                return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -172,21 +161,19 @@ public class HeroController {
     }
 
     /**
-     * Deletes a {@linkplain Hero hero} with the given id
+     * Deletes a {@linkplain Milk milk} with the given id
      * 
-     * @param id The id of the {@link Hero hero} to deleted
+     * @param id The id of the {@link Milk milk} to deleted
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Hero> deleteHero(@PathVariable int id) {
-        LOG.info("DELETE /heroes/" + id);
-
-        // Replace below with your implementation
+    public ResponseEntity<Milk> deleteMilk(@PathVariable int id) {
+        LOG.info("DELETE /milks/" + id);
         try {
-            boolean deleted = heroDao.deleteHero(id);
+            boolean deleted = milkDao.deleteMilk(id);
             if (deleted)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
@@ -196,6 +183,5 @@ public class HeroController {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        //return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
