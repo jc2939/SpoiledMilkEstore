@@ -79,7 +79,7 @@ public class MilkController {
      */
     @GetMapping("")
     public ResponseEntity<Milk[]> getMilks() {
-        LOG.info("GET /milk");
+        LOG.info("GET /milks");
         try {
             Milk listOfMilks[] = milkDao.getMilks();
             return new ResponseEntity<Milk[]>(listOfMilks,HttpStatus.OK);
@@ -103,8 +103,6 @@ public class MilkController {
     @GetMapping("/")
     public ResponseEntity<Milk[]> searchMilks(@RequestParam String type) {
         LOG.info("GET /milks/?type="+type);
-
-        // Replace below with your implementation
         try {
             Milk milks[] = milkDao.searchMilks(type);
             return new ResponseEntity<Milk[]>(milks,HttpStatus.OK);
@@ -127,8 +125,6 @@ public class MilkController {
     @PostMapping("")
     public ResponseEntity<Milk> createMilk(@RequestBody Milk milk) {
         LOG.info("POST /milks " + milk);
-
-        // Replace below with your implementation
         try {
             Milk newMilk = milkDao.createMilk(milk);
             return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
@@ -151,8 +147,6 @@ public class MilkController {
     @PutMapping("")
     public ResponseEntity<Milk> updateMilk(@RequestBody Milk milk) { 
         LOG.info("PUT /milks " + milk);
-
-        // Replace below with your implementation
         try {
             Milk newMilk = milkDao.updateMilk(milk);
             if (newMilk != null)
