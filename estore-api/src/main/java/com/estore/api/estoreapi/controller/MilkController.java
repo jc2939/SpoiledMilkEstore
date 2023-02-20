@@ -29,7 +29,7 @@ import com.estore.api.estoreapi.model.Milk;
  */
 
 @RestController
-@RequestMapping("milk")
+@RequestMapping("milks")
 public class MilkController {
     private static final Logger LOG = Logger.getLogger(MilkController.class.getName());
     private MilkDAO milkDao;
