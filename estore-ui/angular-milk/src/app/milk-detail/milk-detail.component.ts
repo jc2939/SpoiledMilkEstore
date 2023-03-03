@@ -35,7 +35,7 @@ export class MilkDetailComponent implements OnInit {
 
   save(): void {
     if (this.milk) {
-      this.MilkService.updateHero(this.milk)
+      this.MilkService.updateMilk(this.milk)
         .subscribe(() => this.goBack());
     }
   }

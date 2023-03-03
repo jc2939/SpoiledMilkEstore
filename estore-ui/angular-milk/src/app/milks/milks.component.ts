@@ -4,7 +4,7 @@ import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 
 @Component({
-  selector: 'app-heroes',
+  selector: 'app-milks',
   templateUrl: './milks.component.html',
   styleUrls: ['./milks.component.css']
 })

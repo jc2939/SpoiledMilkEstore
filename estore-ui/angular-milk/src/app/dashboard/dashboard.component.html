@@ -2,8 +2,8 @@
 <div class="heroes-menu">
   <a *ngFor="let hero of heroes"
       routerLink="/detail/{{hero.id}}">
-      {{hero.name}}
+      {{hero.name}} {{hero.id}}
   </a>
 </div>
 
-<app-hero-search></app-hero-search>
+<app-milk-search></app-milk-search>

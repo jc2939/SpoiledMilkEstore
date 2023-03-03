@@ -10,12 +10,12 @@ import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 
 @Component({
-  selector: 'app-hero-search',
+  selector: 'app-milk-search',
   templateUrl: './milk-search.component.html',
   styleUrls: [ './milk-search.component.css' ]
 })
 export class MilkSearchComponent implements OnInit {
-  heroes$!: Observable<Milk[]>;
+  milks$!: Observable<Milk[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private MilkService: MilkService) {}
@@ -26,7 +26,7 @@ export class MilkSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.heroes$ = this.searchTerms.pipe(
+    this.milks$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 

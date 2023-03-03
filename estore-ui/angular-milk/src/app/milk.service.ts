@@ -88,10 +88,10 @@ export class MilkService {
   }
 
   /** PUT: update the hero on the server */
-  updateHero(milk: Milk): Observable<any> {
+  updateMilk(milk: Milk): Observable<any> {
     return this.http.put(this.milksUrl, milk, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${milk.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateMilk'))
     );
   }
 
