@@ -11,8 +11,8 @@ import { HeroService } from '../milk.service';
 
 @Component({
   selector: 'app-hero-search',
-  templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.css' ]
+  templateUrl: './milk-search.component.html',
+  styleUrls: [ './milk-search.component.css' ]
 })
 export class HeroSearchComponent implements OnInit {
   heroes$!: Observable<Milk[]>;

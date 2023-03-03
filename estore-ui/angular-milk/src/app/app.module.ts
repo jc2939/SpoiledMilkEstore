@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './milk-detail/milk-detail.component';
 import { HeroesComponent } from './milks/milks.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { HeroSearchComponent } from './milk-search/milk-search.component';
 import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
