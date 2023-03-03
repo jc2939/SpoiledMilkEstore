@@ -6,9 +6,9 @@ import { Milk } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
-  selector: 'app-hero-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  selector: 'app-milk-detail',
+  templateUrl: './milk-detail.component.html',
+  styleUrls: [ './milk-detail.component.css' ]
 })
 export class HeroDetailComponent implements OnInit {
   milk: Milk | undefined;
