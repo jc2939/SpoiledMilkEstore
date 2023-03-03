@@ -3,29 +3,29 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Milk } from '../milk';
-import { HeroService } from '../milk.service';
+import { MilkService } from '../milk.service';
 
 @Component({
   selector: 'app-milk-detail',
   templateUrl: './milk-detail.component.html',
   styleUrls: [ './milk-detail.component.css' ]
 })
-export class HeroDetailComponent implements OnInit {
+export class MilkDetailComponent implements OnInit {
   milk: Milk | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private heroService: HeroService,
+    private MilkService: MilkService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.getHero();
+    this.getMilk();
   }
 
-  getHero(): void {
+  getMilk(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.heroService.getHero(id)
+    this.MilkService.getMilk(id)
       .subscribe(milk => this.milk = milk);
   }
 
@@ -35,7 +35,7 @@ export class HeroDetailComponent implements OnInit {
 
   save(): void {
     if (this.milk) {
-      this.heroService.updateHero(this.milk)
+      this.MilkService.updateHero(this.milk)
         .subscribe(() => this.goBack());
     }
   }

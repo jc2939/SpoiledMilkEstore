@@ -9,9 +9,9 @@ import { MessageService } from './message.service';
 
 
 @Injectable({ providedIn: 'root' })
-export class HeroService {
+export class MilkService {
 
-  private heroesUrl = 'http://localhost:8080/heroes'
+  private milksUrl = 'http://localhost:8080/heroes'
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,74 +22,74 @@ export class HeroService {
     private messageService: MessageService) { }
 
   /** GET heroes from the server */
-  getHeroes(): Observable<Milk[]> {
-    return this.http.get<Milk[]>(this.heroesUrl)
+  getMilks(): Observable<Milk[]> {
+    return this.http.get<Milk[]>(this.milksUrl)
       .pipe(
         tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Milk[]>('getHeroes', []))
+        catchError(this.handleError<Milk[]>('getMilks', []))
       );
   }
 
   /** GET hero by id. Return `undefined` when id not found */
-  getHeroNo404<Data>(id: number): Observable<Milk> {
-    const url = `${this.heroesUrl}/?id=${id}`;
+  getMilkNo404<Data>(id: number): Observable<Milk> {
+    const url = `${this.milksUrl}/?id=${id}`;
     return this.http.get<Milk[]>(url)
       .pipe(
         map(heroes => heroes[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} hero id=${id}`);
+          this.log(`${outcome} milk id=${id}`);
         }),
-        catchError(this.handleError<Milk>(`getHero id=${id}`))
+        catchError(this.handleError<Milk>(`getMilk id=${id}`))
       );
   }
 
   /** GET hero by id. Will 404 if id not found */
-  getHero(id: number): Observable<Milk> {
-    const url = `${this.heroesUrl}/${id}`;
+  getMilk(id: number): Observable<Milk> {
+    const url = `${this.milksUrl}/${id}`;
     return this.http.get<Milk>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Milk>(`getHero id=${id}`))
+      tap(_ => this.log(`fetched milk id=${id}`)),
+      catchError(this.handleError<Milk>(`getMilk id=${id}`))
     );
   }
 
   /* GET heroes whose name contains search term */
-  searchHeroes(term: string): Observable<Milk[]> {
+  searchMilks(term: string): Observable<Milk[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Milk[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+    return this.http.get<Milk[]>(`${this.milksUrl}/?name=${term}`).pipe(
       tap(x => x.length ?
          this.log(`found heroes matching "${term}"`) :
          this.log(`no heroes matching "${term}"`)),
-      catchError(this.handleError<Milk[]>('searchHeroes', []))
+      catchError(this.handleError<Milk[]>('searchMilks', []))
     );
   }
 
   //////// Save methods //////////
 
   /** POST: add a new hero to the server */
-  addHero(milk: Milk): Observable<Milk> {
-    return this.http.post<Milk>(this.heroesUrl, milk, this.httpOptions).pipe(
+  addMilk(milk: Milk): Observable<Milk> {
+    return this.http.post<Milk>(this.milksUrl, milk, this.httpOptions).pipe(
       tap((newMilk: Milk) => this.log(`added hero w/ id=${newMilk.id}`)),
-      catchError(this.handleError<Milk>('addHero'))
+      catchError(this.handleError<Milk>('addMilk'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  deleteHero(id: number): Observable<Milk> {
-    const url = `${this.heroesUrl}/${id}`;
+  deleteMilk(id: number): Observable<Milk> {
+    const url = `${this.milksUrl}/${id}`;
 
     return this.http.delete<Milk>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Milk>('deleteHero'))
+      catchError(this.handleError<Milk>('deleteMilk'))
     );
   }
 
   /** PUT: update the hero on the server */
   updateHero(milk: Milk): Observable<any> {
-    return this.http.put(this.heroesUrl, milk, this.httpOptions).pipe(
+    return this.http.put(this.milksUrl, milk, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${milk.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
@@ -116,8 +116,8 @@ export class HeroService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a MilkService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`MilkService: ${message}`);
   }
 }

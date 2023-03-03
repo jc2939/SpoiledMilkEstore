@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Milk } from '../milk';
-import { HeroService } from '../milk.service';
+import { MilkService } from '../milk.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,14 +10,14 @@ import { HeroService } from '../milk.service';
 export class DashboardComponent implements OnInit {
   heroes: Milk[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private MilkService: MilkService) { }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getMilks();
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes()
+  getMilks(): void {
+    this.MilkService.getMilks()
       .subscribe(heroes => this.heroes = heroes.slice(1, 5));
   }
 }

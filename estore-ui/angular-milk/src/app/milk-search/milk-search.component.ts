@@ -7,18 +7,18 @@ import {
  } from 'rxjs/operators';
 
 import { Milk } from '../milk';
-import { HeroService } from '../milk.service';
+import { MilkService } from '../milk.service';
 
 @Component({
   selector: 'app-hero-search',
   templateUrl: './milk-search.component.html',
   styleUrls: [ './milk-search.component.css' ]
 })
-export class HeroSearchComponent implements OnInit {
+export class MilkSearchComponent implements OnInit {
   heroes$!: Observable<Milk[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private MilkService: MilkService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -34,7 +34,7 @@ export class HeroSearchComponent implements OnInit {
       distinctUntilChanged(),
 
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.MilkService.searchMilks(term)),
     );
   }
 }
