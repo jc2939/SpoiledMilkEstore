@@ -1,4 +1,4 @@
-export interface Hero {
+export interface Milk {
     id: number;
     name: string;
   }
