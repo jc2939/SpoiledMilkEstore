@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Milk } from '../hero';
-import { HeroService } from '../hero.service';
+import { Milk } from '../milk';
+import { HeroService } from '../milk.service';
 
 @Component({
   selector: 'app-milk-detail',

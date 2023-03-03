@@ -1,4 +1,4 @@
-import { Milk } from './hero';
+import { Milk } from './milk';
 
 export const HEROES: Milk[] = [
   { id: 12, name: 'Dr. Nice' },

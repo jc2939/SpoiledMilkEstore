@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Milk } from '../hero';
-import { HeroService } from '../hero.service';
+import { Milk } from '../milk';
+import { HeroService } from '../milk.service';
 
 @Component({
   selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  templateUrl: './milks.component.html',
+  styleUrls: ['./milks.component.css']
 })
 export class HeroesComponent implements OnInit {
   milks: Milk[] = [];
