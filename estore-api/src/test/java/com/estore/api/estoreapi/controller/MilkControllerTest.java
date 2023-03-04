@@ -121,5 +121,32 @@ public class MilkControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    @Test
+    public void testGetMilks() throws IOException
+    {
+        // Setting up
+        Milk[] milks = new Milk[2];
+        milks[0] = new Milk(25, "cow", "banana", 2.4, 10, 2.99);
+        milks[1] = new Milk(26, "goat", "peach", 5.8, 6, 6.24);
+        // When getMilks is called return the milks created above
+        when(mockMilkDAO.getMilks()).thenReturn(milks);
+        ResponseEntity<Milk[]> response = milkController.getMilks();
+        // Invoke
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        // Analyze
+        assertEquals(milks, response.getBody());
+    }
+
+    @Test
+    public void testGetMilksHandleException() throws IOException
+    {
+        // throw an IOException when getMilks is called on Mpck Milk DAO
+        doThrow(new IOException()).when(mockMilkDAO).getMilks();
+        //Invoke
+        ResponseEntity<Milk[]> response = milkController.getMilks();
+        //Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
     
 }
