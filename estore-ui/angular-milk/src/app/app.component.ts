@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Welcome to our Spoiled Milk E-store!';
+  //myimage:string = "assets/images/glass-o-milk.jpg";
 }
+

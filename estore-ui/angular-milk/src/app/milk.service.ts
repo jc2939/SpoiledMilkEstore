@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Milk } from './milk';
-import { MessageService } from './message.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -18,14 +17,12 @@ export class MilkService {
   };
 
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+    private http: HttpClient) { }
 
   /** GET milks from the server */
   getMilks(): Observable<Milk[]> {
     return this.http.get<Milk[]>(this.milksUrl)
       .pipe(
-        tap(_ => this.log('fetched milks')),
         catchError(this.handleError<Milk[]>('getMilks', []))
       );
   }
@@ -36,10 +33,6 @@ export class MilkService {
     return this.http.get<Milk[]>(url)
       .pipe(
         map(milks => milks[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} milk id=${id}`);
-        }),
         catchError(this.handleError<Milk>(`getMilk id=${id}`))
       );
   }
@@ -48,7 +41,6 @@ export class MilkService {
   getMilk(id: number): Observable<Milk> {
     const url = `${this.milksUrl}/${id}`;
     return this.http.get<Milk>(url).pipe(
-      tap(_ => this.log(`fetched milk id=${id}`)),
       catchError(this.handleError<Milk>(`getMilk id=${id}`))
     );
   }
@@ -60,9 +52,6 @@ export class MilkService {
       return of([]);
     }
     return this.http.get<Milk[]>(`${this.milksUrl}/?name=${term}`).pipe(
-      tap(x => x.length ?
-         this.log(`found milks matching "${term}"`) :
-         this.log(`no milks matching "${term}"`)),
       catchError(this.handleError<Milk[]>('searchMilks', []))
     );
   }
@@ -72,7 +61,6 @@ export class MilkService {
   /** POST: add a new milk to the server */
   addMilk(milk: Milk): Observable<Milk> {
     return this.http.post<Milk>(this.milksUrl, milk, this.httpOptions).pipe(
-      tap((newMilk: Milk) => this.log(`added milk w/ id=${newMilk.id}`)),
       catchError(this.handleError<Milk>('addMilk'))
     );
   }
@@ -82,7 +70,6 @@ export class MilkService {
     const url = `${this.milksUrl}/${id}`;
 
     return this.http.delete<Milk>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted milk id=${id}`)),
       catchError(this.handleError<Milk>('deleteMilk'))
     );
   }
@@ -90,7 +77,6 @@ export class MilkService {
   /** PUT: update the milk on the server */
   updateMilk(milk: Milk): Observable<any> {
     return this.http.put(this.milksUrl, milk, this.httpOptions).pipe(
-      tap(_ => this.log(`updated milk id=${milk.id}`)),
       catchError(this.handleError<any>('updateMilk'))
     );
   }
@@ -108,16 +94,9 @@ export class MilkService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-  /** Log a MilkService message with the MessageService */
-  private log(message: string) {
-    this.messageService.add(`MilkService: ${message}`);
-  }
 }
