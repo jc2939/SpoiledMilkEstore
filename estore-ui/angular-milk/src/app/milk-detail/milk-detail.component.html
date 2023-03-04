@@ -1,10 +1,18 @@
 <div *ngIf="milk">
-  <h2>{{milk.name | uppercase}} Details</h2>
+  <h2>{{milk.type | uppercase}} {{milk.flavor | uppercase}} Details</h2>
   <div><span>id: </span>{{milk.id}}</div>
   <div>
-    <label for="milk-name">Hero name: </label>
-    <input id="milk-name" [(ngModel)]="milk.name" placeholder="Hero name"/>
+    <label for="milk-type">Milk type: </label>
+    <input id="milk-type" [(ngModel)]="milk.type" placeholder="Milk type"/>
+    <label for="milk-flavor">Milk flavor: </label>
+    <input id="milk-flavor" [(ngModel)]="milk.flavor" placeholder="Milk flavor"/>
+    <label for="milk-volume">Milk volume: </label>
+    <input id="milk-volume" type="number" [(ngModel)]="milk.volume" placeholder="Milk volume"/>
+    <label for="milk-quantity">Number of Milks in stock: </label>
+    <input id="milk-quantity" type="number" [(ngModel)]="milk.quantity" placeholder="Milk quantity"/>
+    <label for="milk-price">Milk price: </label>
+    <input id="milk-price" type="number" [(ngModel)]="milk.price" placeholder="Milk price"/>
   </div>
-  <button type="button" (click)="goBack()">go back</button>
-  <button type="button" (click)="save()">save</button>
+  <button type="button" (click)="goBack()">Go Back</button>
+  <button type="button" (click)="save()">Save</button>
 </div>

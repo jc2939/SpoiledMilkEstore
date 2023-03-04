@@ -19,13 +19,14 @@ export class MilksComponent implements OnInit {
 
   getMilks(): void {
     this.MilkService.getMilks()
-    .subscribe(heroes => this.milks = heroes);
+    .subscribe(milks => this.milks = milks);
   }
 
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.MilkService.addMilk({ name } as Milk)
+  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
+    type = type.trim();
+    flavor = flavor.trim();
+    if (!type) { return; }
+    this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
       .subscribe(milk => {
         this.milks.push(milk);
       });
@@ -34,6 +35,12 @@ export class MilksComponent implements OnInit {
   delete(milk: Milk): void {
     this.milks = this.milks.filter(m => m !== milk);
     this.MilkService.deleteMilk(milk.id).subscribe();
+  }
+
+  stringToInt(input: string): number
+  {
+    var number = Number(input);
+    return number;
   }
 
 }

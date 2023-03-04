@@ -1,4 +1,8 @@
 export interface Milk {
     id: number;
-    name: string;
+    type: string;
+    flavor: string;
+    volume: number;
+    quantity: number;
+    price: number;
   }

@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class MilkService {
 
-  private milksUrl = 'http://localhost:8080/heroes'
+  private milksUrl = 'http://localhost:8080/milks'
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,21 +21,21 @@ export class MilkService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  /** GET heroes from the server */
+  /** GET milks from the server */
   getMilks(): Observable<Milk[]> {
     return this.http.get<Milk[]>(this.milksUrl)
       .pipe(
-        tap(_ => this.log('fetched heroes')),
+        tap(_ => this.log('fetched milks')),
         catchError(this.handleError<Milk[]>('getMilks', []))
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
+  /** GET milk by id. Return `undefined` when id not found */
   getMilkNo404<Data>(id: number): Observable<Milk> {
     const url = `${this.milksUrl}/?id=${id}`;
     return this.http.get<Milk[]>(url)
       .pipe(
-        map(heroes => heroes[0]), // returns a {0|1} element array
+        map(milks => milks[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
           this.log(`${outcome} milk id=${id}`);
@@ -44,7 +44,7 @@ export class MilkService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET milk by id. Will 404 if id not found */
   getMilk(id: number): Observable<Milk> {
     const url = `${this.milksUrl}/${id}`;
     return this.http.get<Milk>(url).pipe(
@@ -53,44 +53,44 @@ export class MilkService {
     );
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET milks whose name contains search term */
   searchMilks(term: string): Observable<Milk[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty milk array.
       return of([]);
     }
     return this.http.get<Milk[]>(`${this.milksUrl}/?name=${term}`).pipe(
       tap(x => x.length ?
-         this.log(`found heroes matching "${term}"`) :
-         this.log(`no heroes matching "${term}"`)),
+         this.log(`found milks matching "${term}"`) :
+         this.log(`no milks matching "${term}"`)),
       catchError(this.handleError<Milk[]>('searchMilks', []))
     );
   }
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new milk to the server */
   addMilk(milk: Milk): Observable<Milk> {
     return this.http.post<Milk>(this.milksUrl, milk, this.httpOptions).pipe(
-      tap((newMilk: Milk) => this.log(`added hero w/ id=${newMilk.id}`)),
+      tap((newMilk: Milk) => this.log(`added milk w/ id=${newMilk.id}`)),
       catchError(this.handleError<Milk>('addMilk'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the milk from the server */
   deleteMilk(id: number): Observable<Milk> {
     const url = `${this.milksUrl}/${id}`;
 
     return this.http.delete<Milk>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
+      tap(_ => this.log(`deleted milk id=${id}`)),
       catchError(this.handleError<Milk>('deleteMilk'))
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the milk on the server */
   updateMilk(milk: Milk): Observable<any> {
     return this.http.put(this.milksUrl, milk, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${milk.id}`)),
+      tap(_ => this.log(`updated milk id=${milk.id}`)),
       catchError(this.handleError<any>('updateMilk'))
     );
   }

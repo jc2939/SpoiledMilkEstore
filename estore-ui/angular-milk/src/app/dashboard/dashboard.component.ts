@@ -8,7 +8,7 @@ import { MilkService } from '../milk.service';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Milk[] = [];
+  milks: Milk[] = [];
 
   constructor(private MilkService: MilkService) { }
 
@@ -18,6 +18,6 @@ export class DashboardComponent implements OnInit {
 
   getMilks(): void {
     this.MilkService.getMilks()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(milks => this.milks = milks.slice(1, 5));
   }
 }

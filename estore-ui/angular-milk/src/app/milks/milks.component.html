@@ -1,21 +1,31 @@
 <h2>My Milks</h2>
 
 <div>
-  <label for="new-milk">Hero name: </label>
-  <input id="new-milk" #milkName />
+  <label for="milk-type">Milk type: </label>
+  <input id="milk-type" #milkType />
+  <label for="milk-type">Milk flavor: </label>
+  <input id="milk-type" #milkFlavor />
+  <label for="milk-type">Milk volume: </label>
+  <input id="milk-type" type="number" #milkVolume />
+  <label for="milk-type">Number of milks in stock: </label>
+  <input id="milk-type" type="number" #milkQuantity />
+  <label for="milk-type">Milk price: </label>
+  <input id="milk-type" type="number" #milkPrice />
+
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" class="add-button" (click)="add(milkName.value); milkName.value=''">
-    Add hero
+  <button type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
+    stringToInt(milkQuantity.value), stringToInt(milkPrice.value))">
+    Add milk
   </button>
 </div>
 
-<ul class="heroes">
+<ul class="milks">
   <li *ngFor="let milk of milks">
     <a routerLink="/detail/{{milk.id}}">
-      <span class="badge">{{milk.id}}</span> {{milk.name}}
+      <span class="badge">{{milk.id}}</span> {{milk.type}} {{milk.flavor}}
     </a>
-    <button type="button" class="delete" title="delete hero"
+    <button type="button" class="delete" title="delete milk"
       (click)="delete(milk)">x</button>
   </li>
 </ul>
