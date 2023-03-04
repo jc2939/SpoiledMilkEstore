@@ -61,4 +61,14 @@ public class MilkFileDAOTest {
         }
     }
 
+    @Test
+    public void testSearchMilks()
+    {
+        Milk[] milks = milkFileDAO.searchMilks("oat");
+        // Analyze
+        assertEquals(milks.length, 2);
+        assertEquals(milks[0], testMilks[1]);
+        assertEquals(milks[1], testMilks[2]);
+    }
+
 }
