@@ -25,5 +25,24 @@ public class MilkTest {
         assertEquals(expectedQuantity, milk.getQuantity());
         assertEquals(expectedPrice, milk.getPrice());
     }
+
+    @Test
+    public void testToString() {
+        // Setup
+        int id = 99;
+        String type = "goat";
+        String flavor = "vanilla";
+        double volume = 4.5;
+        int quantity = 7;
+        double price = 4.99;
+        String expected_string = String.format(Milk.STRING_FORMAT, id, type, flavor, volume, quantity, price);
+        Milk milk = new Milk(id, type, flavor, volume, quantity, price);
+
+        // Invoke
+        String actual_string = milk.toString();
+
+        // Analyze
+        assertEquals(expected_string, actual_string);
+    }
     
 }
