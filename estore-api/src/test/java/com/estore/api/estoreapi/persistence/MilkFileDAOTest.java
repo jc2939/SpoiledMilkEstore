@@ -71,4 +71,28 @@ public class MilkFileDAOTest {
         assertEquals(milks[1], testMilks[2]);
     }
 
+    @Test
+    public void testGetMilk() {
+        // Invoke
+        Milk milk = milkFileDAO.getMilk(10);
+
+        // Analyze
+        assertEquals(milk,testMilks[0]);
+    }
+
+    @Test
+    public void testDeleteMilk() {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> milkFileDAO.deleteMilk(10),
+                            "Unexpected exception thrown");
+
+        // Analyze
+        assertEquals(result, true);
+        // We check the internal tree map size against the length
+        // of the test milks array - 1 (because of the delete)
+        // Because milks attribute of MilkFileDAO is package private
+        // we can access it directly
+        assertEquals(milkFileDAO.milks.size(),testMilks.length-1);
+    }
+
 }
