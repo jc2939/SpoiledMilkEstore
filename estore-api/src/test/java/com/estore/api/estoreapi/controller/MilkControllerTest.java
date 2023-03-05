@@ -148,5 +148,38 @@ public class MilkControllerTest {
         //Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
+
+    @Test
+    public void testSearchMilks() throws IOException { // searchMilks may throw IOException
+        // Setup
+        String searchString = "oa";
+        Milk[] milks = new Milk[2];
+        milks[0] = new Milk(27, "goat", "orange", 2.5, 4, 4.99);
+        milks[1] = new Milk(28, "oat", "vanilla", 3.6, 8, 3.99);
+        // When searchMilks is called with the search string, return the 
+        // two milks above
+        when(mockMilkDAO.searchMilks(searchString)).thenReturn(milks);
+
+        // Invoke
+        ResponseEntity<Milk[]> response = milkController.searchMilks(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(milks, response.getBody());
+    }
+
+    @Test
+    public void testSearchMilksHandleException() throws IOException { // searchMilks may throw IOException
+        // Setup
+        String searchString = "ow";
+        // When createMilk is called on the Mock Milk DAO, throw an IOException
+        doThrow(new IOException()).when(mockMilkDAO).searchMilks(searchString);
+
+        // Invoke
+        ResponseEntity<Milk[]> response = milkController.searchMilks(searchString);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
     
 }
