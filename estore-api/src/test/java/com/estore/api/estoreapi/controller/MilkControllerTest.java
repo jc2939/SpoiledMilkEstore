@@ -182,4 +182,18 @@ public class MilkControllerTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
     
+    @Test
+    public void testCreateMilk() throws IOException { //createMilk may throw IOException
+        // Setup
+        Milk milk = new Milk(0, "cow", "strawberry", 0.25, 10, 6.99);
+        // when createMilk is called return true, simulating successful deletion
+        when(mockMilkDAO.createMilk(milk)).thenReturn(milk);
+
+        // Invoke
+        ResponseEntity<Milk> response = milkController.createMilk(milk);
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(milk,response.getBody());
+    }
 }
