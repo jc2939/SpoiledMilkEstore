@@ -21,6 +21,7 @@ public class Milk {
     @JsonProperty("volume") private double volume;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
+    @JsonProperty("imageUrl") String imageUrl;
 
 
     /**
@@ -33,13 +34,14 @@ public class Milk {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price) {
+    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price, @JsonProperty("imageUrl") String imageUrl) {
         this.id = id;
         this.type = type;
         this.flavor = flavor;
         this.volume = volume;
         this.quantity = quantity;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     /**
@@ -107,6 +109,18 @@ public class Milk {
      * @return The price of the milk
      */
     public double getPrice() {return price;}
+
+    /**
+     * Sets the price of the milk - necessary for JSON object to Java object deserialization
+     * @param name The price of the milk
+     */
+    public void setURL(String imageUrl) {this.imageUrl = imageUrl;}
+
+    /**
+     * Retrieves the price of the milk
+     * @return The price of the milk
+     */
+    public String getImageUrl() {return imageUrl;}
 
     /**
      * {@inheritDoc}
