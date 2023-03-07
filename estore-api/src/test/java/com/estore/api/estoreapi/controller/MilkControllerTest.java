@@ -196,4 +196,50 @@ public class MilkControllerTest {
         assertEquals(HttpStatus.OK,response.getStatusCode());
         assertEquals(milk,response.getBody());
     }
+
+    @Test
+    public void testUpdateMilk() throws IOException {
+        // Setup
+        Milk milk = new Milk(0, "almond", "chocolate", 0.5, 10, 8.99);
+        
+        // when updateMilk is called, return milk, simulating the successful update
+        when(mockMilkDAO.updateMilk(milk)).thenReturn(milk);
+
+        // Invoke
+        ResponseEntity<Milk> response = milkController.updateMilk(milk);
+        
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(milk,response.getBody());
+    }
+
+    @Test
+    public void testUpdateMilkNotFound() throws IOException {
+        // Setup
+        Milk milk = new Milk(99, "almond", "chocolate", 0.5, 10, 8.99);
+        
+        // when updateMilk is called, return null, simulating the failed update
+        when(mockMilkDAO.updateMilk(milk)).thenReturn(null);
+
+        // Invoke
+        ResponseEntity<Milk> response = milkController.updateMilk(milk);
+        
+        // Analyze
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    public void testUpdateMilkHandleException() throws IOException {
+        // Setup
+        Milk milk = new Milk(9, "almond", "chocolate", 0.5, 10, 8.99);
+        
+        // Throw an IOException when updateMilk is called
+        doThrow(new IOException()).when(mockMilkDAO).updateMilk(milk);
+
+        // Invoke
+        ResponseEntity<Milk> response = milkController.updateMilk(milk);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 }
