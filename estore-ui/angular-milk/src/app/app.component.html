@@ -1,7 +1,12 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/heroes">Heroes</a>
-</nav>
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+<div class = "Dash">
+  <h1>{{title}}</h1>
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/milks">Milks</a>
+    <a routerLink="/shopping-cart">Cart</a>
+  </nav>
+  <router-outlet></router-outlet>
+  <!-- <div>
+    <img [src] ="myimage" alt="">
+  </div> -->
+</div>

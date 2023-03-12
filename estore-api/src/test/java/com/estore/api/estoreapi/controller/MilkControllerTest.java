@@ -39,7 +39,7 @@ public class MilkControllerTest {
     @Test
     public void testGetMilk() throws IOException {  // getMilk may throw IOException
         // Setup
-        Milk milk = new Milk(1,"Oat", "Dragonfruit", 35.0, 50, 99.99);
+        Milk milk = new Milk(1,"Oat", "Dragonfruit", 35.0, 50, 99.99, "");
         // When the same id is passed in, our mock Milk DAO will return the Milk object
         when(mockMilkDAO.getMilk(milk.getId())).thenReturn(milk);
 

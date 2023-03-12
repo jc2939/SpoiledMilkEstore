@@ -1,0 +1,24 @@
+<h2>My Items</h2>
+
+
+<div class="container">
+  <div class="item" *ngFor="let milk of milks; let i = index">
+
+    <a routerLink="/detail/{{milk.id}}">
+      <span class="badge"></span> <span style="text-transform:capitalize">{{milk.type}} {{milk.flavor}}</span>
+    </a>
+    <label for="milk-type">Volume: {{milk.volume}} </label>
+    <label for="milk-type">Price: ${{milk.price}}</label>
+    <img class="productImage" [src]="milk.imageUrl"/>
+    <!-- remember imageUrl added to everything -->
+    <p>
+      <button type="button" class="delete" title="Delete One"
+        (click)="deleteOne(milk)">-</button>
+       {{ milk.quantity }} &nbsp; <!-- Not milk.quantity but shopping cart item quantity. Also the &nbsp is a space -->
+      <button type="button" class="add" title="Add one"
+        (click)="addOne(milk)">+</button>   
+    </p>
+  </div>
+</div>  
+
+<button type="button" class="add-button" (click)="purchase()">Purchase</button>

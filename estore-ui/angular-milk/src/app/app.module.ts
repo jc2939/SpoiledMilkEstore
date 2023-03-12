@@ -8,10 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
-import { MessagesComponent } from './messages/messages.component';
+import { MilkDetailComponent } from './milk-detail/milk-detail.component';
+import { MilksComponent } from './milks/milks.component';
+import { MilkSearchComponent } from './milk-search/milk-search.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   imports: [
@@ -23,10 +23,10 @@ import { MessagesComponent } from './messages/messages.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    MessagesComponent,
-    HeroSearchComponent
+    MilksComponent,
+    MilkDetailComponent,
+    MilkSearchComponent,
+    ShoppingCartComponent
   ],
   bootstrap: [ AppComponent ]
 })
