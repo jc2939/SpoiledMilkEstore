@@ -37,10 +37,10 @@ public class MilkFileDAOTest {
     {
         mockObjectMapper = mock(ObjectMapper.class);
         testMilks = new Milk[4];
-        testMilks[0] = new Milk(10, "cow", "banana", 2.5, 8, 2.95);
-        testMilks[1] = new Milk(11, "oat", "chocolate", 4.2, 5, 4.50);
-        testMilks[2] = new Milk(12, "goat", "strawberry", 3.9, 11, 4.23);
-        testMilks[3] = new Milk(13, "almond", "pumpkin", 5.7, 14, 6.03);
+        testMilks[0] = new Milk(10, "cow", "banana", 2.5, 8, 2.95, "../assets/images/glass-o-milk.jpg");
+        testMilks[1] = new Milk(11, "oat", "chocolate", 4.2, 5, 4.50, "../assets/images/glass-o-milk.jpg");
+        testMilks[2] = new Milk(12, "goat", "strawberry", 3.9, 11, 4.23, "../assets/images/glass-o-milk.jpg");
+        testMilks[3] = new Milk(13, "almond", "pumpkin", 5.7, 14, 6.03, "../assets/images/glass-o-milk.jpg");
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the hero array above

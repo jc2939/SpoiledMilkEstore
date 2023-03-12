@@ -127,8 +127,8 @@ public class MilkControllerTest {
     {
         // Setting up
         Milk[] milks = new Milk[2];
-        milks[0] = new Milk(25, "cow", "banana", 2.4, 10, 2.99);
-        milks[1] = new Milk(26, "goat", "peach", 5.8, 6, 6.24);
+        milks[0] = new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg");
+        milks[1] = new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg");
         // When getMilks is called return the milks created above
         when(mockMilkDAO.getMilks()).thenReturn(milks);
         ResponseEntity<Milk[]> response = milkController.getMilks();
@@ -154,8 +154,8 @@ public class MilkControllerTest {
         // Setup
         String searchString = "oa";
         Milk[] milks = new Milk[2];
-        milks[0] = new Milk(27, "goat", "orange", 2.5, 4, 4.99);
-        milks[1] = new Milk(28, "oat", "vanilla", 3.6, 8, 3.99);
+        milks[0] = new Milk(27, "goat", "orange", 2.5, 4, 4.99, "../assets/images/glass-o-milk.jpg");
+        milks[1] = new Milk(28, "oat", "vanilla", 3.6, 8, 3.99, "../assets/images/glass-o-milk.jpg");
         // When searchMilks is called with the search string, return the 
         // two milks above
         when(mockMilkDAO.searchMilks(searchString)).thenReturn(milks);
@@ -185,7 +185,7 @@ public class MilkControllerTest {
     @Test
     public void testCreateMilk() throws IOException { //createMilk may throw IOException
         // Setup
-        Milk milk = new Milk(0, "cow", "strawberry", 0.25, 10, 6.99);
+        Milk milk = new Milk(0, "cow", "strawberry", 0.25, 10, 6.99, "../assets/images/glass-o-milk.jpg");
         // when createMilk is called return true, simulating successful deletion
         when(mockMilkDAO.createMilk(milk)).thenReturn(milk);
 
@@ -200,7 +200,7 @@ public class MilkControllerTest {
     @Test
     public void testUpdateMilk() throws IOException {
         // Setup
-        Milk milk = new Milk(0, "almond", "chocolate", 0.5, 10, 8.99);
+        Milk milk = new Milk(0, "almond", "chocolate", 0.5, 10, 8.99, "../assets/images/glass-o-milk.jpg");
         
         // when updateMilk is called, return milk, simulating the successful update
         when(mockMilkDAO.updateMilk(milk)).thenReturn(milk);
@@ -216,7 +216,7 @@ public class MilkControllerTest {
     @Test
     public void testUpdateMilkNotFound() throws IOException {
         // Setup
-        Milk milk = new Milk(99, "almond", "chocolate", 0.5, 10, 8.99);
+        Milk milk = new Milk(99, "almond", "chocolate", 0.5, 10, 8.99, "../assets/images/glass-o-milk.jpg");
         
         // when updateMilk is called, return null, simulating the failed update
         when(mockMilkDAO.updateMilk(milk)).thenReturn(null);
@@ -231,7 +231,7 @@ public class MilkControllerTest {
     @Test
     public void testUpdateMilkHandleException() throws IOException {
         // Setup
-        Milk milk = new Milk(9, "almond", "chocolate", 0.5, 10, 8.99);
+        Milk milk = new Milk(9, "almond", "chocolate", 0.5, 10, 8.99, "../assets/images/glass-o-milk.jpg");
         
         // Throw an IOException when updateMilk is called
         doThrow(new IOException()).when(mockMilkDAO).updateMilk(milk);
