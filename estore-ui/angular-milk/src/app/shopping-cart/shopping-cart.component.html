@@ -2,21 +2,21 @@
 
 
 <div class="container">
-  <div class="item" *ngFor="let milk of milks; let i = index">
+  <div class="item" *ngFor="let cart of shoppingCarts;">
 
-    <a routerLink="/detail/{{milk.id}}">
-      <span class="badge"></span> <span style="text-transform:capitalize">{{milk.type}} {{milk.flavor}}</span>
+    <a routerLink="/detail/{{cart.userName}}">
+      <span class="badge"></span> <span style="text-transform:capitalize">{{cart.userName}} {{cart.userName}}</span>
     </a>
-    <label for="milk-type">Volume: {{milk.volume}} </label>
-    <label for="milk-type">Price: ${{milk.price}}</label>
-    <img class="productImage" [src]="milk.imageUrl"/>
+    <label for="milk-type">Volume: {{cart.userName}} </label>
+    <label for="milk-type">Price: ${{cart.userName}}</label>
+    <img class="productImage" [src]="cart.userName"/>
     <!-- remember imageUrl added to everything -->
     <p>
       <button type="button" class="delete" title="Delete One"
-        (click)="deleteOne(milk)">-</button>
-       {{ milk.quantity }} &nbsp; <!-- Not milk.quantity but shopping cart item quantity. Also the &nbsp is a space -->
+        (click)="deleteOne(cart)">-</button>
+       {{ cart.userName }} &nbsp; <!-- Not milk.quantity but shopping cart item quantity. Also the &nbsp is a space -->
       <button type="button" class="add" title="Add one"
-        (click)="addOne(milk)">+</button>   
+        (click)="addOne(cart)">+</button>   
     </p>
   </div>
 </div>  

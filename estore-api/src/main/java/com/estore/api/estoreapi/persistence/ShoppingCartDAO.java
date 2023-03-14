@@ -26,5 +26,8 @@ public interface ShoppingCartDAO {
      * 
      * @throws IOException if an issue with underlying storage
      */
-    void decrementMilk(Milk milk, String userName) throws IOException;
+    boolean decrementMilk(Milk milk, String userName) throws IOException;
+
+
+    ShoppingCart[] getShoppingCarts();
 }    

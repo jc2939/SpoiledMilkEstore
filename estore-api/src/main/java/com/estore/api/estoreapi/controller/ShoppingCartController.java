@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 import com.estore.api.estoreapi.persistence.MilkDAO;
 import com.estore.api.estoreapi.model.Milk;
+import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.persistence.ShoppingCartDAO;
 
 /**
@@ -34,7 +35,6 @@ import com.estore.api.estoreapi.persistence.ShoppingCartDAO;
 public class ShoppingCartController {
     private static final Logger LOG = Logger.getLogger(ShoppingCartController.class.getName());
     private ShoppingCartDAO shoppingCartDAO;
-    private MilkDAO milkDao;
 
     /**
      * Creates a REST API controller to reponds to requests
@@ -47,12 +47,21 @@ public class ShoppingCartController {
         this.shoppingCartDAO = shoppingCartDAO;
     }
 
+    /**
+     * Creates a {@linkplain Milk milk} with the provided milk object
+     * 
+     * @param milk - The {@link Milk milk} to create
+     * 
+     * @return ResponseEntity with created {@link Milk milk} object and HTTP status of CREATED<br>
+     * ResponseEntity with HTTP status of CONFLICT if {@link Milk milk} object already exists<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
     @PostMapping("")
-    public ResponseEntity<Milk> addMilk(@RequestBody Milk milk) {
-        LOG.info("POST /milks " + milk);
+    public ResponseEntity<ShoppingCart> incrementMilk(@RequestBody Milk milk, String userName) {
+        LOG.info("Post /milks " + userName);
         try {
-            Milk newMilk = milkDao.createMilk(milk);
-            return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
+            shoppingCartDAO.addMilk(milk, userName);
+            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -60,28 +69,29 @@ public class ShoppingCartController {
         }
     }
 
-    // /**
-    //  * Responds to the GET request for a {@linkplain Milk milk} for the given id
-    //  * 
-    //  * @param id The id used to locate the {@link Milk milk}
-    //  * 
-    //  * @return ResponseEntity with {@link Milk milk} object and HTTP status of OK if found<br>
-    //  * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-    //  * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-    //  */
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Milk> getMilk(@PathVariable int id) {
-    //     LOG.info("GET /milks/" + id);
-    //     try {
-    //         Milk milk = milkDao.getMilk(id);
-    //         if (milk != null)
-    //             return new ResponseEntity<Milk>(milk,HttpStatus.OK);
-    //         else
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    //     catch(IOException e) {
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
+    /**
+     * Deletes a {@linkplain Milk milk} with the given id
+     * 
+     * @param id The id of the {@link Milk milk} to deleted
+     * 
+     * @return ResponseEntity HTTP status of OK if deleted<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("")
+    public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable Milk milk, String userName) {
+        LOG.info("DELETE /milks/" + userName);
+        try {
+            boolean deleted = shoppingCartDAO.decrementMilk(milk, userName);
+            if (deleted)
+                return new ResponseEntity<>(HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }    

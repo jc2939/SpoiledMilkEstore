@@ -1,29 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
+import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCart } from '../shoppingCart';
+
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })
-export class ShoppingCartComponent {
-  milks: Milk[] = [];
+export class ShoppingCartComponent implements OnInit{
+  shoppingCarts: ShoppingCart[] = [];
 
-  constructor(private MilkService: MilkService) { }
+  constructor(private ShoppingCartService: ShoppingCartService) { }
+
   ngOnInit(): void {
-    this.getMilks();
+    this.getShoppingCarts();
+    //console.log("Test");
+
+  }
+
+  getShoppingCarts(): void {
+    this.ShoppingCartService.getShoppingCarts()
+    .subscribe(shoppingCarts => this.shoppingCarts = shoppingCarts);
   }
 
   purchase(): void{
 
   }
 
-  addOne(milk: Milk): void {
+  addOne(cart: ShoppingCart): void {
     // this.milks = this.milks.filter(m => m !== milk);
     // this.MilkService.deleteMilk(milk.id).subscribe();
   }
-  deleteOne(milk: Milk): void {
+  deleteOne(cart: ShoppingCart): void {
     // this.milks = this.milks.filter(m => m !== milk);
     // this.MilkService.deleteMilk(milk.id).subscribe();
   }
@@ -39,19 +50,19 @@ export class ShoppingCartComponent {
   }
 
 
-  getMilks(): void {
-    this.MilkService.getMilks()
-    .subscribe(milks => this.milks = milks);
-  }
+  // getMilks(): void {
+  //   this.MilkService.getMilks()
+  //   .subscribe(milks => this.milks = milks);
+  // }
 
-  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
-    type = type.trim();
-    flavor = flavor.trim();
-    if (!type) { return; }
-    this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
-      .subscribe(milk => {
-        this.milks.push(milk);
-      });
-  }
+  // add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
+  //   type = type.trim();
+  //   flavor = flavor.trim();
+  //   if (!type) { return; }
+  //   this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
+  //     .subscribe(milk => {
+  //       this.milks.push(milk);
+  //     });
+  // }
 
 }

@@ -43,7 +43,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public ShoppingCartFileDAO(@Value("${shoppingcart.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public ShoppingCartFileDAO(@Value("${shoppingCart.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the milks from the file
@@ -122,6 +122,15 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         return true;
     }
 
+    /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public ShoppingCart[] getShoppingCarts() {
+        synchronized(shoppingCart) {
+            return getShoppingCartArray();
+        }
+    }
 
     /**
      * Generates an array of {@linkplain Milk milks} from the tree map
@@ -138,12 +147,14 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     /**
      * Generates an array of {@linkplain Milk milks} from the tree map
      */
-    public void decrementMilk(Milk milk, String userName) throws IOException {
+    public boolean decrementMilk(Milk milk, String userName) throws IOException {
         synchronized(shoppingCart) {
             if (shoppingCart.containsKey(userName)){
                 shoppingCart.get(userName).decrementItem(milk);
-                save(); 
-            } 
+                save();
+                return true; 
+            }
+            return false;
         }    
     }
 
