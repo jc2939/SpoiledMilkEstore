@@ -18,6 +18,6 @@ export class DashboardComponent implements OnInit {
 
   getMilks(): void {
     this.MilkService.getMilks()
-      .subscribe(milks => this.milks = milks.slice(1, 5));
+      .subscribe(milks => this.milks = milks);
   }
 }
