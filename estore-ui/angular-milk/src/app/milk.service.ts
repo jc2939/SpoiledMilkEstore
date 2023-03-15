@@ -51,7 +51,7 @@ export class MilkService {
       // if not search term, return empty milk array.
       return of([]);
     }
-    return this.http.get<Milk[]>(`${this.milksUrl}/?name=${term}`).pipe(
+    return this.http.get<Milk[]>(`${this.milksUrl}/?type=${term}`).pipe(
       catchError(this.handleError<Milk[]>('searchMilks', []))
     );
   }
