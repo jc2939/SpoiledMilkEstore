@@ -12,6 +12,7 @@ import { MilkDetailComponent } from './milk-detail/milk-detail.component';
 import { MilksComponent } from './milks/milks.component';
 import { MilkSearchComponent } from './milk-search/milk-search.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { MilkDetailCustomerComponent } from './milk-detail-customer/milk-detail-customer.component';
 
 @NgModule({
   imports: [
@@ -25,8 +26,10 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     DashboardComponent,
     MilksComponent,
     MilkDetailComponent,
+    MilkDetailCustomerComponent,
     MilkSearchComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    MilkDetailCustomerComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -2,27 +2,22 @@
 <div *ngIf="shoppingCart">
   <label for="test">{{shoppingCart.username}}'s Shopping Cart </label>
   <div class="container">
-    <div class="item" *ngFor="let milk of shoppingCart.milksInCart;">
+    <div class="item" *ngFor="let milk of shoppingCart.milksInCart; let i = index">
   
-      <a routerLink="/detail/{{milk.id}}">
-        <span class="badge"></span> <span style="text-transform:capitalize">{{milk.type}} {{milk.flavor}}</span>
+      <a routerLink="/detail-customer/{{milk.id}}">
+        <span class="badge"></span> <span style="text-transform:capitalize">{{milk.flavor}} {{milk.type}}</span>
       </a>
-      <label for="milk-type">Volume: {{milk.volume}} </label>
-      <label for="milk-type">Price: ${{milk.price}}</label>
+      <label for="milk-type">Price Per Unit: ${{milk.price}}</label>
       <img class="productImage" [src]="milk.imageUrl"/>
       <p>
         <button type="button" class="delete" title="Delete One"
-          (click)="deleteOne()">-</button>
-         {{ milk.quantity }} &nbsp; <!-- The &nbsp is a space -->
+          (click)="deleteOne(milk.id, shoppingCart.username)">-</button>
+         {{ shoppingCart.milksInCartQuantity[i] }} &nbsp; &nbsp; <!-- The &nbsp; is a space -->
         <button type="button" class="add" title="Add one"
-          (click)="addOne()">+</button>   
+          (click)="addOne(milk, shoppingCart.username)">+</button>   
       </p>
     </div>
   </div>  
 </div>
-
-
-
-<!--  -->
 
 <button type="button" class="add-button" (click)="purchase()">Purchase</button>

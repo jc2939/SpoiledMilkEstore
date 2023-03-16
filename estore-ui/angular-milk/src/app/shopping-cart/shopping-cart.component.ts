@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ShoppingCart } from '../shoppingCart';
+import { Milk } from '../milk';
 
 
 @Component({
@@ -27,40 +28,33 @@ export class ShoppingCartComponent implements OnInit{
   purchase(): void{
 
   }
-  // cart: ShoppingCart
-  addOne(): void {
-    // this.milks = this.milks.filter(m => m !== milk);
-    // this.MilkService.deleteMilk(milk.id).subscribe();
-  }
-  deleteOne(): void {
-    // this.milks = this.milks.filter(m => m !== milk);
-    // this.MilkService.deleteMilk(milk.id).subscribe();
+
+  addOne(milk: Milk, username: String): void {
+    this.ShoppingCartService.incrementMilk(milk, username).subscribe(() => {
+      const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === milk.id);
+      if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
+        this.shoppingCart.milksInCartQuantity[index] += 1;
+      }
+    });
+
   }
 
-  // properImage(milk: Milk): void{
-  //   var url = milk.imageUrl;
 
-  // }
+  deleteOne(id: number, username: String): void {
+    this.ShoppingCartService.decrementMilk(id, username).subscribe(() => {
+      const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === id);
+      if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
+        this.shoppingCart.milksInCartQuantity[index] -= 1;
+      }
+    });
+  }
+
+
   stringToInt(input: string): number
   {
     var number = Number(input);
     return number;
   }
 
-
-  // getMilks(): void {
-  //   this.MilkService.getMilks()
-  //   .subscribe(milks => this.milks = milks);
-  // }
-
-  // add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
-  //   type = type.trim();
-  //   flavor = flavor.trim();
-  //   if (!type) { return; }
-  //   this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
-  //     .subscribe(milk => {
-  //       this.milks.push(milk);
-  //     });
-  // }
 
 }

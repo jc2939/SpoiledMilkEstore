@@ -1,5 +1,5 @@
 package com.estore.api.estoreapi.model;
-
+import com.estore.api.estoreapi.model.Milk;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -100,19 +100,23 @@ public class ShoppingCart {
             milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
         }else{
             milksInCart.add(milk);
+            milksInCartQuantity.add(1);
         }
     }
 
-    public void decrementItem(Milk milk){
-        if(milksInCart.contains(milk)){
-            if(milksInCartQuantity.get(milksInCart.indexOf(milk)) >= 2){
-                milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) - 1);    
-            }else{
-                milksInCartQuantity.remove(milksInCart.indexOf(milk));
-                milksInCart.remove(milk);
+    public void decrementItem(int id){
+        int indexCounter = 0;
+        for (Milk milk : milksInCart) {
+            if (milk.getId() == id) {
+                if(milksInCartQuantity.get(indexCounter) >= 2){
+                    milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);    
+                }else{
+                    milksInCartQuantity.remove(indexCounter);
+                    milksInCart.remove(id);
+                }    
             }
+            indexCounter++;
         }
-     
     }
 
     @Override

@@ -57,9 +57,9 @@ public class ShoppingCartController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Milk milk} object already exists<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
-    public ResponseEntity<ShoppingCart> incrementMilk(@RequestBody Milk milk, String userName) {
-        LOG.info("Post /milks " + userName);
+    @PostMapping("/{userName}")
+    public ResponseEntity<ShoppingCart> incrementMilk(@RequestBody Milk milk, @PathVariable String userName) {
+        LOG.info("POST /" + milk.toString() + "/" + userName);
         try {
             shoppingCartDAO.addMilk(milk, userName);
             return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
@@ -79,11 +79,11 @@ public class ShoppingCartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("")
-    public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable Milk milk, String userName) {
-        LOG.info("DELETE /milks/" + userName);
+    @DeleteMapping("/{userName}/{id}")
+    public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable int id, @PathVariable String userName) {
+        LOG.info("DELETE /" + id + "/" + userName);
         try {
-            boolean deleted = shoppingCartDAO.decrementMilk(milk, userName);
+            boolean deleted = shoppingCartDAO.decrementMilk(id, userName);
             if (deleted)
                 return new ResponseEntity<>(HttpStatus.OK);
             else
@@ -106,11 +106,8 @@ public class ShoppingCartController {
     @GetMapping("")
     public ResponseEntity<ShoppingCart[]> getShoppingCarts() {
         LOG.info("GET /carts");
-        
         try {
             ShoppingCart listOfCarts[] = shoppingCartDAO.getShoppingCarts();
-            System.out.println(listOfCarts[0].toString());
-            System.out.println(listOfCarts[1].toString());
             return new ResponseEntity<ShoppingCart[]>(listOfCarts, HttpStatus.OK);
         }
         catch(IOException e) {
@@ -128,11 +125,9 @@ public class ShoppingCartController {
      */
     @GetMapping("/{name}")
     public ResponseEntity<ShoppingCart> getShoppingCart(@PathVariable String name) {
-        LOG.info("GET /carts");
-        System.out.println(name);
+        LOG.info("GET /cart/" + name);
         try {
             ShoppingCart cart = shoppingCartDAO.getShoppingCart(name);
-            System.out.println(cart.toString());
             return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
         }
         catch(IOException e) {

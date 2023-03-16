@@ -122,6 +122,20 @@ public class Milk {
      */
     public String getImageUrl() {return imageUrl;}
 
+
+    @Override
+    public boolean equals(Object object)
+    {
+        boolean sameSame = false;
+
+        if (object != null && object instanceof Milk)
+        {
+            sameSame = this.id == ((Milk) object).id;
+        }
+
+        return sameSame;
+    }
+
     /**
      * {@inheritDoc}
      */

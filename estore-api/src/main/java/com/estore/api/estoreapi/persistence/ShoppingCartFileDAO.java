@@ -79,7 +79,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
 
 
         ShoppingCart[] shoppingCartArray = new ShoppingCart[shoppingCartArrayList.size()];
-
+        shoppingCartArrayList.toArray(shoppingCartArray);
         return shoppingCartArray;
     }
 
@@ -105,6 +105,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     private boolean save() throws IOException {
         ShoppingCart[] shoppingCartArray = getShoppingCartArray();
+        //System.out.println(shoppingCartArray[0].toString());
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue
@@ -162,10 +163,10 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     /**
      * Generates an array of {@linkplain Milk milks} from the tree map
      */
-    public boolean decrementMilk(Milk milk, String userName) throws IOException {
+    public boolean decrementMilk(int id, String userName) throws IOException {
         synchronized(shoppingCart) {
             if (shoppingCart.containsKey(userName)){
-                shoppingCart.get(userName).decrementItem(milk);
+                shoppingCart.get(userName).decrementItem(id);
                 save();
                 return true; 
             }

@@ -24,24 +24,24 @@ export class ShoppingCartService {
   }
 
   /** GET milk by id. Will 404 if id not found */
-  getShoppingCart(name: string): Observable<ShoppingCart> {
-    const url = `${this.cartUrl}/${name}`;
+  getShoppingCart(userName: string): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}`;
     return this.http.get<ShoppingCart>(url).pipe(
       catchError(this.handleError<ShoppingCart>(`getShoppingCart username=${name}`))
     );
   }
 
 
-  addMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
-    return this.http.post<ShoppingCart>(this.cartUrl, milk, this.httpOptions).pipe(
+  incrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}`;
+    return this.http.post<ShoppingCart>(url, milk, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('addMilk'))
     );
   }
 
   /** DELETE: delete the milk from the server */
-  decrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
-    const url = `${this.cartUrl}/${userName}`;
-
+  decrementMilk(id: number, userName: String): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}/${id}`;
     return this.http.delete<ShoppingCart>(url, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('decrementMilk'))
     );
