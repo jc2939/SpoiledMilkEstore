@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -69,16 +70,30 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     private ShoppingCart[] getShoppingCartArray(String type) { // if type == null, no filter
         ArrayList<ShoppingCart> shoppingCartArrayList = new ArrayList<>();
-
-        for (ShoppingCart cart : shoppingCart.values()) {
+       for (ShoppingCart cart : shoppingCart.values()) {
             if (type == null || cart.getUsername().contains(type)) {
                 shoppingCartArrayList.add(cart);
             }
         }
 
+
+
         ShoppingCart[] shoppingCartArray = new ShoppingCart[shoppingCartArrayList.size()];
-        shoppingCartArrayList.toArray(shoppingCartArray);
+
         return shoppingCartArray;
+    }
+
+     /**
+    ** {@inheritDoc}
+     */
+    @Override
+    public ShoppingCart getShoppingCart(String name) {
+        synchronized(shoppingCart) {
+            if (shoppingCart.containsKey(name))
+                return shoppingCart.get(name);
+            else
+                return null;
+        }
     }
 
     /**
@@ -126,7 +141,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     ** {@inheritDoc}
      */
     @Override
-    public ShoppingCart[] getShoppingCarts() {
+    public ShoppingCart[] getShoppingCarts() throws IOException {
         synchronized(shoppingCart) {
             return getShoppingCartArray();
         }

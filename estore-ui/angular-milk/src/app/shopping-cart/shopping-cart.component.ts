@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Milk } from '../milk';
-import { MilkService } from '../milk.service';
 import { ShoppingCartService } from '../shopping-cart.service';
 import { ShoppingCart } from '../shoppingCart';
 
@@ -11,30 +9,30 @@ import { ShoppingCart } from '../shoppingCart';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit{
-  shoppingCarts: ShoppingCart[] = [];
+  shoppingCart: ShoppingCart | undefined;
 
   constructor(private ShoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
-    this.getShoppingCarts();
+    this.getShoppingCart();
+    //console.log(this.shoppingCarts);
     //console.log("Test");
-
   }
 
-  getShoppingCarts(): void {
-    this.ShoppingCartService.getShoppingCarts()
-    .subscribe(shoppingCarts => this.shoppingCarts = shoppingCarts);
+  getShoppingCart(): void {
+    this.ShoppingCartService.getShoppingCart("Yaro")
+    .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 
   purchase(): void{
 
   }
-
-  addOne(cart: ShoppingCart): void {
+  // cart: ShoppingCart
+  addOne(): void {
     // this.milks = this.milks.filter(m => m !== milk);
     // this.MilkService.deleteMilk(milk.id).subscribe();
   }
-  deleteOne(cart: ShoppingCart): void {
+  deleteOne(): void {
     // this.milks = this.milks.filter(m => m !== milk);
     // this.MilkService.deleteMilk(milk.id).subscribe();
   }

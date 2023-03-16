@@ -1,24 +1,28 @@
 <h2>My Items</h2>
+<div *ngIf="shoppingCart">
+  <label for="test">{{shoppingCart.username}}'s Shopping Cart </label>
+  <div class="container">
+    <div class="item" *ngFor="let milk of shoppingCart.milksInCart;">
+  
+      <a routerLink="/detail/{{milk.id}}">
+        <span class="badge"></span> <span style="text-transform:capitalize">{{milk.type}} {{milk.flavor}}</span>
+      </a>
+      <label for="milk-type">Volume: {{milk.volume}} </label>
+      <label for="milk-type">Price: ${{milk.price}}</label>
+      <img class="productImage" [src]="milk.imageUrl"/>
+      <p>
+        <button type="button" class="delete" title="Delete One"
+          (click)="deleteOne()">-</button>
+         {{ milk.quantity }} &nbsp; <!-- The &nbsp is a space -->
+        <button type="button" class="add" title="Add one"
+          (click)="addOne()">+</button>   
+      </p>
+    </div>
+  </div>  
+</div>
 
 
-<div class="container">
-  <div class="item" *ngFor="let cart of shoppingCarts;">
 
-    <a routerLink="/detail/{{cart.userName}}">
-      <span class="badge"></span> <span style="text-transform:capitalize">{{cart.userName}} {{cart.userName}}</span>
-    </a>
-    <label for="milk-type">Volume: {{cart.userName}} </label>
-    <label for="milk-type">Price: ${{cart.userName}}</label>
-    <img class="productImage" [src]="cart.userName"/>
-    <!-- remember imageUrl added to everything -->
-    <p>
-      <button type="button" class="delete" title="Delete One"
-        (click)="deleteOne(cart)">-</button>
-       {{ cart.userName }} &nbsp; <!-- Not milk.quantity but shopping cart item quantity. Also the &nbsp is a space -->
-      <button type="button" class="add" title="Add one"
-        (click)="addOne(cart)">+</button>   
-    </p>
-  </div>
-</div>  
+<!--  -->
 
 <button type="button" class="add-button" (click)="purchase()">Purchase</button>

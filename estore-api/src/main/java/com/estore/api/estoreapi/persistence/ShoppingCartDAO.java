@@ -29,5 +29,7 @@ public interface ShoppingCartDAO {
     boolean decrementMilk(Milk milk, String userName) throws IOException;
 
 
-    ShoppingCart[] getShoppingCarts();
+    ShoppingCart[] getShoppingCarts() throws IOException;
+
+    ShoppingCart getShoppingCart(String userName) throws IOException;
 }    

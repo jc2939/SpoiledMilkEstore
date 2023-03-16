@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -87,6 +88,52 @@ public class ShoppingCartController {
                 return new ResponseEntity<>(HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    /**
+     * Responds to the GET request for all {@linkplain Milk listOfMilks}
+     * 
+     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("")
+    public ResponseEntity<ShoppingCart[]> getShoppingCarts() {
+        LOG.info("GET /carts");
+        
+        try {
+            ShoppingCart listOfCarts[] = shoppingCartDAO.getShoppingCarts();
+            System.out.println(listOfCarts[0].toString());
+            System.out.println(listOfCarts[1].toString());
+            return new ResponseEntity<ShoppingCart[]>(listOfCarts, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for all {@linkplain Milk listOfMilks}
+     * 
+     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{name}")
+    public ResponseEntity<ShoppingCart> getShoppingCart(@PathVariable String name) {
+        LOG.info("GET /carts");
+        System.out.println(name);
+        try {
+            ShoppingCart cart = shoppingCartDAO.getShoppingCart(name);
+            System.out.println(cart.toString());
+            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

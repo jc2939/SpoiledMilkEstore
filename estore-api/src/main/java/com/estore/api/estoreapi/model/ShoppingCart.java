@@ -14,7 +14,7 @@ public class ShoppingCart {
     private static final Logger LOG = Logger.getLogger(ShoppingCart.class.getName());
 
     // Package private for tests
-    static final String STRING_FORMAT = "ShoppingCart [username=%d, name=%s]";
+    //static final String STRING_FORMAT = "ShoppingCart [username=%s, milksInCart=%s, milksInCartQuantity=%s]";
 
     @JsonProperty("username") private String username;
     @JsonProperty("milksInCart") private ArrayList<Milk> milksInCart;
@@ -113,6 +113,11 @@ public class ShoppingCart {
             }
         }
      
+    }
+
+    @Override
+    public String toString() {
+        return  (username + " " + milksInCart.toString() + " " + milksInCartQuantity.toString());
     }
     
 }
