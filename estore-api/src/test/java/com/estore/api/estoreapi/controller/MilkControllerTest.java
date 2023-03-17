@@ -198,6 +198,20 @@ public class MilkControllerTest {
     }
 
     @Test
+    public void testCreateMilkHandleException() throws IOException
+    {
+        // Setup
+        Milk milk = new Milk(30, "coconut", "wheat", 5.9, 2, 7.3, "../assets/images/glass-o-milk.jpg");
+        // throw an IOException when createHero is called on mockMilkDAO
+        doThrow(new IOException()).when(mockMilkDAO).createMilk(milk);
+        // Invoke
+        ResponseEntity<Milk> response = milkController.createMilk(milk);
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+
+    }
+
+    @Test
     public void testUpdateMilk() throws IOException {
         // Setup
         Milk milk = new Milk(0, "almond", "chocolate", 0.5, 10, 8.99, "../assets/images/glass-o-milk.jpg");

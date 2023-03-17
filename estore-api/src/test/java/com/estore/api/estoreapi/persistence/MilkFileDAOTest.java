@@ -81,6 +81,15 @@ public class MilkFileDAOTest {
     }
 
     @Test
+    public void testGetmilkNotFound()
+    {
+        // Invoke
+        Milk milk = milkFileDAO.getMilk(42);
+        // Analyze
+        assertEquals(milk, null);
+    }
+
+    @Test
     public void testDeleteMilk() {
         // Invoke
         boolean result = assertDoesNotThrow(() -> milkFileDAO.deleteMilk(10),
@@ -95,4 +104,51 @@ public class MilkFileDAOTest {
         assertEquals(milkFileDAO.milks.size(),testMilks.length-1);
     }
 
+    @Test
+    public void testDeleteMilkNotFound()
+    {
+        // Invoke
+        boolean result = assertDoesNotThrow(() -> milkFileDAO.deleteMilk(42), "Unexpected exception thrown");
+        // Analyze
+        assertEquals(result, false);
+        assertEquals(milkFileDAO.milks.size(), testMilks.length);
+    }
+
+    @Test
+    public void testCreateMilk()
+    {
+        // Setup
+        Milk milk = new Milk(14, "almond", null, 2.5, 8, 3, "../assets/images/glass-o-milk.jpg");
+        // Invoke
+        Milk result = assertDoesNotThrow(() -> milkFileDAO.createMilk(milk), "Unexpected exception thrown");
+        // Analyze
+        assertNotNull(result);
+        Milk current = milkFileDAO.getMilk(milk.getId());
+        assertEquals(current.getType(), milk.getType());
+        assertEquals(current.getFlavor(), milk.getFlavor());
+        assertEquals(current.getVolume(), milk.getVolume());
+        assertEquals(current.getQuantity(), milk.getQuantity());
+        assertEquals(current.getPrice(), milk.getPrice());
+    }
+
+    @Test
+    public void testUpdateMilk()
+    {
+        // Invoke
+        Milk milk = new Milk(10, "coconut", "wheat", 5.9, 2, 7.3, "../assets/images/glass-o-milk.jpg");
+        Milk current = assertDoesNotThrow(() -> milkFileDAO.updateMilk(milk), "Unexpected exception thrown");
+        // Analyze
+        assertNotNull(current);
+        Milk actual = milkFileDAO.getMilk(milk.getId());
+        assertEquals(actual, milk);
+    }
+
+    @Test
+    public void testUpdateMilkNotFound()
+    {
+        Milk milk = new Milk(30, "coconut", "wheat", 5.9, 2, 7.3, "../assets/images/glass-o-milk.jpg");
+        Milk result = assertDoesNotThrow(() -> milkFileDAO.updateMilk(milk), "Unexpected exception thrown");
+        // Analyze
+        assertNull(result);
+    }
 }
