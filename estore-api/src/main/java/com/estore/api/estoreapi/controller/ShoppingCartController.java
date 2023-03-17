@@ -6,14 +6,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,12 +20,12 @@ import com.estore.api.estoreapi.model.ShoppingCart;
 import com.estore.api.estoreapi.persistence.ShoppingCartDAO;
 
 /**
- * Handles the REST API requests for the Milk resource
+ * Handles the REST API requests for the ShoppingCart resource
  * <p>
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  * 
- * @author SWEN Faculty
+ * @author SpoiledMilk Team
  */
 
 @RestController
@@ -40,7 +37,7 @@ public class ShoppingCartController {
     /**
      * Creates a REST API controller to reponds to requests
      * 
-     * @param milkDao The {@link MilkDAO Milk Data Access Object} to perform CRUD operations
+     * @param shoppingCartDAO The {@link ShoppingCartDAO Shopping Cart Data Access Object} to perform CRUD operations
      * <br>
      * This dependency is injected by the Spring Framework
      */
@@ -49,12 +46,12 @@ public class ShoppingCartController {
     }
 
     /**
-     * Creates a {@linkplain Milk milk} with the provided milk object
+     * Either adds a new or increments a {@linkplain Milk milk} with the provided milk object and username
      * 
-     * @param milk - The {@link Milk milk} to create
+     * @param milk - The {@link Milk milk} to add/increment
+     * @param userName - The {@link String userName} name of the user
      * 
-     * @return ResponseEntity with created {@link Milk milk} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Milk milk} object already exists<br>
+     * @return ResponseEntity with created {@link ShoppingCart shoppingCart} object and HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("/{userName}")
@@ -71,9 +68,10 @@ public class ShoppingCartController {
     }
 
     /**
-     * Deletes a {@linkplain Milk milk} with the given id
+     * Deletes or decrements a {@linkplain Milk milk} with the given id
      * 
      * @param id The id of the {@link Milk milk} to deleted
+     * @param userName - The {@link String userName} name of the user
      * 
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -97,9 +95,9 @@ public class ShoppingCartController {
 
 
     /**
-     * Responds to the GET request for all {@linkplain Milk listOfMilks}
+     * Responds to the GET request for all {@linkplain ShoppingCart listOfCarts}
      * 
-     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
+     * @return ResponseEntity with array of {@link ShoppingCart listOfCarts} objects (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -117,9 +115,9 @@ public class ShoppingCartController {
     }
 
     /**
-     * Responds to the GET request for all {@linkplain Milk listOfMilks}
+     * Responds to the GET request for one {@linkplain ShoppingCart cart}
      * 
-     * @return ResponseEntity with array of {@link Milk listOfMilks} objects (may be empty) and
+     * @return ResponseEntity with array of {@link ShoppingCart cart} object (may be empty) and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */

@@ -15,7 +15,7 @@ export class ShoppingCartService {
   };
   constructor(private http: HttpClient) { }
 
-  /** GET milks from the server */
+  /** GET shoppingCarts from the server */
   getShoppingCarts(): Observable<ShoppingCart[]> {
     return this.http.get<ShoppingCart[]>(this.cartUrl)
       .pipe(
@@ -23,7 +23,7 @@ export class ShoppingCartService {
       );
   }
 
-  /** GET milk by id. Will 404 if id not found */
+  /** GET shoppingCart by userName. Will 404 if id not found */
   getShoppingCart(userName: string): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
     return this.http.get<ShoppingCart>(url).pipe(
@@ -31,7 +31,7 @@ export class ShoppingCartService {
     );
   }
 
-
+  /** POST a milk object to a shopping cart specified by username */
   incrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
     return this.http.post<ShoppingCart>(url, milk, this.httpOptions).pipe(
@@ -39,7 +39,7 @@ export class ShoppingCartService {
     );
   }
 
-  /** DELETE: delete the milk from the server */
+  /** DELETE a milk object from the shoppingCart specified by the id and username */
   decrementMilk(id: number, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}/${id}`;
     return this.http.delete<ShoppingCart>(url, this.httpOptions).pipe(

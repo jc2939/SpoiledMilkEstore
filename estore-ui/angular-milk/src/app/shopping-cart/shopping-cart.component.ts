@@ -3,7 +3,6 @@ import { ShoppingCartService } from '../shopping-cart.service';
 import { ShoppingCart } from '../shoppingCart';
 import { Milk } from '../milk';
 
-
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -16,12 +15,10 @@ export class ShoppingCartComponent implements OnInit{
 
   ngOnInit(): void {
     this.getShoppingCart();
-    //console.log(this.shoppingCarts);
-    //console.log("Test");
   }
 
   getShoppingCart(): void {
-    this.ShoppingCartService.getShoppingCart("Yaro")
+    this.ShoppingCartService.getShoppingCart("Jeremy")
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 
@@ -36,9 +33,8 @@ export class ShoppingCartComponent implements OnInit{
         this.shoppingCart.milksInCartQuantity[index] += 1;
       }
     });
-
+    this.reloadPage();
   }
-
 
   deleteOne(id: number, username: String): void {
     this.ShoppingCartService.decrementMilk(id, username).subscribe(() => {
@@ -47,14 +43,17 @@ export class ShoppingCartComponent implements OnInit{
         this.shoppingCart.milksInCartQuantity[index] -= 1;
       }
     });
+    this.reloadPage();
   }
 
+  reloadPage() {
+    window.location.reload();
+ }
 
   stringToInt(input: string): number
   {
     var number = Number(input);
     return number;
   }
-
 
 }

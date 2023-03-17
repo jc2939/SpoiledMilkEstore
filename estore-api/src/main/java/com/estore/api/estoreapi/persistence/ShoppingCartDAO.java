@@ -11,25 +11,45 @@ import com.estore.api.estoreapi.model.ShoppingCart;
  */
 public interface ShoppingCartDAO {
     /**
-     * Retrieves all {@linkplain Milk milks}
+     * Adds/increments a {@linkplain Milk milk} to the ShoppingCart with the matching {@linkplain String username}
      * 
-     * @return An array of {@link Milk milk} objects, may be empty
+     * @param milk The {@linkplain Milk milk} that will be either added or incremented to the ShoppingCart
+     * @param userName The {@linkplain String usename} that is used to identify which cart to add {@linkplain Milk milk} object to
      * 
      * @throws IOException if an issue with underlying storage
      */
     void addMilk(Milk milk, String userName) throws IOException;
 
     /**
-     * Retrieves all {@linkplain Milk milks}
+     * Deletes/decrements a {@linkplain Milk milk} from the the ShoppingCart with the matching {@linkplain String username}
      * 
-     * @return An array of {@link Milk milk} objects, may be empty
+     * @param id The {@linkplain Integer id} that is used to identify which milk to delete/decrement
+     * @param userName The {@linkplain String usename} that is used to identify which cart to delete/decrement the {@linkplain Milk milk}
+     *  object derived from the {@linkplain Integer id}
      * 
      * @throws IOException if an issue with underlying storage
      */
     boolean decrementMilk(int id, String userName) throws IOException;
 
-
+    /**
+     * Retrieves all {@linkplain ShoppingCart cart}
+     * 
+     * @return An array of {@link ShoppingCart cart} objects, may be empty
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
     ShoppingCart[] getShoppingCarts() throws IOException;
 
+    /**
+     * Retrieves a {@linkplain ShoppingCart cart} with the given userName
+     * 
+     * @param userName The userName of the {@link ShoppingCart cart} to get
+     * 
+     * @return a {@link ShoppingCart cart} object with the matching userName
+     * <br>
+     * null if no {@link ShoppingCart cart} with a matching userName is found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
     ShoppingCart getShoppingCart(String userName) throws IOException;
 }    

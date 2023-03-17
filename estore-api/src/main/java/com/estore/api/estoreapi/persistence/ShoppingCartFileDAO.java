@@ -3,7 +3,6 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -17,12 +16,12 @@ import com.estore.api.estoreapi.model.Milk;
 import com.estore.api.estoreapi.model.ShoppingCart;
 
 /**
- * Implements the functionality for JSON file-based peristance for Milk
+ * Implements the functionality for JSON file-based persistance for ShoppingCart
  * 
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  * 
- * @author SWEN Faculty
+ * @author SpoiledMilk Team
  */
 @Component
 public class ShoppingCartFileDAO implements ShoppingCartDAO {
@@ -37,7 +36,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
 
 
     /**
-     * Creates a Milk File Data Access Object
+     * Creates a ShoppingCart File Data Access Object
      * 
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
@@ -47,26 +46,26 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     public ShoppingCartFileDAO(@Value("${shoppingCart.file}") String filename,ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the milks from the file
+        load();  // load the ShoppingCart from the file
     }
 
     /**
-     * Generates an array of {@linkplain Milk milks} from the tree map
+     * Generates an array of {@linkplain ShoppingCart carts} from the tree map
      * 
-     * @return  The array of {@link Milk milks}, may be empty
+     * @return  The array of {@link ShoppingCart carts}, may be empty
      */
     private ShoppingCart[] getShoppingCartArray() {
         return getShoppingCartArray(null);
     }
 
     /**
-     * Generates an array of {@linkplain Milk milkArrayList} from the tree map for any
-     * {@linkplain Milk milks} that contains the text specified by type
+     * Generates an array of {@linkplain ShoppingCart shoppingCartArrayList} from the tree map for any
+     * {@linkplain ShoppingCart carts} that contains the text specified by type
      * <br>
-     * If type is null, the array contains all of the {@linkplain Milk milks}
+     * If type is null, the array contains all of the {@linkplain ShoppingCart carts}
      * in the tree map
      * 
-     * @return  The array of {@link Milk milkArray}, may be empty
+     * @return  The array of {@linkplain ShoppingCart shoppingCartArray}, may be empty
      */
     private ShoppingCart[] getShoppingCartArray(String type) { // if type == null, no filter
         ArrayList<ShoppingCart> shoppingCartArrayList = new ArrayList<>();
@@ -75,9 +74,6 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
                 shoppingCartArrayList.add(cart);
             }
         }
-
-
-
         ShoppingCart[] shoppingCartArray = new ShoppingCart[shoppingCartArrayList.size()];
         shoppingCartArrayList.toArray(shoppingCartArray);
         return shoppingCartArray;
@@ -97,9 +93,9 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     }
 
     /**
-     * Saves the {@linkplain Milk milks} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain ShoppingCart carts} from the map into the file as an array of JSON objects
      * 
-     * @return true if the {@link Milk milks} were written successfully
+     * @return true if the {@link ShoppingCart carts} were written successfully
      * 
      * @throws IOException when file cannot be accessed or written to
      */
@@ -115,7 +111,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     }
 
     /**
-     * Loads {@linkplain Milk milks} from the JSON file into the map
+     * Loads {@linkplain ShoppingCart carts} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      * 
@@ -149,7 +145,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Milk milks} from the tree map
+     * {@inheritDoc}
      */
     public void addMilk(Milk milk, String userName) throws IOException {
         synchronized(shoppingCart) {
@@ -161,7 +157,7 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Milk milks} from the tree map
+     * {@inheritDoc}
      */
     public boolean decrementMilk(int id, String userName) throws IOException {
         synchronized(shoppingCart) {
@@ -173,6 +169,4 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
             return false;
         }    
     }
-
-
 }    

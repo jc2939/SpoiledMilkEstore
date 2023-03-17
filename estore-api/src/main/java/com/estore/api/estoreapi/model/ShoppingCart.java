@@ -1,30 +1,24 @@
 package com.estore.api.estoreapi.model;
-import com.estore.api.estoreapi.model.Milk;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Milk entity
- * 
- * @author SWEN Faculty
- * @author Jeremy Smart
+ * @author SpoiledMilk Team
  */
-
 public class ShoppingCart {
     private static final Logger LOG = Logger.getLogger(ShoppingCart.class.getName());
-
-    // Package private for tests
-    //static final String STRING_FORMAT = "ShoppingCart [username=%s, milksInCart=%s, milksInCartQuantity=%s]";
 
     @JsonProperty("username") private String username;
     @JsonProperty("milksInCart") private ArrayList<Milk> milksInCart;
     @JsonProperty("milksInCartQuantity") private ArrayList<Integer> milksInCartQuantity;
 
-
     /**
-     * Create a Shopping Cart with the given id and name
-     * @param id The id of the milk
-     * @param name The name of the milk
+     * Create a ShoppingCart with the given username and list of milks and quantities
+     * @param username The username of the user
+     * @param milksInCart A list of the all the milks in the shopping cart
+     * @param milksInCartQuantity A list of the all quantities of the milks in the shopping cart
      * 
      * {@literal @}JsonProperty is used in serialization and deserialization
      * of the JSON object to the Java object in mapping the fields.  If a field
@@ -38,87 +32,107 @@ public class ShoppingCart {
     }
 
     /**
-     * Sets the type of the milk - necessary for JSON object to Java object deserialization
-     * @param type The type of the milk
-     */
-    public void setMilksInCartQuantity(int index, int amount) {this.milksInCartQuantity.set(index, amount);}
-    /**
-     * Sets the type of the milk - necessary for JSON object to Java object deserialization
-     * @param type The type of the milk
-     */
-    public void setMilksInCartQuantity(ArrayList<Integer> milksInCartQuantity) {this.milksInCartQuantity = milksInCartQuantity;}
-
-    /**
-     * Retrieves the type of the milk
-     * @return The type of the milk
-     */
-    public ArrayList<Integer> getMilksInCartQuantity() {return milksInCartQuantity;}
-
-    /**
-     * Retrieves the type of the milk
-     * @return The type of the milk
-     */
-    public Integer getMilksInCartQuantity(int index) {return milksInCartQuantity.get(index);}
-
-    /**
-     * Sets the type of the milk - necessary for JSON object to Java object deserialization
-     * @param type The type of the milk
+     * Sets the username of the ShoppingCart - necessary for JSON object to Java object deserialization
+     * @param username The username of the ShoppingCart
      */
     public void setUsername(String username) {this.username = username;}
 
     /**
-     * Retrieves the type of the milk
-     * @return The type of the milk
+     * Retrieves the username of the ShoppingCart
+     * @return The username of the ShoppingCart
      */
     public String getUsername() {return username;}
 
     /**
-     * Sets the type of the milk - necessary for JSON object to Java object deserialization
-     * @param type The type of the milk
+     * Sets the list of milks in cart - necessary for JSON object to Java object deserialization
+     * @param milksInCart A list of milk objects
      */
     public void setMilksInCart(ArrayList<Milk> milksInCart) {this.milksInCart = milksInCart;}
+
     /**
-     * Sets the type of the milk - necessary for JSON object to Java object deserialization
-     * @param type The type of the milk
+     * Sets a milk in the ShoppingCart at a particular index - necessary for JSON object to Java object deserialization
+     * @param index Index at which to set the milk object
+     * @param milk Milk object to set a specified index
      */
     public void setMilksInCart(int index, Milk milk) {this.milksInCart.set(index, milk);}
 
     /**
-     * Retrieves the type of the milk
-     * @return The type of the milk
+     * Retrieves the list of milks in the ShoppingCart
+     * @return The list of milks in the ShoppingCart
      */
     public ArrayList<Milk> getMilksInCart() {return milksInCart;}
 
     /**
-     * Retrieves the type of the milk
-     * @return The type of the milk
+     * Retrieves a milk in the ShoppingCart at a specific index
+     * @return Milk object from specified index
      */
     public Milk getMilksInCart(int index) {return milksInCart.get(index);}
 
+    /**
+     * Sets the list of milk quantities in cart - necessary for JSON object to Java object deserialization
+     * @param milksInCart A list of integers representing quantities
+     */
+    public void setMilksInCartQuantity(ArrayList<Integer> milksInCartQuantity) {this.milksInCartQuantity = milksInCartQuantity;}
+
+    /**
+     * Sets a quantity of a milk in the ShoppingCart at a particular index - necessary for JSON object to Java object deserialization
+     * @param index Index at which to set the quantity integer
+     * @param amount The specific amount to set it to
+     */
+    public void setMilksInCartQuantity(int index, int amount) {this.milksInCartQuantity.set(index, amount);}
+
+    /**
+     * Retrieves the list of milk quantities in the ShoppingCart
+     * @return The list of milk quantities in the ShoppingCart
+     */
+    public ArrayList<Integer> getMilksInCartQuantity() {return milksInCartQuantity;}
+
+    /**
+     * Retrieves a milk quantity in the ShoppingCart at a specific index
+     * @return Milk quantity from specified index
+     */
+    public Integer getMilksInCartQuantity(int index) {return milksInCartQuantity.get(index);}
+
+    /**
+     * Either creates or increments a specified milk in the ShoppingCart
+     * @param Milk The milk that needs to be incremented or created
+     */
     public void incrementItem(Milk milk){
-        if(milksInCart.contains(milk)){
-            milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
-        }else{
-            milksInCart.add(milk);
-            milksInCartQuantity.add(1);
-        }
-    }
-
-    public void decrementItem(int id){
-        int indexCounter = 0;
-        for (Milk milk : milksInCart) {
-            if (milk.getId() == id) {
-                if(milksInCartQuantity.get(indexCounter) >= 2){
-                    milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);    
-                }else{
-                    milksInCartQuantity.remove(indexCounter);
-                    milksInCart.remove(id);
-                }    
+        synchronized(this){
+            if(milksInCart.contains(milk)){
+                milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
+            }else{
+                milksInCart.add(milk);
+                milksInCartQuantity.add(1);
             }
-            indexCounter++;
         }
     }
 
+    /**
+     * Either deletes or decrements a specified milk in the ShoppingCart based on the id
+     * @param id The id of the milk that needs to be deleted or decremented
+     */
+    public void decrementItem(int id){
+        synchronized(this){
+            int indexCounter = 0;
+            for (Milk milk : milksInCart) {
+                if (milk.getId() == id) {
+                    if(milksInCartQuantity.get(indexCounter) >= 2){
+                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);    
+                    }else{
+                        milksInCartQuantity.remove(indexCounter);
+                        milksInCart.remove(indexCounter);
+                    }    
+                }
+                indexCounter++;
+            }
+        }
+    }
+
+    /**
+     * Creates a string representation of the values stored in this ShoppingCart
+     * @return String representation of the values stored in this ShoppingCart
+     */
     @Override
     public String toString() {
         return  (username + " " + milksInCart.toString() + " " + milksInCartQuantity.toString());
