@@ -111,16 +111,30 @@ public class Milk {
     public double getPrice() {return price;}
 
     /**
-     * Sets the price of the milk - necessary for JSON object to Java object deserialization
-     * @param name The price of the milk
+     * Sets the image url of the milk - necessary for JSON object to Java object deserialization
+     * @param imageUrl The image url of the milk
      */
     public void setURL(String imageUrl) {this.imageUrl = imageUrl;}
 
     /**
-     * Retrieves the price of the milk
-     * @return The price of the milk
+     * Retrieves the image url of the milk
+     * @return The image url of the milk
      */
     public String getImageUrl() {return imageUrl;}
+
+
+    @Override
+    public boolean equals(Object object)
+    {
+        boolean sameSame = false;
+
+        if (object != null && object instanceof Milk)
+        {
+            sameSame = this.id == ((Milk) object).id;
+        }
+
+        return sameSame;
+    }
 
     /**
      * {@inheritDoc}

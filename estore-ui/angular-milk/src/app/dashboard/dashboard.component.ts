@@ -20,4 +20,6 @@ export class DashboardComponent implements OnInit {
     this.MilkService.getMilks()
       .subscribe(milks => this.milks = milks);
   }
+
+
 }
