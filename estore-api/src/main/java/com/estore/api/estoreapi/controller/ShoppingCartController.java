@@ -80,11 +80,8 @@ public class ShoppingCartController {
     public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable int id, @PathVariable String userName) {
         LOG.info("DELETE /" + id + "/" + userName);
         try {
-            boolean deleted = shoppingCartDAO.decrementMilk(id, userName);
-            if (deleted)
-                return new ResponseEntity<>(HttpStatus.OK);
-            else
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            shoppingCartDAO.decrementMilk(id, userName);
+            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

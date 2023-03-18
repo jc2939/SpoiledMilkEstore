@@ -88,7 +88,23 @@ public class ShoppingCartControllerTest {
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
 
-    }   
+    }
+    
+    @Test
+    public void testDecrementMilkHandleException() throws IOException { // deleteMilk may throw IOException
+        // Setup
+        String username = "nonexistant";
+        int id = 99;
+        // When getMilk is called on the Mock Milk DAO, throw an IOException
+        doThrow(new IOException()).when(mockShoppingCartDAO.decrementMilk(id, username));
+
+        // Invoke
+        ResponseEntity<ShoppingCart> response = shoppingCartController.decrementMilk(id, username);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+
+    } 
 
     @Test
     public void testIncrementMilk() throws IOException { // deleteMilk may throw IOException
@@ -104,4 +120,19 @@ public class ShoppingCartControllerTest {
         // Analyze
         assertEquals(HttpStatus.OK,response.getStatusCode());
     }  
+
+    @Test
+    public void testIncrementMilkHandleException() throws IOException { // deleteMilk may throw IOException
+        // Setup
+        String username = "nonexistant";
+        Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg");
+        // When getMilk is called on the Mock Milk DAO, throw an IOException
+        doThrow(new IOException()).when(mockShoppingCartDAO.addMilk(milk, username));
+
+        // Invoke
+        ResponseEntity<ShoppingCart> response = shoppingCartController.incrementMilk(milk, username);
+
+        // Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    } 
 }
