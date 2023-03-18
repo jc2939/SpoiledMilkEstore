@@ -10,7 +10,11 @@
     <img class="productImage" [src]="milk.imageUrl"/>
     <!-- remember imageUrl added to everything -->
     <p>
-       Quantity: {{ milk.quantity }} &nbsp; <!-- Not milk.quantity but shopping cart item quantity. Also the &nbsp is a space -->   
+      Quantity: {{ milk.quantity }} &nbsp; <!-- &nbsp is a space -->   
+    </p>
+    <p *ngIf="shoppingCart">
+      <button type="button" class="add" title="Add One"
+      (click)="addOne(milk, shoppingCart.username)">Add to Cart</button>
     </p>
   </a>
 </div>
