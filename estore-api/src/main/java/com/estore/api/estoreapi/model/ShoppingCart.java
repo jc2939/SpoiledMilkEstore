@@ -2,7 +2,7 @@ package com.estore.api.estoreapi.model;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.io.IOException;
 /**
  * Represents a Milk entity
  * @author SpoiledMilk Team
@@ -97,7 +97,7 @@ public class ShoppingCart {
      * Either creates or increments a specified milk in the ShoppingCart
      * @param Milk The milk that needs to be incremented or created
      */
-    public boolean incrementItem(Milk milk){
+    public boolean incrementItem(Milk milk) throws IOException{
         synchronized(this){
             if(milksInCart.contains(milk)){
                 milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
@@ -106,20 +106,20 @@ public class ShoppingCart {
                 milksInCartQuantity.add(1);
             }
             return true;
-        }
+        }  
     }
 
     /**
      * Either deletes or decrements a specified milk in the ShoppingCart based on the id
      * @param id The id of the milk that needs to be deleted or decremented
      */
-    public boolean decrementItem(int id){
+    public boolean decrementItem(int id) throws IOException{
         synchronized(this){
             int indexCounter = 0;
             for (Milk milk : milksInCart) {
                 if (milk.getId() == id) {
                     if(milksInCartQuantity.get(indexCounter) >= 2){
-                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);    
+                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);  
                     }else{
                         milksInCartQuantity.remove(indexCounter);
                         milksInCart.remove(indexCounter);

@@ -73,6 +73,52 @@ public class ShoppingCartControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+    @Test
+    public void testGetShoppingCarts() throws IOException {  // getShoppingCart may throw IOException
+
+        ShoppingCart[] carts = new ShoppingCart[2];
+        // Setup
+        ArrayList<Milk> listOfMilks1 = new ArrayList<Milk>();
+        listOfMilks1.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks1.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+
+        ArrayList<Integer> listOfQuantities1 = new ArrayList<Integer>();
+        listOfQuantities1.add(1);
+        listOfQuantities1.add(2);
+
+        ArrayList<Milk> listOfMilks2 = new ArrayList<Milk>();
+        listOfMilks2.add(new Milk(2, "cowsss", "bananazas", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks2.add(new Milk(23, "goat", "peaches", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+
+        ArrayList<Integer> listOfQuantities2 = new ArrayList<Integer>();
+        listOfQuantities2.add(3);
+        listOfQuantities2.add(5);
+
+        ShoppingCart shoppingCart1 = new ShoppingCart("Testing", listOfMilks1, listOfQuantities1);
+        ShoppingCart shoppingCart2 = new ShoppingCart("Testing", listOfMilks2, listOfQuantities2);
+
+        carts[0] = shoppingCart1;
+        carts[1] = shoppingCart2;
+        // When the same id is passed in, our mock Milk DAO will return the Milk object
+        when(mockShoppingCartDAO.getShoppingCarts()).thenReturn(carts);
+
+        // Invoke
+        ResponseEntity<ShoppingCart[]> response = shoppingCartController.getShoppingCarts();
+
+        // Analyze
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(carts,response.getBody());
+    }
+
+    @Test
+    public void testGetShoppingCartsHandleException() throws Exception { 
+        // throw an IOException when getMilks is called on Mpck Milk DAO
+        doThrow(new IOException()).when(mockShoppingCartDAO).getShoppingCarts();
+        //Invoke
+        ResponseEntity<ShoppingCart[]> response = shoppingCartController.getShoppingCarts();
+        //Analyze
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
     @Test
     public void testDecrementMilk() throws IOException { // deleteMilk may throw IOException
@@ -96,14 +142,13 @@ public class ShoppingCartControllerTest {
         String username = "nonexistant";
         int id = 99;
         // When getMilk is called on the Mock Milk DAO, throw an IOException
-        doThrow(new IOException()).when(mockShoppingCartDAO.decrementMilk(id, username));
+        doThrow(new IOException()).when(mockShoppingCartDAO).decrementMilk(id, username);
 
         // Invoke
         ResponseEntity<ShoppingCart> response = shoppingCartController.decrementMilk(id, username);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
-
     } 
 
     @Test
@@ -127,7 +172,7 @@ public class ShoppingCartControllerTest {
         String username = "nonexistant";
         Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg");
         // When getMilk is called on the Mock Milk DAO, throw an IOException
-        doThrow(new IOException()).when(mockShoppingCartDAO.addMilk(milk, username));
+        doThrow(new IOException()).when(mockShoppingCartDAO).addMilk(milk, username);
 
         // Invoke
         ResponseEntity<ShoppingCart> response = shoppingCartController.incrementMilk(milk, username);
