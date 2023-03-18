@@ -96,7 +96,7 @@ public class ShoppingCartControllerTest {
         String username = "nonexistant";
         int id = 99;
         // When getMilk is called on the Mock Milk DAO, throw an IOException
-        doThrow(new IOException()).when(mockShoppingCartDAO.decrementMilk(id, username));
+        doThrow(new IOException()).when(mockShoppingCartDAO).decrementMilk(id, username);
 
         // Invoke
         ResponseEntity<ShoppingCart> response = shoppingCartController.decrementMilk(id, username);
@@ -127,7 +127,7 @@ public class ShoppingCartControllerTest {
         String username = "nonexistant";
         Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg");
         // When getMilk is called on the Mock Milk DAO, throw an IOException
-        doThrow(new IOException()).when(mockShoppingCartDAO.addMilk(milk, username));
+        doThrow(new IOException()).when(mockShoppingCartDAO).addMilk(milk, username);
 
         // Invoke
         ResponseEntity<ShoppingCart> response = shoppingCartController.incrementMilk(milk, username);
