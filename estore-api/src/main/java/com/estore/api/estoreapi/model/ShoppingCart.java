@@ -97,7 +97,7 @@ public class ShoppingCart {
      * Either creates or increments a specified milk in the ShoppingCart
      * @param Milk The milk that needs to be incremented or created
      */
-    public void incrementItem(Milk milk){
+    public boolean incrementItem(Milk milk){
         synchronized(this){
             if(milksInCart.contains(milk)){
                 milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
@@ -105,6 +105,7 @@ public class ShoppingCart {
                 milksInCart.add(milk);
                 milksInCartQuantity.add(1);
             }
+            return true;
         }
     }
 
@@ -112,7 +113,7 @@ public class ShoppingCart {
      * Either deletes or decrements a specified milk in the ShoppingCart based on the id
      * @param id The id of the milk that needs to be deleted or decremented
      */
-    public void decrementItem(int id){
+    public boolean decrementItem(int id){
         synchronized(this){
             int indexCounter = 0;
             for (Milk milk : milksInCart) {
@@ -126,6 +127,7 @@ public class ShoppingCart {
                 }
                 indexCounter++;
             }
+            return true;
         }
     }
 

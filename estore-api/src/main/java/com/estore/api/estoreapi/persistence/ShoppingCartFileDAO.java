@@ -147,12 +147,13 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     /**
      * {@inheritDoc}
      */
-    public void addMilk(Milk milk, String userName) throws IOException {
+    public boolean addMilk(Milk milk, String userName) throws IOException {
         synchronized(shoppingCart) {
             // We create a new milk object because the id field is immutable
             // and we need to assign the next unique id
             shoppingCart.get(userName).incrementItem(milk);
             save(); // may throw an IOException
+            return true;
         }        
     }
 
