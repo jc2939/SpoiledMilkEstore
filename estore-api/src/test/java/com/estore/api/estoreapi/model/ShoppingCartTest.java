@@ -193,6 +193,25 @@ public class ShoppingCartTest {
     }
 
     @Test
+    public void testDecrementMilk() throws IOException
+    {
+        // Setup
+        ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 1, 6.24, "../assets/images/glass-o-milk.jpg"));
+        ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
+        listOfMilksQuantity.add(10);
+        listOfMilksQuantity.add(1);
+        ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
+        // Invoke
+        boolean result = cart.decrementItem(listOfMilks.get(0).getId());
+        boolean result2 = cart.decrementItem(listOfMilks.get(1).getId());
+        // Analyze
+        assertEquals(result, true);
+        assertEquals(result2, true);   
+    }
+
+    @Test
     public void testToString()
     {
         // Setup
