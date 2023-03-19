@@ -123,7 +123,8 @@ public class ShoppingCart {
                     }else{
                         milksInCartQuantity.remove(indexCounter);
                         milksInCart.remove(indexCounter);
-                    }    
+                    }   
+                    break; 
                 }
                 indexCounter++;
             }
