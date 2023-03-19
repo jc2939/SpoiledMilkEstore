@@ -119,15 +119,17 @@ public class ShoppingCart {
             for (Milk milk : milksInCart) {
                 if (milk.getId() == id) {
                     if(milksInCartQuantity.get(indexCounter) >= 2){
-                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);  
+                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);
+                        return true;  
                     }else{
                         milksInCartQuantity.remove(indexCounter);
                         milksInCart.remove(indexCounter);
+                        return true;
                     }    
                 }
                 indexCounter++;
             }
-            return true;
+            return false;
         }
     }
 
