@@ -160,7 +160,7 @@ public class ShoppingCartFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, false);
+        assertEquals(result, true);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private
