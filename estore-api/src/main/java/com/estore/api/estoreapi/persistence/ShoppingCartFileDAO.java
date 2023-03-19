@@ -163,9 +163,9 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
     public boolean decrementMilk(int id, String userName) throws IOException {
         synchronized(shoppingCart) {
             if (shoppingCart.containsKey(userName)){
-                shoppingCart.get(userName).decrementItem(id);
+                boolean result = shoppingCart.get(userName).decrementItem(id);
                 save();
-                return true; 
+                return result; 
             }
             return false;
         }    

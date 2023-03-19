@@ -119,18 +119,20 @@ public class ShoppingCart {
             for (Milk milk : milksInCart) {
                 if (milk.getId() == id) {
                     if(milksInCartQuantity.get(indexCounter) >= 2){
-                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);  
-                    }else{
+                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1); 
+                    }
+                    else{
                         milksInCartQuantity.remove(indexCounter);
                         milksInCart.remove(indexCounter);
                     }   
-                    break; 
+                    break;
+                    }    
                 }
                 indexCounter++;
             }
             return true;
         }
-    }
+    
 
     /**
      * Creates a string representation of the values stored in this ShoppingCart
