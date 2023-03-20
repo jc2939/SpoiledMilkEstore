@@ -3,6 +3,8 @@ import { ShoppingCartService } from '../shopping-cart.service';
 import { MilkService } from '../milk.service';
 import { ShoppingCart } from '../shoppingCart';
 import { Milk } from '../milk';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,7 +14,8 @@ import { Milk } from '../milk';
 export class ShoppingCartComponent implements OnInit{
   shoppingCart: ShoppingCart | undefined;
 
-  constructor(private ShoppingCartService: ShoppingCartService, private MilkService: MilkService) { }
+  constructor(private ShoppingCartService: ShoppingCartService, private MilkService: MilkService,
+    private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getShoppingCart();
@@ -60,4 +63,8 @@ export class ShoppingCartComponent implements OnInit{
     return number;
   }
 
+  logout() {
+    this.loginService.logout()
+    this._router.navigateByUrl("/login")
+  }
 }

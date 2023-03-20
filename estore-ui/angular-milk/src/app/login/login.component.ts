@@ -12,9 +12,19 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    if (await this.LoginService.login(this.username!, this.password!)) {
-      this._router.navigateByUrl("/dashboard")
-    } else {
+    if (await this.LoginService.login(this.username!, this.password!)) 
+    {
+      if (this.username === "admin")
+      {
+        this._router.navigateByUrl("/milks")
+      }
+      else
+      {
+        this._router.navigateByUrl("/dashboard")
+      }
+    } 
+    else 
+    {
       this.username = "";
     }
   }
