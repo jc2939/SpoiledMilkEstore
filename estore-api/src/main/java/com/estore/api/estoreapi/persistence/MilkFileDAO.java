@@ -42,7 +42,7 @@ public class MilkFileDAO implements MilkDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public MilkFileDAO(@Value("${milk.file}") String filename,ObjectMapper objectMapper) throws IOException {
+    public MilkFileDAO(@Value("${milk.file}") String filename, @Value("${logins.file}") String loginFilename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the milks from the file
