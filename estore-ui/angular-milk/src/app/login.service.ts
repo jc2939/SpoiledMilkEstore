@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -20,19 +21,11 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   async login(username: string, password: string): Promise<boolean> {
-    var result: string = "";
-    this.http.post(this.loginUrl, [username, password], this.httpOptions).subscribe(username => { 
-      console.log(username)
-      result = JSON.parse(JSON.stringify(username)).username; 
-      console.log(result);
-    })
-    await new Promise(f => setTimeout(f, 1000));
-    if (result != "") {
-      this.username == result
-      console.log("true")
+    var test = await firstValueFrom(this.http.post(this.loginUrl, [username, password], this.httpOptions));
+    if (test.toString() != "") {
+      this.username = test.toString();
       return true;
     }
-    console.log("false")
     return false;
   }
 

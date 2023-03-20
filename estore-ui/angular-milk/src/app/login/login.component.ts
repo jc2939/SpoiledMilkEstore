@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit {
 
   async login() {
     if (await this.LoginService.login(this.username!, this.password!)) {
-      console.log("dash")
       this._router.navigateByUrl("/dashboard")
-      console.log("success")
     }
   }
 
