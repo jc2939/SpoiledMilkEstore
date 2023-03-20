@@ -21,12 +21,17 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   async login(username: string, password: string): Promise<boolean> {
-    var test = await firstValueFrom(this.http.post(this.loginUrl, [username, password], this.httpOptions));
-    if (test.toString() != "") {
-      this.username = test.toString();
+    var test = (await firstValueFrom(this.http.post(this.loginUrl, [username, password], this.httpOptions))).toString();
+    if (test != "") {
+      this.username = test;
       return true;
     }
     return false;
+  }
+
+  resetPassword(username: string) {
+    console.log(username)
+    this.http.delete(`${this.loginUrl}/${username}`, this.httpOptions)
   }
 
   logout() {
