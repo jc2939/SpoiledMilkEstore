@@ -1,8 +1,21 @@
-<h2>Top Milks</h2>
+<h2>Our Milks</h2>
 <div class="milks-menu">
   <a *ngFor="let milk of milks"
-      routerLink="/detail/{{milk.id}}">
-      {{milk.type}} {{milk.id}}
+      routerLink="/detail-customer/{{milk.id}}">
+      <label for="milk-type">{{milk.type}} {{milk.flavor}} milk</label>
+      <br>
+      <label for="milk-type">Volume: {{milk.volume}} </label>
+      <br>
+    <label for="milk-type">Price: ${{milk.price}}</label>
+    <img class="productImage" [src]="milk.imageUrl"/>
+    <!-- remember imageUrl added to everything -->
+    <p>
+      Quantity: {{ milk.quantity }} &nbsp; <!-- &nbsp is a space -->   
+    </p>
+    <p *ngIf="shoppingCart">
+      <button type="button" class="add" title="Add One"
+      (click)="addOne(milk, shoppingCart.username)">Add to Cart</button>
+    </p>
   </a>
 </div>
 

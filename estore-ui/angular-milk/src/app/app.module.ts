@@ -13,6 +13,7 @@ import { MilksComponent } from './milks/milks.component';
 import { MilkSearchComponent } from './milk-search/milk-search.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
+import { MilkDetailCustomerComponent } from './milk-detail-customer/milk-detail-customer.component';
 
 @NgModule({
   imports: [
@@ -26,9 +27,11 @@ import { LoginComponent } from './login/login.component';
     DashboardComponent,
     MilksComponent,
     MilkDetailComponent,
+    MilkDetailCustomerComponent,
     MilkSearchComponent,
     ShoppingCartComponent,
     LoginComponent
+    MilkDetailCustomerComponent
   ],
   bootstrap: [ AppComponent ]
 })
