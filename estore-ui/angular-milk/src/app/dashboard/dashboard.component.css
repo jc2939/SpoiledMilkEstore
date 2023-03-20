@@ -7,7 +7,7 @@ h2 {
 .milks-menu {
   padding: 0;
   margin: auto;
-  max-width: 1000px;
+  max-width: 1100px;
 
   /* flexbox */
   display: -webkit-box;
@@ -47,6 +47,11 @@ a {
     width: 18%;
     box-sizing: content-box;
   }
+}
+
+.productImage{
+  height:147px;
+  width:196px;
 }
 
 a:hover {
