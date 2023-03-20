@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { MilkService } from '../milk.service';
 import { ShoppingCart } from '../shoppingCart';
 import { Milk } from '../milk';
 
@@ -11,7 +12,7 @@ import { Milk } from '../milk';
 export class ShoppingCartComponent implements OnInit{
   shoppingCart: ShoppingCart | undefined;
 
-  constructor(private ShoppingCartService: ShoppingCartService) { }
+  constructor(private ShoppingCartService: ShoppingCartService, private MilkService: MilkService) { }
 
   ngOnInit(): void {
     this.getShoppingCart();
@@ -36,7 +37,10 @@ export class ShoppingCartComponent implements OnInit{
     this.reloadPage();
   }
 
-  deleteOne(id: number, username: String): void {
+  deleteOne(milk: Milk, id: number, username: String): void {
+    milk.quantity = milk.quantity + 1;
+    this.MilkService.updateMilk(milk).subscribe();
+
     this.ShoppingCartService.decrementMilk(id, username).subscribe(() => {
       const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {

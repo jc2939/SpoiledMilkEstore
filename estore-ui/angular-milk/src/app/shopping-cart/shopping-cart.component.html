@@ -11,7 +11,7 @@
         <img class="productImage" [src]="milk.imageUrl"/>
         <p>
           <button type="button" class="delete" title="Delete One"
-            (click)="deleteOne(milk.id, shoppingCart.username)">-</button>
+            (click)="deleteOne(milk, milk.id, shoppingCart.username)">-</button>
           {{ shoppingCart.milksInCartQuantity[i] }} &nbsp; &nbsp; <!-- The &nbsp; is a space -->
           <button type="button" class="add" title="Add one"
             (click)="addOne(milk, shoppingCart.username)">+</button>   

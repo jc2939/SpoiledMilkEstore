@@ -31,6 +31,9 @@ export class DashboardComponent implements OnInit {
   }
 
   addOne(milk: Milk, userName: String): void {
+    milk.quantity = milk.quantity - 1;
+    this.MilkService.updateMilk(milk).subscribe();
+    
     this.ShoppingCartService.incrementMilk(milk, userName).subscribe(() => {
       const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === milk.id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
