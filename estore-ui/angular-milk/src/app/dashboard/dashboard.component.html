@@ -1,7 +1,7 @@
 <h2>Our Milks</h2>
 <div class="milks-menu">
   <a *ngFor="let milk of milks"
-      routerLink="/detail/{{milk.id}}">
+      routerLink="/detail-customer/{{milk.id}}">
       <label for="milk-type">{{milk.type}} {{milk.flavor}} milk</label>
       <br>
       <label for="milk-type">Volume: {{milk.volume}} </label>
