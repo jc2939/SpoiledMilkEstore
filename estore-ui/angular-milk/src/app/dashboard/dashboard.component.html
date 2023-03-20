@@ -1,8 +1,10 @@
 <h2>Our Milks</h2>
+<app-milk-search></app-milk-search>
 <div class="milks-menu">
+
   <a *ngFor="let milk of milks"
       routerLink="/detail-customer/{{milk.id}}">
-      <label for="milk-type">{{milk.type}} {{milk.flavor}} milk</label>
+      <label for="milk-type" style="text-transform:capitalize">{{milk.type}} {{milk.flavor}} milk</label>
       <br>
       <label for="milk-type">Volume: {{milk.volume}} </label>
       <br>
@@ -19,4 +21,3 @@
   </a>
 </div>
 
-<app-milk-search></app-milk-search>
