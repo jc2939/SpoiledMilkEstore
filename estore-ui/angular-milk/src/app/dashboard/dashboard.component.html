@@ -1,4 +1,12 @@
 <h2>Our Milks</h2>
+<div>
+  <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/shopping-cart">Cart</a>
+    <a (click)="logout()">Logout</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
 <app-milk-search></app-milk-search>
 <div class="milks-menu">
 

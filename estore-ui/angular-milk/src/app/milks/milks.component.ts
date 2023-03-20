@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
@@ -11,7 +13,7 @@ import { MilkService } from '../milk.service';
 export class MilksComponent implements OnInit {
   milks: Milk[] = [];
 
-  constructor(private MilkService: MilkService) { }
+  constructor(private MilkService: MilkService, private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getMilks();
@@ -41,6 +43,11 @@ export class MilksComponent implements OnInit {
   {
     var number = Number(input);
     return number;
+  }
+
+  logout() {
+    this.loginService.logout()
+    this._router.navigateByUrl("/login")
   }
 
 }

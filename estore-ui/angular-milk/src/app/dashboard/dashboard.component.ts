@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 import { ShoppingCartService } from '../shopping-cart.service';
@@ -13,7 +15,8 @@ export class DashboardComponent implements OnInit {
   milks: Milk[] = [];
   shoppingCart: ShoppingCart | undefined;
 
-  constructor(private MilkService: MilkService, private ShoppingCartService: ShoppingCartService) { }
+  constructor(private MilkService: MilkService, private ShoppingCartService: ShoppingCartService,
+    private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getMilks();
@@ -45,6 +48,11 @@ export class DashboardComponent implements OnInit {
 
   reloadPage() {
     window.location.reload();
+  }
+
+  logout() {
+    this.loginService.logout()
+    this._router.navigateByUrl("/login")
   }
 
 }
