@@ -125,10 +125,10 @@ public class ShoppingCart {
                         milksInCartQuantity.remove(indexCounter);
                         milksInCart.remove(indexCounter);
                     }   
-                    break;
+                        break;
                     }    
+                    indexCounter++;
                 }
-                indexCounter++;
             }
             return true;
         }
