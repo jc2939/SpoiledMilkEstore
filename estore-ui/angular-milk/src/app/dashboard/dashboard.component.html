@@ -15,7 +15,7 @@
       Quantity: {{ milk.quantity }} &nbsp; <!-- &nbsp is a space -->   
     </p>
     <p *ngIf="shoppingCart">
-      <button type="button" class="add" title="Add One"
+      <button type="button" class="add" title="Add One" [disabled]="milk.quantity == 0"
       (click)="addOne(milk, shoppingCart.username)">Add to Cart</button>
     </p>
   </a>
