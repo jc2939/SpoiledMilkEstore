@@ -43,7 +43,7 @@ public class MilkFileDAOTest {
         // the mock object mapper will return the hero array above
         when(mockObjectMapper.readValue(new File("random.txt"), Milk[].class))
             .thenReturn(testMilks);
-        milkFileDAO = new MilkFileDAO("random.txt", mockObjectMapper);
+        milkFileDAO = new MilkFileDAO("random.txt", "random2.txt", mockObjectMapper);
     }
 
     @Test
