@@ -39,14 +39,26 @@ public class LoginFileDAO implements LoginDAO {
 
     @Override
     public String login(String username, String password) {
+        System.out.println(logins);
+        if (username == null || password == null) {
+            return null;
+        }
         if (!logins.containsKey(username)) {
             logins.put(username, String.valueOf(password.hashCode()));
-            System.out.println(logins);
             return username;
         }
         if (logins.get(username).equals(String.valueOf(password.hashCode()))) {
             return username;
         }
         return null;
+    }
+
+    @Override
+    public boolean resetPassword(String username) {
+        if (username == null) {
+            return false;
+        }
+        logins.remove(username);
+        return true;
     }
 }
