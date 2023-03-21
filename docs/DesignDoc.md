@@ -9,12 +9,13 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 ​
 ## Team Information
-* Team name: TEAMNAME
+* Team name: Spoiled Milk
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Jerry Chen
+  * Daniel Jara
+  * Yaro Khalitov
+  * Nate Saunders
+  * Jeremy Smart
 ​
 ## Executive Summary
 ​
