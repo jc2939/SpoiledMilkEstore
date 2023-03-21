@@ -37,7 +37,7 @@ export class ShoppingCartComponent implements OnInit{
         this.shoppingCart.milksInCartQuantity[index] += 1;
       }
     });
-    this.reloadPage();
+    //this.reloadPage();
   }
 
   deleteOne(milk: Milk, id: number, username: String): void {
@@ -48,9 +48,11 @@ export class ShoppingCartComponent implements OnInit{
       const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
         this.shoppingCart.milksInCartQuantity[index] -= 1;
+        if (this.shoppingCart?.milksInCartQuantity[index] <= 0)
+          this.reloadPage();
       }
     });
-    this.reloadPage();
+    
   }
 
   reloadPage() {
