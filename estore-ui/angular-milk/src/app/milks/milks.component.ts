@@ -24,11 +24,11 @@ export class MilksComponent implements OnInit {
     .subscribe(milks => this.milks = milks);
   }
 
-  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
+  add(type: string, flavor: string, volume: number, quantity: number, price: number, imageUrl: string): void {
     type = type.trim();
     flavor = flavor.trim();
     if (!type) { return; }
-    this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
+    this.MilkService.addMilk({ type, flavor, volume, quantity, price, imageUrl } as Milk)
       .subscribe(milk => {
         this.milks.push(milk);
       });

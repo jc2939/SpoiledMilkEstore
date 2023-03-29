@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
 
   
   addOne(milk: Milk, userName: String, event: Event): void {
-    //event.stopPropagation();
     milk.quantity = milk.quantity - 1;
     this.MilkService.updateMilk(milk).subscribe();
     
@@ -48,7 +47,6 @@ export class DashboardComponent implements OnInit {
       }
     });
     event.stopPropagation();
-    //this.reloadPage();
   }
 
   reloadPage() {
