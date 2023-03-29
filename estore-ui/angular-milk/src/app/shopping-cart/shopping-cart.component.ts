@@ -21,6 +21,8 @@ export class ShoppingCartComponent implements OnInit{
     this.getShoppingCart();
   }
 
+
+
   getShoppingCart(): void {
     this.ShoppingCartService.getShoppingCart("Jeremy")
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
@@ -31,14 +33,18 @@ export class ShoppingCartComponent implements OnInit{
   }
 
   addOne(milk: Milk, username: String): void {
+    milk.quantity = milk.quantity - 1;
+    this.MilkService.updateMilk(milk).subscribe();
+
     this.ShoppingCartService.incrementMilk(milk, username).subscribe(() => {
       const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === milk.id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
         this.shoppingCart.milksInCartQuantity[index] += 1;
       }
     });
-    //this.reloadPage();
   }
+
+  
 
   deleteOne(milk: Milk, id: number, username: String): void {
     milk.quantity = milk.quantity + 1;
