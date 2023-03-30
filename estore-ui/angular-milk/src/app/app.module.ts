@@ -30,7 +30,7 @@ import { MilkDetailCustomerComponent } from './milk-detail-customer/milk-detail-
     MilkDetailCustomerComponent,
     MilkSearchComponent,
     ShoppingCartComponent,
-    LoginComponent
+    LoginComponent,
     MilkDetailCustomerComponent
   ],
   bootstrap: [ AppComponent ]
