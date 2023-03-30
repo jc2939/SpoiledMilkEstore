@@ -13,13 +13,18 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    /*const login: Login = {
-      username: this.username!,
-      password: this.password!
-    }
-    */
     const login = {"username": this.username!, "password": this.password!} as Login
     if (await this.LoginService.login(login)) {
+      this._router.navigateByUrl("/dashboard")
+    } else {
+      this.username = "";
+      this.error = "Bad login."
+    }
+  }
+
+  async signup() {
+    const login = {"username": this.username!, "password": this.password!} as Login
+    if (await this.LoginService.signup(login)) {
       this._router.navigateByUrl("/dashboard")
     } else {
       this.username = "";

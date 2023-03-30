@@ -22,14 +22,13 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   async login(login: Login): Promise<boolean> {
-    let res: boolean = await firstValueFrom(this.http.post<boolean>(this.loginUrl, login, this.httpOptions))
-    console.log(`res: ${res}`);
+    let res: boolean = await firstValueFrom(this.http.post<boolean>(`${this.loginUrl}/login`, login, this.httpOptions))
     return res;
-    // var test = (await firstValueFrom(this.http.post(this.loginUrl, login, this.httpOptions))).toString();
-    // if (test != "") {
-    //   this.username = test;
-    //   return true;
-    // }
+  }
+
+  async signup(login: Login): Promise<boolean> {
+    let res: boolean = await firstValueFrom(this.http.post<boolean>(`${this.loginUrl}/signup`, login, this.httpOptions))
+    return res;
   }
 
   resetPassword(username: string) {
