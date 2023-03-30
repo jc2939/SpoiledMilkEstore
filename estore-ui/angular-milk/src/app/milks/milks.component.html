@@ -18,11 +18,14 @@
   <input id="milk-type" type="number" #milkQuantity />
   <label for="milk-type">Milk price: </label>
   <input id="milk-type" type="number" #milkPrice />
+  <label for="milk-type">Select Image </label>
+  <input id="milk-image" type="file" #milkImage />
+
 
 
   <!-- (click) passes input value to add() and then clears the input -->
   <button type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
-    stringToInt(milkQuantity.value), stringToInt(milkPrice.value))">
+    stringToInt(milkQuantity.value), stringToInt(milkPrice.value), fileName())">
     Add milk
   </button>
 </div>

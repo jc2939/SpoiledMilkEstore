@@ -24,11 +24,11 @@ export class MilksComponent implements OnInit {
     .subscribe(milks => this.milks = milks);
   }
 
-  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
+  add(type: string, flavor: string, volume: number, quantity: number, price: number, imageUrl: string): void {
     type = type.trim();
     flavor = flavor.trim();
     if (!type) { return; }
-    this.MilkService.addMilk({ type, flavor, volume, quantity, price } as Milk)
+    this.MilkService.addMilk({ type, flavor, volume, quantity, price, imageUrl } as Milk)
       .subscribe(milk => {
         this.milks.push(milk);
       });
@@ -45,9 +45,19 @@ export class MilksComponent implements OnInit {
     return number;
   }
 
+  fileName(): string
+  {
+    var file = (document.getElementById("milk-image") as HTMLInputElement)!;
+    var path = file.files![0];
+    var filename = path.name;
+    var pathName = "../assets/images/" + filename
+    return pathName;
+  }
+
   logout() {
     this.loginService.logout()
     this._router.navigateByUrl("/login")
   }
+
 
 }
