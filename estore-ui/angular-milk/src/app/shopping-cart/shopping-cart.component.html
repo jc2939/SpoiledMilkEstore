@@ -21,7 +21,7 @@
           <button type="button" class="delete" title="Delete One"
             (click)="deleteOne(milk, milk.id, shoppingCart.username)">-</button>
           {{ shoppingCart.milksInCartQuantity[i] }} &nbsp; &nbsp; <!-- The &nbsp; is a space -->
-          <button type="button" class="add" title="Add one"
+          <button type="button" class="add" title="Add one" [disabled]="milk.quantity == 0"
             (click)="addOne(milk, shoppingCart.username)">+</button>   
         </p>
     </div>
