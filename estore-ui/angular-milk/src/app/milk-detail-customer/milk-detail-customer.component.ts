@@ -33,5 +33,9 @@ export class MilkDetailCustomerComponent implements OnInit {
     this.location.back();
   }
 
+  rateMilk(rating: number): void {
+    
+  }
+
 
 }

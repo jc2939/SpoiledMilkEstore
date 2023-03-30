@@ -10,6 +10,14 @@
       <label for="descriptions">Units in stock: {{ milk.quantity }}</label>
       <label for="descriptions">Unit price: ${{ milk.price }}</label>
       <img class="productImage" [src]="milk.imageUrl"/>  
+      <label>Please rate us:</label>
+      <div>
+        <button type="button" (click)="rateMilk(1)">1</button>
+        <button type="button" (click)="rateMilk(2)">2</button>
+        <button type="button" (click)="rateMilk(3)">3</button>
+        <button type="button" (click)="rateMilk(4)">4</button>
+        <button type="button" (click)="rateMilk(5)">5</button>
+      </div>
     </div>
     <button type="button" (click)="goBack()">Go Back</button>
   </div>
