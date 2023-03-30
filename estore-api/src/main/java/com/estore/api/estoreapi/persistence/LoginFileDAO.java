@@ -61,16 +61,22 @@ public class LoginFileDAO implements LoginDAO {
 
     @Override
     public String login(Login login) throws IOException {
-        System.out.println(logins);
+        if (login.getUsername() == null || login.getPassword() == null) {
+            return null;
+        }
+        if (logins.get(login.getUsername()).equals(String.valueOf(login.getPassword().hashCode()))) {
+            return login.getUsername();
+        }
+        return null;
+    }
+
+    public String signup(Login login) throws IOException {
         if (login.getUsername() == null || login.getPassword() == null) {
             return null;
         }
         if (!logins.containsKey(login.getUsername())) {
             logins.put(login.getUsername(), String.valueOf(login.getPassword().hashCode()));
             save();
-            return login.getUsername();
-        }
-        if (logins.get(login.getUsername()).equals(String.valueOf(login.getPassword().hashCode()))) {
             return login.getUsername();
         }
         return null;

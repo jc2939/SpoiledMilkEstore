@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.estore.api.estoreapi.model.Login;
 import com.estore.api.estoreapi.model.Milk;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,27 +45,27 @@ public class LoginFileDAOTest {
     }
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws IOException {
         String username = "admin";
         String password = "admin";
 
-        String result = loginFileDAO.login(username, password);
+        String result = loginFileDAO.login(new Login(username, password));
         assertEquals(result, "admin");
     }
     @Test
-    public void testLoginWrongPassword() {
+    public void testLoginWrongPassword() throws IOException {
         String username = "admin";
         String password = "admin1";
 
-        String result = loginFileDAO.login(username, password);
+        String result = loginFileDAO.login(new Login(username, password));
         assertEquals(result, null);
     }
     @Test
-    public void testLoginNewAccount() {
+    public void testLoginNewAccount() throws IOException {
         String username = "admin1";
         String password = "admin";
 
-        String result = loginFileDAO.login(username, password);
+        String result = loginFileDAO.login(new Login(username, password));
         assertEquals(result, "admin1");
     }
 }

@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 
+import com.estore.api.estoreapi.model.Login;
 import com.estore.api.estoreapi.persistence.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +32,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void testResetPassword() {
+    public void testResetPassword() throws IOException {
         String username = "admin";
 
         when(mockLoginDAO.resetPassword(username)).thenReturn(true);
@@ -41,7 +43,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void testResetPasswordFail() {
+    public void testResetPasswordFail() throws IOException {
         String username = "";
 
         when(mockLoginDAO.resetPassword(username)).thenReturn(false);
@@ -52,25 +54,25 @@ public class LoginControllerTest {
     }
     
     @Test
-    public void testLogin() {
+    public void testLogin() throws IOException {
         String username = "admin";
         String password = "admin";
 
-        when(mockLoginDAO.login(username, password)).thenReturn(username);
+        when(mockLoginDAO.login(new Login(username, password))).thenReturn(username);
 
-        ResponseEntity<String> response = loginController.login(new String[]{username, password});
+        ResponseEntity<Boolean> response = loginController.login(new Login(username, password));
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    public void testLoginFail() {
+    public void testLoginFail() throws IOException {
         String username = "";
         String password = "admin";
 
-        when(mockLoginDAO.login(username, password)).thenReturn(null);
+        when(mockLoginDAO.login(new Login(username, password))).thenReturn(null);
 
-        ResponseEntity<String> response = loginController.login(new String[]{username, password});
+        ResponseEntity<Boolean> response = loginController.login(new Login(username, password));
 
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }

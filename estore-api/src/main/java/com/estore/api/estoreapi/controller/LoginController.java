@@ -25,7 +25,7 @@ public class LoginController {
         this.loginDAO = loginDAO;
     }
 
-    @PostMapping("")
+    @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody Login loginData) throws IOException {
         LOG.info("POST /login");
         String result = loginDAO.login(loginData);
@@ -35,6 +35,18 @@ public class LoginController {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else {
             System.out.println("Unauthorized");
+            return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<Boolean> signup(@RequestBody Login loginData) throws IOException {
+        LOG.info("POST /signup");
+        String result = loginDAO.signup(loginData);
+        System.out.println(loginData);
+        if (result != null) {
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } else {
             return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
         }
     }
