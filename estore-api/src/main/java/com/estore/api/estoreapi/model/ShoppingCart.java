@@ -101,6 +101,10 @@ public class ShoppingCart {
         synchronized(this){
             if(milksInCart.contains(milk)){
                 milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
+                //increment in cart also
+                Milk temp = milksInCart.get(milksInCart.indexOf(milk));
+                temp.setQuantity(temp.getQuantity() - 1);
+                milksInCart.set(milksInCart.indexOf(milk), temp);
             }else{
                 milksInCart.add(milk);
                 milksInCartQuantity.add(1);
@@ -119,7 +123,11 @@ public class ShoppingCart {
             for (Milk milk : milksInCart) {
                 if (milk.getId() == id) {
                     if(milksInCartQuantity.get(indexCounter) >= 2){
-                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1); 
+                        milksInCartQuantity.set(indexCounter, milksInCartQuantity.get(indexCounter) - 1);
+                        //decrement in cart also
+                        Milk temp = milksInCart.get(indexCounter);
+                        temp.setQuantity(temp.getQuantity() + 1);
+                        milksInCart.set(indexCounter, temp);
                     }
                     else{
                         milksInCartQuantity.remove(indexCounter);

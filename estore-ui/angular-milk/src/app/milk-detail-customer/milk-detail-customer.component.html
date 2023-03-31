@@ -8,7 +8,7 @@
       <label for="descriptions">Milk flavor: {{ milk.flavor }}</label>
       <label for="descriptions">Unit volume: {{ milk.volume }}</label>
       <label for="descriptions">Units in stock: {{ milk.quantity }}</label>
-      <label for="descriptions">Unit price: {{ milk.price }}</label>
+      <label for="descriptions">Unit price: ${{ milk.price }}</label>
       <img class="productImage" [src]="milk.imageUrl"/>  
     </div>
     <button type="button" (click)="goBack()">Go Back</button>

@@ -4,7 +4,7 @@
 
   <ul class="search-result">
     <li *ngFor="let milk of milks$ | async" >
-      <a routerLink="/detail/{{milk.id}}">
+      <a routerLink="/detail-customer/{{milk.id}}">
         {{milk.type}} {{milk.flavor}}
       </a>
     </li>
