@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estore.api.estoreapi.model.Login;
 import com.estore.api.estoreapi.persistence.LoginDAO;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 @RestController
@@ -24,19 +26,21 @@ public class LoginController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> login(@RequestBody String[] loginData) {
+    public ResponseEntity<Boolean> login(@RequestBody Login loginData) throws IOException {
         LOG.info("POST /login");
-        String result = loginDAO.login(loginData[0], loginData[1]);
+        String result = loginDAO.login(loginData);
+        System.out.println(loginData);
         if (result != null) {
             System.out.println(result);
-            return new ResponseEntity<String>(String.format("{\"username\":\"%s\"}",result), HttpStatus.OK);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else {
-            return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
+            System.out.println("Unauthorized");
+            return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
         }
     }
 
     @DeleteMapping("/{username}")
-    public ResponseEntity<String> resetPassword(@PathVariable String username) {
+    public ResponseEntity<String> resetPassword(@PathVariable String username) throws IOException {
         LOG.info("DELETE /login/"+username);
         if (loginDAO.resetPassword(username)) {
             return new ResponseEntity<>(HttpStatus.OK);
