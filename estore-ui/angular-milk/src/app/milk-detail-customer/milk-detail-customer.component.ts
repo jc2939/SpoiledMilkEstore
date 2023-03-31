@@ -34,7 +34,7 @@ export class MilkDetailCustomerComponent implements OnInit {
   }
 
   rateMilk(rating: number): void {
-    
+
   }
 
 
