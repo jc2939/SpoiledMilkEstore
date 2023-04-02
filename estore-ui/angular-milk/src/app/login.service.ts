@@ -32,9 +32,9 @@ export class LoginService {
     return res;
   }
 
-  resetPassword(username: string) {
+  async resetPassword(username: string) {
     console.log(username)
-    this.http.delete(`${this.loginUrl}/${username}`, this.httpOptions)
+    let res: string = await firstValueFrom(this.http.delete<string>(`${this.loginUrl}/${username}`, this.httpOptions))
   }
 
   logout() {

@@ -30,9 +30,9 @@ public class LoginController {
         LOG.info("POST /login");
         String result = loginDAO.login(loginData);
         if (result != null) {
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -41,9 +41,9 @@ public class LoginController {
         LOG.info("POST /signup");
         String result = loginDAO.signup(loginData);
         if (result != null) {
-            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         }
     }
 
