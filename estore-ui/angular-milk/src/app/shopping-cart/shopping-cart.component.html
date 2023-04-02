@@ -28,4 +28,10 @@
   </div>  
 </div>
 
+<label for="delivery-address">Delivery Address:</label>
+<input type="text" id="delivery-address" name="delivery-address" [(ngModel)]="deliveryAddress">
+
 <button type="button" class="add-button" (click)="purchase()">Purchase</button>
+
+<p>Purchase Total: ${{ calculateTotal() }}</p>
+</div>
