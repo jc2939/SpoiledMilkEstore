@@ -27,6 +27,7 @@ export class LoginService {
   }
 
   async signup(login: Login): Promise<boolean> {
+    console.log(`${this.loginUrl}/signup`)
     let res: boolean = await firstValueFrom(this.http.post<boolean>(`${this.loginUrl}/signup`, login, this.httpOptions))
     return res;
   }

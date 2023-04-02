@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("login")
+@RequestMapping("/login")
 public class LoginController {
     LoginDAO loginDAO;
     private static final Logger LOG = Logger.getLogger(LoginController.class.getName());
@@ -29,12 +29,9 @@ public class LoginController {
     public ResponseEntity<Boolean> login(@RequestBody Login loginData) throws IOException {
         LOG.info("POST /login");
         String result = loginDAO.login(loginData);
-        System.out.println(loginData);
         if (result != null) {
-            System.out.println(result);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else {
-            System.out.println("Unauthorized");
             return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
         }
     }
@@ -43,7 +40,6 @@ public class LoginController {
     public ResponseEntity<Boolean> signup(@RequestBody Login loginData) throws IOException {
         LOG.info("POST /signup");
         String result = loginDAO.signup(loginData);
-        System.out.println(loginData);
         if (result != null) {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } else {
