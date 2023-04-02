@@ -15,7 +15,11 @@ export class LoginComponent implements OnInit {
   async login() {
     const login = {"username": this.username!, "password": this.password!} as Login
     if (await this.LoginService.login(login)) {
-      this._router.navigateByUrl("/dashboard")
+      if (this.username === 'admin'){
+        this._router.navigateByUrl("/milks")
+      } else {
+        this._router.navigateByUrl("/dashboard")
+      }
     } else {
       this.username = "";
       this.error = "Bad login."
