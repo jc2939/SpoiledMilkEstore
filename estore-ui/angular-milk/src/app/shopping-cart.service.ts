@@ -39,6 +39,14 @@ export class ShoppingCartService {
     );
   }
 
+  /** CREATE a milk object to a shopping cart specified by username */
+  createNewCart(userName: String): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}/create`;
+    return this.http.post<ShoppingCart>(url, this.httpOptions).pipe(
+      catchError(this.handleError<ShoppingCart>('addMilk'))
+    );
+  }
+
   /** DELETE a milk object from the shoppingCart specified by the id and username */
   decrementMilk(id: number, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}/${id}`;

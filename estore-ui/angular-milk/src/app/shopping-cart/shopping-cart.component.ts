@@ -27,7 +27,7 @@ export class ShoppingCartComponent implements OnInit{
 
   getShoppingCart(): void {
     this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
-     this.ShoppingCartService.getShoppingCart(this.currUsername!)
+    this.ShoppingCartService.getShoppingCart("Yaro")//this.currUsername!
      .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 
@@ -57,8 +57,9 @@ export class ShoppingCartComponent implements OnInit{
       const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
         this.shoppingCart.milksInCartQuantity[index] -= 1;
-        if (this.shoppingCart?.milksInCartQuantity[index] <= 0)
-          this.reloadPage();
+        if (this.shoppingCart?.milksInCartQuantity[index] <= 0){
+          this.getShoppingCart();
+        }  
       }
     });
     

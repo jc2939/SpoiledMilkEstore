@@ -15,14 +15,14 @@ label {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: center;
 }
 
 .item {
-    flex: 15%;
+    flex-basis: 15%;
     padding: 10px;
     box-sizing: border-box;
 }
+
 
 nav a {
     padding: 1rem;

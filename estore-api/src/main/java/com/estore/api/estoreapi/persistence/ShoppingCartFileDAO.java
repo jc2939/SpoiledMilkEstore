@@ -169,4 +169,21 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
             return true;
         }    
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public boolean createNewCart(String userName) throws IOException{
+        synchronized(shoppingCart){
+            if (!shoppingCart.containsKey(userName)){
+                ArrayList<Milk> tempMilkList = new ArrayList<Milk>();
+                ArrayList<Integer> tempMilkQuantityList = new ArrayList<Integer>();
+                ShoppingCart newCart = new ShoppingCart(userName, tempMilkList, tempMilkQuantityList);
+                shoppingCart.put(userName, newCart);
+                save();
+                return true;
+            }
+            return false;
+        }
+    }
 }    

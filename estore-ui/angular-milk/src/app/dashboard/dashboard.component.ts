@@ -4,6 +4,7 @@ import { LoginService } from '../login.service';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartDataService } from '../shopping-cart-data.service';
 import { ShoppingCart } from '../shoppingCart';
 
 
@@ -13,11 +14,13 @@ import { ShoppingCart } from '../shoppingCart';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
+  private currUsername: string | undefined
   milks: Milk[] = [];
   shoppingCart: ShoppingCart | undefined;
 
+
   constructor(private MilkService: MilkService, private ShoppingCartService: ShoppingCartService,
-    private loginService: LoginService, private _router: Router) { }
+    private loginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) { }
 
   ngOnInit(): void {
     this.getMilks();
@@ -25,7 +28,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getShoppingCart(): void {
-    this.ShoppingCartService.getShoppingCart("Jeremy")
+    this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
+    this.ShoppingCartService.getShoppingCart("Yaro")//this.currUsername!
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 

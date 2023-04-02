@@ -52,4 +52,17 @@ public interface ShoppingCartDAO {
      * @throws IOException if an issue with underlying storage
      */
     ShoppingCart getShoppingCart(String userName) throws IOException;
+
+    /**
+     * Retrieves a {@linkplain ShoppingCart cart} with the given userName
+     * 
+     * @param userName The userName of the {@link ShoppingCart cart} to get
+     * 
+     * @return a {@link ShoppingCart cart} object with the matching userName
+     * <br>
+     * null if no {@link ShoppingCart cart} with a matching userName is found
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    boolean createNewCart(String userName) throws IOException;
 }    
