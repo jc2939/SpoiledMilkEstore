@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
-
+import { FormsModule } from '@angular/forms';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-milks',
@@ -12,6 +13,8 @@ import { MilkService } from '../milk.service';
 })
 export class MilksComponent implements OnInit {
   milks: Milk[] = [];
+  imageType: string | undefined;
+  base64code: string | undefined;
 
   constructor(private MilkService: MilkService, private loginService: LoginService, private _router: Router) { }
 
@@ -24,11 +27,35 @@ export class MilksComponent implements OnInit {
     .subscribe(milks => this.milks = milks);
   }
 
-  add(type: string, flavor: string, volume: number, quantity: number, price: number, imageUrl: string): void {
+  fileSelected(event: any){
+    let me = this;
+    let file = event.target!.files[0];
+    me.imageType = event.target!.files[0].type;
+    console.log(this.imageType);
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      me.base64code = reader.result!.toString().split(',')[1];
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
+  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
     type = type.trim();
     flavor = flavor.trim();
     if (!type) { return; }
-    this.MilkService.addMilk({ type, flavor, volume, quantity, price, imageUrl } as Milk)
+    const milk: Milk = {
+      id: 0,
+      type: type,
+      flavor: flavor,
+      volume: volume,
+      quantity: quantity,
+      price: price,
+      imageUrl: "data:" + this.imageType + ";base64," + this.base64code // use base64code as the imageUrl value
+    };
+    this.MilkService.addMilk(milk)
       .subscribe(milk => {
         this.milks.push(milk);
       });
