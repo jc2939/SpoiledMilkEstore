@@ -37,7 +37,7 @@ public class LoginControllerTest {
 
         when(mockLoginDAO.resetPassword(username)).thenReturn(true);
 
-        ResponseEntity<String> response = loginController.resetPassword(username);
+        ResponseEntity<Boolean> response = loginController.resetPassword(username);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -48,7 +48,7 @@ public class LoginControllerTest {
 
         when(mockLoginDAO.resetPassword(username)).thenReturn(false);
 
-        ResponseEntity<String> response = loginController.resetPassword(username);
+        ResponseEntity<Boolean> response = loginController.resetPassword(username);
 
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
@@ -73,6 +73,30 @@ public class LoginControllerTest {
         when(mockLoginDAO.login(new Login(username, password))).thenReturn(null);
 
         ResponseEntity<Boolean> response = loginController.login(new Login(username, password));
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
+
+    @Test
+    public void testSignup() throws IOException {
+        String username = "admin";
+        String password = "admin";
+
+        when(mockLoginDAO.signup(new Login(username, password))).thenReturn(username);
+
+        ResponseEntity<Boolean> response = loginController.signup(new Login(username, password));
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void testSignupFail() throws IOException {
+        String username = "";
+        String password = "admin";
+
+        when(mockLoginDAO.signup(new Login(username, password))).thenReturn(null);
+
+        ResponseEntity<Boolean> response = loginController.signup(new Login(username, password));
 
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }

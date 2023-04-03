@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.estore.api.estoreapi.model.HashedLogin;
 import com.estore.api.estoreapi.model.Login;
 import com.estore.api.estoreapi.model.Milk;
 
@@ -24,7 +25,7 @@ import org.junit.jupiter.api.Test;
 @Tag("Persistence-tier")
 public class LoginFileDAOTest {
     LoginFileDAO loginFileDAO;
-    String[][] testLogins;
+    HashedLogin[] testLogins;
     ObjectMapper mockObjectMapper;
 
     /**
@@ -36,11 +37,11 @@ public class LoginFileDAOTest {
     public void setupMilkFileDAO() throws IOException
     {
         mockObjectMapper = mock(ObjectMapper.class);
-        testLogins = new String[][]{{"admin","92668751"}};
+        testLogins = new HashedLogin[]{new HashedLogin("admin","92668751")}; // username: admin, password: admin
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the hero array above
-        when(mockObjectMapper.readValue(new File("random.txt"), String[][].class)).thenReturn(testLogins);
+        when(mockObjectMapper.readValue(new File("random.txt"), HashedLogin[].class)).thenReturn(testLogins);
         loginFileDAO = new LoginFileDAO("random.txt", mockObjectMapper);
     }
 
@@ -50,7 +51,7 @@ public class LoginFileDAOTest {
         String password = "admin";
 
         String result = loginFileDAO.login(new Login(username, password));
-        assertEquals(result, "admin");
+        assertEquals("admin", result);
     }
     @Test
     public void testLoginWrongPassword() throws IOException {
@@ -58,14 +59,54 @@ public class LoginFileDAOTest {
         String password = "admin1";
 
         String result = loginFileDAO.login(new Login(username, password));
-        assertEquals(result, null);
+        assertEquals(null, result);
     }
     @Test
-    public void testLoginNewAccount() throws IOException {
-        String username = "admin1";
+    public void testLoginEmptyField() throws IOException {
+        String username = "";
         String password = "admin";
 
         String result = loginFileDAO.login(new Login(username, password));
-        assertEquals(result, "admin1");
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void testSignup() throws IOException {
+        String username = "admin1";
+        String password = "admin";
+
+        String result = loginFileDAO.signup(new Login(username, password));
+        assertEquals("admin1", result);
+    }
+    @Test
+    public void testSignupExistingUsername() throws IOException {
+        String username = "admin";
+        String password = "admin";
+
+        String result = loginFileDAO.signup(new Login(username, password));
+        assertEquals(null, result);
+    }
+    @Test
+    public void testSignupEmptyField() throws IOException {
+        String username = null;
+        String password = "admin";
+
+        String result = loginFileDAO.signup(new Login(username, password));
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void testResetPassword() throws IOException {
+        String username = "admin";
+
+        boolean result = loginFileDAO.resetPassword(username);
+        assertEquals(true, result);
+    }
+    @Test
+    public void testResetPasswordEmptyField() throws IOException {
+        String username = null;
+
+        boolean result = loginFileDAO.resetPassword(username);
+        assertEquals(false, result);
     }
 }
