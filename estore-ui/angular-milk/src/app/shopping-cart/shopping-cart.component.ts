@@ -13,17 +13,19 @@ import { ShoppingCartDataService } from '../shopping-cart-data.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit{
-  shoppingCart: ShoppingCart | undefined;
+  // shoppingCart: ShoppingCart | undefined;
+  shoppingCart: any;
   private currUsername: string | undefined
+  deliveryAddress: string = '';
+  total: number = 0;
 
   constructor(private ShoppingCartService: ShoppingCartService, private ShoppingCartDataService: ShoppingCartDataService, private MilkService: MilkService,
     private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getShoppingCart();
+    this.calculateTotal();
   }
-
-
 
   getShoppingCart(): void {
     this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
@@ -31,8 +33,18 @@ export class ShoppingCartComponent implements OnInit{
      .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 
-  purchase(): void{
+  calculateTotal(): number {
+    let total = 0;
+    for (let i = 0; i < this.shoppingCart.milksInCart.length; i++) {
+      total += this.shoppingCart.milksInCart[i].price * this.shoppingCart.milksInCartQuantity[i];
+    }
+    return total;
+  }
 
+  purchase() {
+    console.log('Delivery address:', this.deliveryAddress);
+    console.log('Purchase total:', this.total);
+    document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + this.total;
   }
 
   addOne(milk: Milk, username: String): void {
@@ -40,7 +52,7 @@ export class ShoppingCartComponent implements OnInit{
     this.MilkService.updateMilk(milk).subscribe();
 
     this.ShoppingCartService.incrementMilk(milk, username).subscribe(() => {
-      const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === milk.id);
+      const index = this.shoppingCart?.milksInCart.findIndex((item: { id: number; }) => item.id === milk.id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
         this.shoppingCart.milksInCartQuantity[index] += 1;
       }
@@ -54,7 +66,7 @@ export class ShoppingCartComponent implements OnInit{
     this.MilkService.updateMilk(milk).subscribe();
 
     this.ShoppingCartService.decrementMilk(id, username).subscribe(() => {
-      const index = this.shoppingCart?.milksInCart.findIndex(item => item.id === id);
+      const index = this.shoppingCart?.milksInCart.findIndex((item: { id: number; }) => item.id === id);
       if (this.shoppingCart && this.shoppingCart.milksInCartQuantity && index !== undefined && index !== -1) {
         this.shoppingCart.milksInCartQuantity[index] -= 1;
         if (this.shoppingCart?.milksInCartQuantity[index] <= 0){
