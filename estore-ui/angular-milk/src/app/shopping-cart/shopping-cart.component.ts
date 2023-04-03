@@ -44,6 +44,7 @@ export class ShoppingCartComponent implements OnInit{
   purchase() {
     console.log('Delivery address:', this.deliveryAddress);
     console.log('Purchase total:', this.total);
+    document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + this.total;
   }
 
   addOne(milk: Milk, username: String): void {
