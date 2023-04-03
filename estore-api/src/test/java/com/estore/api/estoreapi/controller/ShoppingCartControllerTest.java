@@ -42,8 +42,8 @@ public class ShoppingCartControllerTest {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
         double[] rating = {4.0};
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
 
         ArrayList<Integer> listOfQuantities = new ArrayList<Integer>();
         listOfQuantities.add(1);
@@ -81,16 +81,16 @@ public class ShoppingCartControllerTest {
         // Setup
         ArrayList<Milk> listOfMilks1 = new ArrayList<Milk>();
         double[] rating = {4.0};
-        listOfMilks1.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks1.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks1.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks1.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
 
         ArrayList<Integer> listOfQuantities1 = new ArrayList<Integer>();
         listOfQuantities1.add(1);
         listOfQuantities1.add(2);
 
         ArrayList<Milk> listOfMilks2 = new ArrayList<Milk>();
-        listOfMilks2.add(new Milk(2, "cowsss", "bananazas", 2.4, 10, 2.99, rating, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks2.add(new Milk(23, "goat", "peaches", 5.8, 6, 6.24, rating, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks2.add(new Milk(2, "cowsss", "bananazas", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks2.add(new Milk(23, "goat", "peaches", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
 
         ArrayList<Integer> listOfQuantities2 = new ArrayList<Integer>();
         listOfQuantities2.add(3);
@@ -158,7 +158,7 @@ public class ShoppingCartControllerTest {
         // Setup
         String username = "nonexistant";
         double[] rating = {4.0};
-        Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, "../assets/images/glass-o-milk.jpg");
+        Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // When getMilk is called on the Mock Milk DAO, throw an IOException
         when(mockShoppingCartDAO.addMilk(milk, username)).thenReturn(true);
 
@@ -174,7 +174,7 @@ public class ShoppingCartControllerTest {
         // Setup
         String username = "nonexistant";
         double[] rating = {4.0};
-        Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, "../assets/images/glass-o-milk.jpg");
+        Milk milk = new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // When getMilk is called on the Mock Milk DAO, throw an IOException
         doThrow(new IOException()).when(mockShoppingCartDAO).addMilk(milk, username);
 

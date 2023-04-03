@@ -178,7 +178,7 @@ public class MilkFileDAO implements MilkDAO {
         synchronized(this.milks) {
             // We create a new milk object because the id field is immutable
             // and we need to assign the next unique id
-            Milk newMilk = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume(), milk.getQuantity(), milk.getPrice(), milk.getRating(), milk.getImageUrl());
+            Milk newMilk = new Milk(nextId(), milk.getType(), milk.getFlavor(), milk.getVolume(), milk.getQuantity(), milk.getPrice(), milk.getRating(), milk.getCalcRating(), milk.getImageUrl());
             this.milks.put(newMilk.getId(),newMilk);
             save(); // may throw an IOException
             return newMilk;

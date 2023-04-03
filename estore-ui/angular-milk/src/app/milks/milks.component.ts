@@ -42,7 +42,7 @@ export class MilksComponent implements OnInit {
     };
   }
 
-  add(type: string, flavor: string, volume: number, quantity: number, price: number): void {
+  add(type: string, flavor: string, volume: number, quantity: number, price: number, rating: number[], calcRating: number): void {
     type = type.trim();
     flavor = flavor.trim();
     if (!type) { return; }
@@ -53,6 +53,8 @@ export class MilksComponent implements OnInit {
       volume: volume,
       quantity: quantity,
       price: price,
+      rating: rating,
+      calcRating: calcRating,
       imageUrl: "data:" + this.imageType + ";base64," + this.base64code // use base64code as the imageUrl value
     };
     this.MilkService.addMilk(milk)

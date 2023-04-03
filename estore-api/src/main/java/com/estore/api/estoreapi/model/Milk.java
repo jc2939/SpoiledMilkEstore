@@ -24,6 +24,7 @@ public class Milk {
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
     @JsonProperty("rating") private double[] rating;
+    @JsonProperty("calcRating") private double calcRating;
     @JsonProperty("imageUrl") String imageUrl;
 
 
@@ -37,7 +38,7 @@ public class Milk {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price, @JsonProperty("rating") double[] rating, @JsonProperty("imageUrl") String imageUrl) {
+    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price, @JsonProperty("rating") double[] rating, @JsonProperty("calcRating") double calcRating, @JsonProperty("imageUrl") String imageUrl) {
         this.id = id;
         this.type = type;
         this.flavor = flavor;
@@ -45,6 +46,7 @@ public class Milk {
         this.quantity = quantity;
         this.price = price;
         this.rating = rating;
+        this.calcRating = calcRating;
         this.imageUrl = imageUrl;
     }
 
@@ -137,6 +139,10 @@ public class Milk {
 
         return sum/rating.length;
     }
+
+    public void setCalcRating() {this.calcRating = calcRating();}
+
+    public double getCalcRating() {return this.calcRating;}
 
     /**
      * Sets the image url of the milk - necessary for JSON object to Java object deserialization
