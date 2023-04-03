@@ -38,7 +38,7 @@ export class ShoppingCartComponent implements OnInit{
     for (let i = 0; i < this.shoppingCart.milksInCart.length; i++) {
       total += this.shoppingCart.milksInCart[i].price * this.shoppingCart.milksInCartQuantity[i];
     }
-    return total;
+    return parseFloat(total.toFixed(2));
   }
 
   purchase() {
