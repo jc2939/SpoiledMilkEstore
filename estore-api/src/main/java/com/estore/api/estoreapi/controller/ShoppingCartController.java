@@ -67,6 +67,27 @@ public class ShoppingCartController {
     }
 
     /**
+     * Creates a new empty {@linkplain ShoppingCart cart} with the provided username
+     * 
+     * @param userName - The {@link String userName} name of the user
+     * 
+     * @return ResponseEntity indicating if the creating was successful {@link Boolean result} and HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PostMapping("/{username}/create")
+    public ResponseEntity<Boolean> createNewCart(@PathVariable String username) {
+        LOG.info("POST /" + "Creating" + "/" + username);
+        try {
+            boolean result = shoppingCartDAO.createNewCart(username);
+            return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * Deletes or decrements a {@linkplain Milk milk} with the given id
      * 
      * @param id The id of the {@link Milk milk} to deleted

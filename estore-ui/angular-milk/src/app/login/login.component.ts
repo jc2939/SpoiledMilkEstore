@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from '../login';
+import { ShoppingCartDataService } from '../shopping-cart-data.service';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,12 @@ export class LoginComponent implements OnInit {
   async login() {
     const login = {"username": this.username!, "password": this.password!} as Login
     if (await this.LoginService.login(login)) {
-      this._router.navigateByUrl("/dashboard")
+      if (this.username === 'admin'){
+        this._router.navigateByUrl("/milks")
+      } else {
+        this._router.navigateByUrl("/dashboard")
+        this.ShoppingCartDataService.changeMessage(this.username!);
+      }
     } else {
       this.username = "";
       this.password = "";
@@ -42,7 +49,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private LoginService: LoginService, private _router: Router) {}
+  constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) {}
 
   username: string | undefined;
   password: string | undefined;

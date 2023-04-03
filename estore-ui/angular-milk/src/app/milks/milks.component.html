@@ -1,3 +1,10 @@
+<div>
+  <nav>
+    <a routerLink="/milks">Milks</a>
+    <a (click)="logout()">Logout</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
 <h2>My Milks</h2>
 
 <div>
@@ -11,11 +18,14 @@
   <input id="milk-type" type="number" #milkQuantity />
   <label for="milk-type">Milk price: </label>
   <input id="milk-type" type="number" #milkPrice />
+  <label for="milk-type">Choose milk image: </label>
+  <input type="file" class="file-upload" onchange="console.log(event.target.files)" #imageUrl>
+  
 
 
   <!-- (click) passes input value to add() and then clears the input -->
   <button type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
-    stringToInt(milkQuantity.value), stringToInt(milkPrice.value))">
+    stringToInt(milkQuantity.value), stringToInt(milkPrice.value), imageUrl.value)">
     Add milk
   </button>
 </div>
