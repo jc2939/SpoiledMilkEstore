@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
       this._router.navigateByUrl("/dashboard")
     } else {
       this.username = "";
+      this.password = "";
       this.error = "Bad login."
     }
   }
@@ -28,17 +29,22 @@ export class LoginComponent implements OnInit {
       this._router.navigateByUrl("/dashboard")
     } else {
       this.username = "";
-      this.error = "Bad login."
+      this.password = "";
+      this.error = "Bad signup."
     }
   }
 
-  resetPassword() {
-    this.LoginService.resetPassword(this.username!)
+  async resetPassword() {
+    if (await this.LoginService.resetPassword(this.username!) != null) {
+      this.username = "";
+      this.password = "";
+      this.error = "Password reset!"
+    }
   }
 
   constructor(private LoginService: LoginService, private _router: Router) {}
 
   username: string | undefined;
   password: string | undefined;
-  error: string = "";
+  error: string = "Login with a username and password";
 }
