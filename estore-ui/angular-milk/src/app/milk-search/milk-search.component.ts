@@ -22,6 +22,7 @@ export class MilkSearchComponent implements OnInit {
 
   // Push a search term into the observable stream.
   search(term: string): void {
+    term = term.toLowerCase();
     this.searchTerms.next(term);
   }
 

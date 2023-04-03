@@ -4,7 +4,9 @@ import { LoginService } from '../login.service';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartDataService } from '../shopping-cart-data.service';
 import { ShoppingCart } from '../shoppingCart';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +14,13 @@ import { ShoppingCart } from '../shoppingCart';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
+  private currUsername: string | undefined
   milks: Milk[] = [];
   shoppingCart: ShoppingCart | undefined;
 
+
   constructor(private MilkService: MilkService, private ShoppingCartService: ShoppingCartService,
-    private loginService: LoginService, private _router: Router) { }
+    private loginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) { }
 
   ngOnInit(): void {
     this.getMilks();
@@ -24,7 +28,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getShoppingCart(): void {
-    this.ShoppingCartService.getShoppingCart("Jeremy")
+    this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
+    this.ShoppingCartService.getShoppingCart(this.currUsername!)
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 
@@ -33,7 +38,9 @@ export class DashboardComponent implements OnInit {
       .subscribe(milks => this.milks = milks);
   }
 
-  addOne(milk: Milk, userName: String): void {
+
+  
+  addOne(milk: Milk, userName: String, event: Event): void {
     milk.quantity = milk.quantity - 1;
     this.MilkService.updateMilk(milk).subscribe();
     
@@ -43,7 +50,7 @@ export class DashboardComponent implements OnInit {
         this.shoppingCart.milksInCartQuantity[index] += 1;
       }
     });
-    this.reloadPage();
+    event.stopPropagation();
   }
 
   reloadPage() {

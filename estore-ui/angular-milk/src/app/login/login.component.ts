@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Login } from '../login';
+import { ShoppingCartDataService } from '../shopping-cart-data.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,20 +15,17 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    if (await this.LoginService.login(this.username!, this.password!)) 
-    {
-      if (this.username === "admin")
-      {
+    const login = {"username": this.username!, "password": this.password!} as Login
+    if (await this.LoginService.login(login)) {
+      if (this.username === 'admin'){
         this._router.navigateByUrl("/milks")
-      }
-      else
-      {
+      } else {
         this._router.navigateByUrl("/dashboard")
+        this.ShoppingCartDataService.changeMessage(this.username!);
       }
-    } 
-    else 
-    {
+    } else {
       this.username = "";
+      this.error = "Bad login."
     }
   }
 
@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
     this.LoginService.resetPassword(this.username!)
   }
 
-  constructor(private LoginService: LoginService, private _router: Router) {}
+  constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) {}
 
   username: string | undefined;
   password: string | undefined;
-  error: string | undefined
+  error: string = "";
 }

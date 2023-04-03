@@ -18,6 +18,10 @@
   <input id="milk-type" type="number" #milkQuantity />
   <label for="milk-type">Milk price: </label>
   <input id="milk-type" type="number" #milkPrice />
+  <label for="milk-type">Choose milk image: </label>
+  <input type="file" (change)="fileSelected($event)"/>
+
+  
 
 
   <!-- (click) passes input value to add() and then clears the input -->
