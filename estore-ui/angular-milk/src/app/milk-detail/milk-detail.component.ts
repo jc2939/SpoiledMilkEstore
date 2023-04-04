@@ -50,6 +50,13 @@ export class MilkDetailComponent implements OnInit {
     };
   }
 
+  clearRatings(): void {
+    if (this.milk) {
+      this.milk.calcRating = 0;
+      this.milk.rating = [];
+    }
+  }
+
   save(): void {
     if (this.milk) {
       if (this.base64code){

@@ -116,10 +116,22 @@ public class Milk {
      */
     public double getPrice() {return price;}
 
+    /**
+     * Sets the rating array of the milk - necessary for JSON object to Java object deserialization
+     * @param rating The list of ratings of the milk
+     */
     public void setRating(double[] rating) {this.rating = rating;}
 
+    /**
+     * Retrieves the rating array of the milk
+     * @return The list of ratings of the milk
+     */
     public double[] getRating() {return this.rating;}
 
+    /**
+     * Calculates the rating of the milk
+     * @return The calculated rating of the milk
+     */
     public double calcRating() {
         double sum = 0;
 
@@ -130,8 +142,15 @@ public class Milk {
         return sum/rating.length;
     }
 
+    /**
+     * Sets the calulated rating array of the milk - necessary for JSON object to Java object deserialization
+     */
     public void setCalcRating() {this.calcRating = calcRating();}
 
+    /**
+     * Retrieves the calculated rating of the milk
+     * @return The calculated rating of the milk
+     */
     public double getCalcRating() {return this.calcRating;}
 
     /**
