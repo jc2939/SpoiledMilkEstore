@@ -33,11 +33,12 @@ public class MilkFileDAOTest {
     public void setupMilkFileDAO() throws IOException
     {
         mockObjectMapper = mock(ObjectMapper.class);
+        double[] rating = {4.0};
         testMilks = new Milk[4];
-        testMilks[0] = new Milk(10, "cow", "banana", 2.5, 8, 2.95, "../assets/images/glass-o-milk.jpg");
-        testMilks[1] = new Milk(11, "oat", "chocolate", 4.2, 5, 4.50, "../assets/images/glass-o-milk.jpg");
-        testMilks[2] = new Milk(12, "goat", "strawberry", 3.9, 11, 4.23, "../assets/images/glass-o-milk.jpg");
-        testMilks[3] = new Milk(13, "almond", "pumpkin", 5.7, 14, 6.03, "../assets/images/glass-o-milk.jpg");
+        testMilks[0] = new Milk(10, "cow", "banana", 2.5, 8, 2.95, rating, 4.0, "../assets/images/glass-o-milk.jpg");
+        testMilks[1] = new Milk(11, "oat", "chocolate", 4.2, 5, 4.50, rating, 4.0, "../assets/images/glass-o-milk.jpg");
+        testMilks[2] = new Milk(12, "goat", "strawberry", 3.9, 11, 4.23, rating, 4.0, "../assets/images/glass-o-milk.jpg");
+        testMilks[3] = new Milk(13, "almond", "pumpkin", 5.7, 14, 6.03, rating, 4.0, "../assets/images/glass-o-milk.jpg");
 
         // When the object mapper is supposed to read from the file
         // the mock object mapper will return the hero array above
@@ -115,7 +116,8 @@ public class MilkFileDAOTest {
     public void testCreateMilk()
     {
         // Setup
-        Milk milk = new Milk(14, "almond", null, 2.5, 8, 3, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0};
+        Milk milk = new Milk(14, "almond", null, 2.5, 8, 3, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         Milk result = assertDoesNotThrow(() -> milkFileDAO.createMilk(milk), "Unexpected exception thrown");
         // Analyze
@@ -132,7 +134,8 @@ public class MilkFileDAOTest {
     public void testUpdateMilk()
     {
         // Invoke
-        Milk milk = new Milk(10, "coconut", "wheat", 5.9, 2, 7.3, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0, 2.0};
+        Milk milk = new Milk(10, "coconut", "wheat", 5.9, 2, 7.3, rating, 3.0, "../assets/images/glass-o-milk.jpg");
         Milk current = assertDoesNotThrow(() -> milkFileDAO.updateMilk(milk), "Unexpected exception thrown");
         // Analyze
         assertNotNull(current);
@@ -143,7 +146,8 @@ public class MilkFileDAOTest {
     @Test
     public void testUpdateMilkNotFound()
     {
-        Milk milk = new Milk(30, "coconut", "wheat", 5.9, 2, 7.3, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0, 2.0};
+        Milk milk = new Milk(30, "coconut", "wheat", 5.9, 2, 7.3, rating, 3.0, "../assets/images/glass-o-milk.jpg");
         Milk result = assertDoesNotThrow(() -> milkFileDAO.updateMilk(milk), "Unexpected exception thrown");
         // Analyze
         assertNull(result);
