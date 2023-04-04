@@ -27,6 +27,7 @@ public class MilkTest {
         assertEquals(expectedVolume, milk.getVolume());
         assertEquals(expectedQuantity, milk.getQuantity());
         assertEquals(expectedRating, milk.getRating());
+        assertEquals(expectedCalcRating, milk.getCalcRating());
         assertEquals(expectedPrice, milk.getPrice());
     }
 
@@ -134,6 +135,72 @@ public class MilkTest {
         // Analyze
         assertEquals(expectedPrice, milk.getPrice());
     }
+
+    @Test
+    public void testAddRating()
+    {
+        // Setup
+        int id = 99;
+        String type = "goat";
+        String flavor = "vanilla";
+        double volume = 4.5;
+        int quantity = 7;
+        double price = 4.99;
+        double[] rating = {4.0};
+        double calcRating = 4.0;
+        String imageUrl = "../assets/images/glass-o-milk.jpg";
+        Milk milk = new Milk(id, type, flavor, volume, quantity, price, rating, calcRating, imageUrl);
+        double[] expectedRatings = {4.0, 5.0};
+        double addedRating = 5.0;
+        // Invoke
+        milk.addRating(addedRating);
+        // Analyze
+        assertEquals(expectedRatings, milk.getRating());
+    }
+
+    @Test
+    public void testClearRating()
+    {
+        // Setup
+        int id = 99;
+        String type = "goat";
+        String flavor = "vanilla";
+        double volume = 4.5;
+        int quantity = 7;
+        double price = 4.99;
+        double[] rating = {4.0};
+        double calcRating = 4.0;
+        String imageUrl = "../assets/images/glass-o-milk.jpg";
+        Milk milk = new Milk(id, type, flavor, volume, quantity, price, rating, calcRating, imageUrl);
+        double[] expectedRatings = {};
+        // Invoke
+        milk.clearRating();
+        // Analyze
+        assertEquals(expectedRatings, milk.getRating());
+    }
+
+    @Test
+    public void testCalcRating()
+    {
+        // Setup
+        int id = 99;
+        String type = "goat";
+        String flavor = "vanilla";
+        double volume = 4.5;
+        int quantity = 7;
+        double price = 4.99;
+        double[] rating = {4.0, 5.0};
+        double calcRating = 4.0;
+        String imageUrl = "../assets/images/glass-o-milk.jpg";
+        Milk milk = new Milk(id, type, flavor, volume, quantity, price, rating, calcRating, imageUrl);
+        double expectedCalcRating = 4.5;
+        // Invoke
+        milk.calcRating();
+        // Analyze
+        assertEquals(expectedCalcRating, milk.getCalcRating());
+    }
+
+    
 
     @Test
     public void testSetURL()
