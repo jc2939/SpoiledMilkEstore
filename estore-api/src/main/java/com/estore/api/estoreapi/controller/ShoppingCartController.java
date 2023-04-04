@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,9 +54,9 @@ public class ShoppingCartController {
      * @return ResponseEntity with created {@link ShoppingCart shoppingCart} object and HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("/{userName}")
+    @PutMapping("/{userName}")
     public ResponseEntity<ShoppingCart> incrementMilk(@RequestBody Milk milk, @PathVariable String userName) {
-        LOG.info("POST /" + milk.toString() + "/" + userName);
+        LOG.info("PUT /" + milk.toString() + "/" + userName);
         try {
             shoppingCartDAO.addMilk(milk, userName);
             return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
@@ -74,12 +75,12 @@ public class ShoppingCartController {
      * @return ResponseEntity indicating if the creating was successful {@link Boolean result} and HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("/{username}/create")
-    public ResponseEntity<Boolean> createNewCart(@PathVariable String username) {
+    @PostMapping("")
+    public ResponseEntity<ShoppingCart> createNewCart(@RequestBody String username) {
         LOG.info("POST /" + "Creating" + "/" + username);
         try {
-            boolean result = shoppingCartDAO.createNewCart(username);
-            return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+            shoppingCartDAO.createNewCart(username);
+            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -97,7 +98,7 @@ public class ShoppingCartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{userName}/{id}")
+    @PutMapping("/{userName}/{id}")
     public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable int id, @PathVariable String userName) {
         LOG.info("DELETE /" + id + "/" + userName);
         try {
