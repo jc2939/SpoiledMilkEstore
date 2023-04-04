@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   getShoppingCart(): void {
     this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
-    this.ShoppingCartService.getShoppingCart("Yaro")//this.currUsername!
+    this.ShoppingCartService.getShoppingCart(this.currUsername!)
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }
 

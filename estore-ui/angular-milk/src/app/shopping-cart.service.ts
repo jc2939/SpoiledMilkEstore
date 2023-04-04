@@ -31,6 +31,14 @@ export class ShoppingCartService {
     );
   }
 
+  /** DELETE shoppingCart by userName. */
+  deleteShoppingCart(userName: string): Observable<{}> {
+    const url = `${this.cartUrl}/${userName}`;
+    return this.http.delete<ShoppingCart>(url).pipe(
+      catchError(this.handleError<ShoppingCart>('deleteShoppingCart'))
+    );
+  }
+
   /** POST a milk object to a shopping cart specified by username */
   incrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
