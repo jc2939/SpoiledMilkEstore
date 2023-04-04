@@ -1,5 +1,6 @@
 package com.estore.api.estoreapi.model;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Tag;
@@ -155,7 +156,7 @@ public class MilkTest {
         // Invoke
         milk.addRating(addedRating);
         // Analyze
-        assertEquals(expectedRatings, milk.getRating());
+        assertArrayEquals(expectedRatings, milk.getRating());
     }
 
     @Test
@@ -176,7 +177,7 @@ public class MilkTest {
         // Invoke
         milk.clearRating();
         // Analyze
-        assertEquals(expectedRatings, milk.getRating());
+        assertArrayEquals(expectedRatings, milk.getRating());
     }
 
     @Test
