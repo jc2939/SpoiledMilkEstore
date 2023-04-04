@@ -116,17 +116,7 @@ public class Milk {
      */
     public double getPrice() {return price;}
 
-    public void addRating(double rating) {
-        double[] newRatings = new double[this.rating.length + 1];
-
-        for (int i = 0; i < this.rating.length; i++) {
-            newRatings[i] = this.rating[i];
-        }
-
-        newRatings[this.rating.length + 1] = rating;
-
-        this.rating = newRatings;
-    }
+    public void setRating(double[] rating) {this.rating = rating;}
 
     public double[] getRating() {return this.rating;}
 

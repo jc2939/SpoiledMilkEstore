@@ -3,7 +3,8 @@
     <h2>{{milk.flavor | titlecase}} {{milk.type | titlecase}} Details</h2>
 
     <div>
-      <label for="descriptions">Rating: {{ milk.calcRating }}</label>
+      <label for="descriptions" *ngIf="milk.calcRating != 0">Rating: {{ milk.calcRating }}</label>
+      <label for="descriptions" *ngIf="milk.calcRating == 0">Rating: No Ratings</label>
       <label for="descriptions">Milk Identification: {{ milk.id }}</label> 
       <label for="descriptions">Milk type: {{ milk.type }}</label>
       <label for="descriptions">Milk flavor: {{ milk.flavor }}</label>
