@@ -25,17 +25,33 @@ export class LoginComponent implements OnInit {
       }
     } else {
       this.username = "";
+      this.password = "";
       this.error = "Bad login."
     }
   }
 
-  resetPassword() {
-    this.LoginService.resetPassword(this.username!)
+  async signup() {
+    const login = {"username": this.username!, "password": this.password!} as Login
+    if (await this.LoginService.signup(login)) {
+      this._router.navigateByUrl("/dashboard")
+    } else {
+      this.username = "";
+      this.password = "";
+      this.error = "Bad signup."
+    }
+  }
+
+  async resetPassword() {
+    if (await this.LoginService.resetPassword(this.username!) != null) {
+      this.username = "";
+      this.password = "";
+      this.error = "Password reset!"
+    }
   }
 
   constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) {}
 
   username: string | undefined;
   password: string | undefined;
-  error: string = "";
+  error: string = "Login with a username and password";
 }

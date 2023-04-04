@@ -38,13 +38,17 @@ export class ShoppingCartComponent implements OnInit{
     for (let i = 0; i < this.shoppingCart.milksInCart.length; i++) {
       total += this.shoppingCart.milksInCart[i].price * this.shoppingCart.milksInCartQuantity[i];
     }
-    return total;
+    return parseFloat(total.toFixed(2));
   }
 
   purchase() {
     console.log('Delivery address:', this.deliveryAddress);
     console.log('Purchase total:', this.total);
-    document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + this.total;
+    const totalStr = this.total.toFixed(2);
+    document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + totalStr;
+    this.ShoppingCartService.deleteShoppingCart(this.currUsername!).subscribe(() => {
+      this.shoppingCart = null;
+    });
   }
 
   addOne(milk: Milk, username: String): void {
@@ -58,8 +62,6 @@ export class ShoppingCartComponent implements OnInit{
       }
     });
   }
-
-  
 
   deleteOne(milk: Milk, id: number, username: String): void {
     milk.quantity = milk.quantity + 1;
