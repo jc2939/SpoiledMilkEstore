@@ -31,8 +31,9 @@ input {
   cursor: pointer;
 }
 
-.milks li:hover {
+li:hover {
   left: .1em;
+  background-color: gray;
 }
 
 
@@ -118,6 +119,9 @@ button {
 .file
 {
   color: white;
+}
+a{
+  text-decoration: none;
 }
 
 a:visited

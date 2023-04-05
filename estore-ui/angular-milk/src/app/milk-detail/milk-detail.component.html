@@ -20,7 +20,7 @@
     <label id="milk-rating">Milk rating: {{ milk.calcRating }} </label>
     <button id="milk-rating" type="button" (click)="clearRatings()">Clear Ratings</button>
     <br>
-    <input type="file" (change)="fileSelected($event)"/>
+    <input class="file" type="file" (change)="fileSelected($event)"/>
   </div>
   <button type="button" (click)="goBack()">Go Back</button>
   <button type="button" (click)="save()">Save</button>
