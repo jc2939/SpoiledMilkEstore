@@ -140,6 +140,15 @@ public class ShoppingCart {
             }
             return true;
         }
+
+    /**
+     * Empties the milkInCart and milkInCartQuantity arrays and returns the new object.
+     */
+    public ShoppingCart empty(){
+        this.milksInCart.removeAll(milksInCart);
+        this.milksInCartQuantity.removeAll(milksInCartQuantity);
+        return this;
+    }    
     
 
     /**

@@ -184,9 +184,15 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
             
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     */
     public ShoppingCart emptyShoppingCart(String userName) throws IOException{
         synchronized(shoppingCart){
-            return shoppingCart.get(userName);
+            ShoppingCart newCart = shoppingCart.get(userName).empty();
+            save();
+            return newCart;
         }
     }
 

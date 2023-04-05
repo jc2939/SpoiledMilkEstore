@@ -54,7 +54,7 @@ public interface ShoppingCartDAO {
     ShoppingCart getShoppingCart(String userName) throws IOException;
 
     /**
-     * Retrieves a {@linkplain ShoppingCart cart} with the given userName
+     * Creates a {@linkplain ShoppingCart cart} with the given userName
      * 
      * @param userName The userName of the {@link ShoppingCart cart} to get
      * 
@@ -67,7 +67,7 @@ public interface ShoppingCartDAO {
     ShoppingCart createNewCart(String userName) throws IOException;
 
     /**
-     * Retrieves a {@linkplain ShoppingCart cart} with the given userName
+     * Empties the {@linkplain ShoppingCart cart} with the given userName
      * 
      * @param userName The userName of the {@link ShoppingCart cart} to get
      * 

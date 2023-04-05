@@ -100,7 +100,7 @@ public class ShoppingCartController {
      */
     @PutMapping("/{userName}/{id}")
     public ResponseEntity<ShoppingCart> decrementMilk(@PathVariable int id, @PathVariable String userName) {
-        LOG.info("DELETE /" + id + "/" + userName);
+        LOG.info("PUT /" + id + "/" + userName);
         try {
             shoppingCartDAO.decrementMilk(id, userName);
             return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
@@ -132,9 +132,9 @@ public class ShoppingCartController {
     }
 
     /**
-     * Responds to the GET request for one {@linkplain ShoppingCart cart}
+     * Responds to the PUT request for one {@linkplain ShoppingCart cart}
      * 
-     * @return ResponseEntity with array of {@link ShoppingCart cart} object (may be empty) and
+     * @return ResponseEntity with {@link ShoppingCart cart} object thats empty and
      * HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
