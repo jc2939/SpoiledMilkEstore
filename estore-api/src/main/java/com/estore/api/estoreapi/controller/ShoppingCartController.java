@@ -29,7 +29,7 @@ import com.estore.api.estoreapi.persistence.ShoppingCartDAO;
  */
 
 @RestController
-@RequestMapping("cart")
+@RequestMapping("/cart")
 public class ShoppingCartController {
     private static final Logger LOG = Logger.getLogger(ShoppingCartController.class.getName());
     private ShoppingCartDAO shoppingCartDAO;
@@ -75,16 +75,16 @@ public class ShoppingCartController {
      * @return ResponseEntity indicating if the creating was successful {@link Boolean result} and HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
-    public ResponseEntity<ShoppingCart> createNewCart(@RequestBody String username) {
-        LOG.info("POST /" + "Creating" + "/" + username);
+    @PostMapping("/{userName}")
+    public ResponseEntity<ShoppingCart> createNewCart(@PathVariable String userName) {
+        LOG.info("POST /" + "creating" + "/" + userName);
         try {
-            shoppingCartDAO.createNewCart(username);
-            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
+            ShoppingCart cart = shoppingCartDAO.createNewCart(userName);
+            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -108,6 +108,46 @@ public class ShoppingCartController {
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for one {@linkplain ShoppingCart cart}
+     * 
+     * @return ResponseEntity with array of {@link ShoppingCart cart} object (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/{username}")
+    public ResponseEntity<ShoppingCart> deleteShoppingCart(@PathVariable String username) {
+        LOG.info("DELETE /cart/" + username);
+        try {
+            ShoppingCart cart = shoppingCartDAO.getShoppingCart(username);
+            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for one {@linkplain ShoppingCart cart}
+     * 
+     * @return ResponseEntity with array of {@link ShoppingCart cart} object (may be empty) and
+     * HTTP status of OK<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/{username}/empty")
+    public ResponseEntity<ShoppingCart> emptyShoppingCart(@PathVariable String username) {
+        LOG.info("PUT /empty cart/" + username);
+        try {
+            ShoppingCart cart = shoppingCartDAO.emptyShoppingCart(username);
+            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

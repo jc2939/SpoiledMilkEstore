@@ -46,10 +46,10 @@ export class ShoppingCartComponent implements OnInit{
     console.log('Purchase total:', this.total);
     const totalStr = this.total.toFixed(2);
     document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + totalStr;
-    this.ShoppingCartService.deleteShoppingCart(this.currUsername!).subscribe(() => {
-      this.shoppingCart = null;
-    });
-  }
+    this.ShoppingCartService.deleteShoppingCart(this.currUsername!)
+     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
+    }
+  
 
   addOne(milk: Milk, username: String): void {
     milk.quantity = milk.quantity - 1;

@@ -32,10 +32,18 @@ export class ShoppingCartService {
   }
 
   /** DELETE shoppingCart by userName. */
-  deleteShoppingCart(userName: string): Observable<{}> {
+  deleteShoppingCart(userName: string): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
-    return this.http.delete<ShoppingCart>(url).pipe(
+    return this.http.delete<ShoppingCart>(url, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('deleteShoppingCart'))
+    );
+  }
+
+  /** DELETE shoppingCart by userName. */
+  emptyShoppingCart(userName: string): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}/empty`;
+    return this.http.put<ShoppingCart>(url, this.httpOptions).pipe(
+      catchError(this.handleError<ShoppingCart>('emptyShoppingCart'))
     );
   }
 
@@ -49,7 +57,7 @@ export class ShoppingCartService {
 
   /** CREATE a milk object to a shopping cart specified by username */
   createNewCart(userName: String): Observable<ShoppingCart> {
-    const url = `${this.cartUrl}/${userName}/create`;
+    const url = `${this.cartUrl}/${userName}`;
     return this.http.post<ShoppingCart>(url, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('addMilk'))
     );
@@ -67,6 +75,7 @@ export class ShoppingCartService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
+
       console.error(error); // log to console instead
 
       // Let the app keep running by returning an empty result.

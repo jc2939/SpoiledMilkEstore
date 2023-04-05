@@ -3,6 +3,7 @@ import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from '../login';
 import { ShoppingCartDataService } from '../shopping-cart-data.service';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 
 @Component({
@@ -11,6 +12,8 @@ import { ShoppingCartDataService } from '../shopping-cart-data.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  shoppingCart: any;
+
   ngOnInit(): void {
   }
 
@@ -32,7 +35,11 @@ export class LoginComponent implements OnInit {
 
   async signup() {
     const login = {"username": this.username!, "password": this.password!} as Login
+    console.log("Before if statement")
     if (await this.LoginService.signup(login)) {
+      console.log(login.username)
+      this.ShoppingCartService.createNewCart(login.username).subscribe(shoppingCart => this.shoppingCart = shoppingCart);
+      this.ShoppingCartDataService.changeMessage(this.username!);
       this._router.navigateByUrl("/dashboard")
     } else {
       this.username = "";
@@ -49,7 +56,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) {}
+  constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService ,private ShoppingCartService: ShoppingCartService) {}
 
   username: string | undefined;
   password: string | undefined;
