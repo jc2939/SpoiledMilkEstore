@@ -30,9 +30,7 @@ li{
 .circle
 {    
   background-image: url('Cart.JPG');
-  height:70px;
-  width:90px;
-  background-size: cover;
+  background-size: 70px, 55px;
   color: transparent;
 }
 

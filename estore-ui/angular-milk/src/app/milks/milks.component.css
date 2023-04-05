@@ -68,15 +68,9 @@ input {
   background-color: #42545C;
 }
 
-button.delete {
-  position: absolute;
-  left: 210px;
-  top: 5px;
-  background-color: white;
-  color:  #525252;
-  font-size: 1.1rem;
-  margin: 0;
-  padding: 1px 10px 3px 10px;
+.delete
+{
+  background-color: green;
 }
 
 button.delete:hover {
@@ -119,7 +113,7 @@ nav a:active {
   align-items: flex-start;
 }
 
-a {
+li {
   background-color: orange;
   border-radius: 2px;
   padding: 1rem;

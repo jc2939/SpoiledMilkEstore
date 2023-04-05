@@ -1,5 +1,9 @@
 h2{
   color: white;
+  text-align: center;
+}
+p, label{
+  color: #fff;
 }
 
 .back
@@ -12,9 +16,7 @@ li{
 .circle
 {    
   background-image: url('Cart.JPG');
-  height:70px;
-  width:90px;
-  background-size: cover;
+  background-size: 70px, 55px;
   color: transparent;
 }
 
@@ -124,4 +126,9 @@ nav a {
     cursor: pointer;
     margin-top: 20px;
     margin-left: 10px;
+  }
+
+  a:hover
+  {
+    background-color: gray;
   }

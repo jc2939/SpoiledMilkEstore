@@ -18,14 +18,7 @@
   <input id="milk-type" type="number" #milkQuantity />
   <label for="milk-type">Milk price: </label>
   <input id="milk-type" type="number" #milkPrice />
-  <label for="milk-type">Select Image </label>
-  <input id="milk-image" type="file" #milkImage />
 
-
-
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button class="buttons" type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
-    stringToInt(milkQuantity.value), stringToInt(milkPrice.value), [], 0)">
 
   <label for="milk-type">Choose milk image: </label>
   <input type="file" (change)="fileSelected($event)"/>
@@ -41,8 +34,8 @@
 <!--</div>-->
 
 <div class="milks-menu">
-
-  <a *ngFor="let milk of milks"
+<ul>
+  <li *ngFor="let milk of milks"
       routerLink="/detail/{{milk.id}}">
       <label for="milk-type" style="text-transform:capitalize">{{milk.type}} {{milk.flavor}} milk</label>
       <br>
@@ -55,5 +48,8 @@
     <p>
       Quantity: {{ milk.quantity }} &nbsp; <!-- &nbsp is a space -->   
     </p>
-  </a>
+    <button type="button" class="delete" title="delete milk"
+      (click)="delete(milk)">x</button>
+  </li>
+      </ul>
 </div>
