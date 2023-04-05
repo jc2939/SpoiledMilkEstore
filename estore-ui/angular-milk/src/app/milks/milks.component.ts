@@ -45,15 +45,6 @@ export class MilksComponent implements OnInit {
     return number;
   }
 
-  fileName(): string
-  {
-    var file = (document.getElementById("milk-image") as HTMLInputElement)!;
-    var path = file.files![0];
-    var filename = path.name;
-    var pathName = "../assets/images/" + filename
-    return pathName;
-  }
-
   logout() {
     this.loginService.logout()
     this._router.navigateByUrl("/login")
