@@ -35,27 +35,6 @@ input {
   left: .1em;
 }
 
-.milks a {
-  color: #333;
-  text-decoration: none;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
-  display: block;
-  width: 100%;
-}
-
-.milks a:hover {
-  color: #2c3a41;
-  background-color: #e6e6e6;
-}
-
-.milks a:active {
-  background-color: #525252;
-  color: #fafafa;
-}
 
 .add-button {
  padding: .5rem 1.5rem;
@@ -78,23 +57,7 @@ button.delete:hover {
   color: white;
 }
 
-nav a {
-  padding: 1rem;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #e8e8e8;
-  color: #3d3d3d;
-  border-radius: 4px;
-}
 
-nav a:hover {
-  color: white;
-  background-color: #42545C;
-}
-nav a:active {
-  background-color: black;
-}
 .milks-menu {
   padding: 0;
   margin: auto;
@@ -118,7 +81,7 @@ li {
   border-radius: 2px;
   padding: 1rem;
   font-size: 1.2rem;
-  text-decoration: none;
+  text-decoration: none !important;
   display: inline-block;
   color: #fff;
   text-align: center;
@@ -147,7 +110,17 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  cursor: pointer;
+  cursor: crosshair;
   margin-top: 20px;
   margin-left: 10px;
+}
+
+.file
+{
+  color: white;
+}
+
+a:visited
+{
+  color: inherit;
 }
