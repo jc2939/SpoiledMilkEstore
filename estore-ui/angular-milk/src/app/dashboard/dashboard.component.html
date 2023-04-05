@@ -26,5 +26,6 @@
       (click)="addOne(milk, shoppingCart.username, $event);false">Add to Cart</button>
     </p>
   </a>
+  <h2 *ngIf="!milks.length">Out of Stock. Please return soon.</h2>
 </div>
 
