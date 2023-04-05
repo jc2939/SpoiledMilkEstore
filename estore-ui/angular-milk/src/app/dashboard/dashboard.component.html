@@ -1,10 +1,10 @@
 <h2>Our Milks</h2>
 <div>
-  <nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/shopping-cart">Cart</a>
-    <a (click)="logout()">Logout</a>
-  </nav>
+  <ul>
+    <li><a routerLink="/dashboard">Dashboard</a></li>
+    <li><a (click)="logout()">Logout</a></li>
+    <li><a routerLink="/shopping-cart" class="circle">Cart</a></li>
+  </ul>
   <router-outlet></router-outlet>
 </div>
 <app-milk-search></app-milk-search>
@@ -16,6 +16,9 @@
       <label for="milk-type">Volume: {{milk.volume}} </label>
       <br>
     <label for="milk-type">Price: ${{milk.price}}</label>
+    <br>
+    <img class="productImage" [src]="milk.imageUrl"/>
+    <!-- remember imageUrl added to everything -->
     <!-- <img class="productImage" [src]="milk.imageUrl"> -->
     <img class="productImage" [src]="milk.imageUrl">
     <p>

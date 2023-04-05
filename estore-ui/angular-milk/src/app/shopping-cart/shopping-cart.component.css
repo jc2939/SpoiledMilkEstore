@@ -1,3 +1,23 @@
+h2{
+  color: white;
+}
+
+.back
+{
+  height: 1500px;
+}
+li{
+  display: inline;
+}
+.circle
+{    
+  background-image: url('Cart.JPG');
+  height:70px;
+  width:90px;
+  background-size: cover;
+  color: transparent;
+}
+
 label {
     display: block;
     font-weight: bold;
@@ -11,18 +31,67 @@ label {
     width:180px;
 }
 
+a {
+  background-color: orange;
+  border-radius: 2px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  min-width: 70px;
+  margin: 21px;
+  box-sizing: border-box;
+
+  /* flexbox */
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+.list
+{
+  background-color: orange;
+  border-radius: 2px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  min-width: 300px;
+  margin: 0px;
+  box-sizing: border-box;
+
+  /* flexbox */
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+  padding: 0;
+  margin: auto;
+  max-width: 1100px;
+
+  /* flexbox */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: flex-start;
 }
 
 .item {
-    flex-basis: 15%;
+    flex: 15%;
     padding: 10px;
     box-sizing: border-box;
 }
-
 
 nav a {
     padding: 1rem;
@@ -40,4 +109,19 @@ nav a {
   }
   nav a:active {
     background-color: black;
+  }
+
+  .buttons {
+    background-color: burlywood;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 10px;
   }

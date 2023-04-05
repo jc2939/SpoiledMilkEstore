@@ -1,11 +1,21 @@
 /* MilkDetailComponent's private CSS styles */
+.back{
+  height: 1000px;
+}
+h2{
+  color: yellow;
+}
+
 label {
-  color: #435960;
+  color: goldenrod;
   font-weight: bold;
 }
 input {
-  font-size: 1em;
+  display: block;
+  width: 10%;
   padding: .5rem;
+  margin: 1rem 0;
+  box-sizing: border-box;
 }
 button {
   margin-top: 20px;
@@ -22,4 +32,18 @@ button:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;
+}
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 10px;
 }
