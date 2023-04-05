@@ -1,6 +1,6 @@
-<div *ngIf="milk">
+<div class="back" *ngIf="milk">
   <h2>{{milk.type | uppercase}} {{milk.flavor | uppercase}} Details</h2>
-  <div><span>id: </span>{{milk.id}}</div>
+  <div><span>&nbsp;&nbsp; id: </span>{{milk.id}}</div>
   <div>
     <label for="milk-type">Milk type: </label>
     <input id="milk-type" [(ngModel)]="milk.type" placeholder="Milk type"/>

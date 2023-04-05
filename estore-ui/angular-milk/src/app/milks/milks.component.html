@@ -1,8 +1,8 @@
 <div>
-  <nav>
-    <a routerLink="/milks">Milks</a>
-    <a (click)="logout()">Logout</a>
-  </nav>
+    <ul>
+    <li><a routerLink="/milks">Milks</a></li>
+    <li><a (click)="logout()">Logout</a></li>
+    </ul>
   <router-outlet></router-outlet>
 </div>
 <h2>My Milks</h2>
@@ -24,18 +24,26 @@
 
 
   <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
+  <button class="buttons" type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
     stringToInt(milkQuantity.value), stringToInt(milkPrice.value), fileName())">
     Add milk
   </button>
 </div>
 
-<ul class="milks">
-  <li *ngFor="let milk of milks">
-    <a routerLink="/detail/{{milk.id}}">
-      <span class="badge">{{milk.id}}</span> {{milk.type}} {{milk.flavor}}
-    </a>
-    <button type="button" class="delete" title="delete milk"
-      (click)="delete(milk)">x</button>
-  </li>
-</ul>
+<div class="milks-menu">
+
+  <a *ngFor="let milk of milks"
+      routerLink="/detail/{{milk.id}}">
+      <label for="milk-type" style="text-transform:capitalize">{{milk.type}} {{milk.flavor}} milk</label>
+      <br>
+      <label for="milk-type">Volume: {{milk.volume}} </label>
+      <br>
+    <label for="milk-type">Price: ${{milk.price}}</label>
+    <br>
+    <img class="productImage" [src]="milk.imageUrl"/>
+    <!-- remember imageUrl added to everything -->
+    <p>
+      Quantity: {{ milk.quantity }} &nbsp; <!-- &nbsp is a space -->   
+    </p>
+  </a>
+</div>

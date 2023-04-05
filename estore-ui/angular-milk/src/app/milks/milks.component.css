@@ -1,4 +1,16 @@
 /* MilksComponent's private CSS styles */
+h2
+{
+  color: greenyellow;
+}
+li{
+  display: inline;
+}
+
+label
+{
+  color: #fafafa;
+}
 .milks {
   margin: 0 0 2em 0;
   list-style-type: none;
@@ -8,7 +20,7 @@
 
 input {
   display: block;
-  width: 100%;
+  width: 20%;
   padding: .5rem;
   margin: 1rem 0;
   box-sizing: border-box;
@@ -43,23 +55,6 @@ input {
 .milks a:active {
   background-color: #525252;
   color: #fafafa;
-}
-
-.milks .badge {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #405061;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
 }
 
 .add-button {
@@ -105,4 +100,60 @@ nav a:hover {
 }
 nav a:active {
   background-color: black;
+}
+.milks-menu {
+  padding: 0;
+  margin: auto;
+  max-width: 1100px;
+
+  /* flexbox */
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+a {
+  background-color: orange;
+  border-radius: 2px;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  min-width: 70px;
+  margin: 42px;
+  box-sizing: border-box;
+
+  /* flexbox */
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+.productImage{
+  height:147px;
+  width:196px;
+}
+
+button {
+  background-color: lightsalmon;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 10px;
 }

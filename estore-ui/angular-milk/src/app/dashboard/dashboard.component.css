@@ -1,7 +1,9 @@
 /* DashboardComponent's private CSS styles */
 
+
 h2 {
   text-align: center;
+  color: #fff;
 }
 
 .milks-menu {
@@ -22,8 +24,20 @@ h2 {
   align-items: flex-start;
 }
 
+li{
+  display: inline;
+}
+.circle
+{    
+  background-image: url('Cart.JPG');
+  height:70px;
+  width:90px;
+  background-size: cover;
+  color: transparent;
+}
+
 a {
-  background-color: #3f525c;
+  background-color: orange;
   border-radius: 2px;
   padding: 1rem;
   font-size: 1.2rem;
@@ -31,9 +45,8 @@ a {
   display: inline-block;
   color: #fff;
   text-align: center;
-  width: 100%;
   min-width: 70px;
-  margin: .5rem auto;
+  margin: 42px;
   box-sizing: border-box;
 
   /* flexbox */
@@ -42,18 +55,11 @@ a {
   align-self: auto;
 }
 
-@media (min-width: 600px) {
-  a {
-    width: 18%;
-    box-sizing: content-box;
-  }
-}
-
 .productImage{
   height:147px;
   width:196px;
 }
 
 a:hover {
-  background-color: black;
+  background-color: gray;
 }

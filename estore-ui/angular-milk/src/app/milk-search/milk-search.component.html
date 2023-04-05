@@ -1,7 +1,8 @@
 <div id="search-component">
+  <div class="mx-auto">
   <label for="search-box">Milk Search</label>
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-
+  <input type="text" #searchBox (input)="search(searchBox.value)" placeholder="Search">
+</div>
   <ul class="search-result">
     <li *ngFor="let milk of milks$ | async" >
       <a routerLink="/detail-customer/{{milk.id}}">

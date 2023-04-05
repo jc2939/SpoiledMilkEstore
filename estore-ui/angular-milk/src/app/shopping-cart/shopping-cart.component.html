@@ -1,20 +1,21 @@
-<div>
-  <nav>
-    <a routerLink="/dashboard">Dashboard</a>
-    <a routerLink="/shopping-cart">Cart</a>
-    <a (click)="logout()">Logout</a>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+<div class="back">
+  <div>
+    <ul>
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+      <li><a routerLink="/shopping-cart" class="circle">Cart</a></li>
+    </ul>
+    <router-outlet></router-outlet>
+  </div>
 <div *ngIf="shoppingCart">
   <h2> {{shoppingCart.username}}'s Shopping Cart</h2>
   <div class="container">
     <div class="item" *ngFor="let milk of shoppingCart.milksInCart; let i = index">
       <div *ngIf="shoppingCart.milksInCartQuantity[i] > 0">
-  
-        <a routerLink="/detail-customer/{{milk.id}}">
-          <span class="badge"></span> <span style="text-transform:capitalize">{{milk.flavor}} {{milk.type}}</span>
-        </a>
+          <div class="list">
+            <a routerLink="/detail-customer/{{milk.id}}">
+              <span class="badge"></span> <span style="text-transform:capitalize">{{milk.flavor}} {{milk.type}}</span>
+              </a>
         <label for="milk-type">Price Per Unit: ${{milk.price}}</label>
         <img class="productImage" [src]="milk.imageUrl"/>
         <p>
@@ -24,8 +25,12 @@
           <button type="button" class="add" title="Add one"
             (click)="addOne(milk, shoppingCart.username)">+</button>   
         </p>
+        </div>
     </div>
   </div>  
 </div>
+<br>
+<br>
 
-<button type="button" class="add-button" (click)="purchase()">Purchase</button>
+<button class="buttons" (click)="purchase()">Purchase</button>
+</div>

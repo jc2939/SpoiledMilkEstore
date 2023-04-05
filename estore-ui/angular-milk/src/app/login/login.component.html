@@ -1,5 +1,9 @@
 <p id="error" [(ngModel)]="error"></p>
-<input id="username" [(ngModel)]="username" placeholder="Username"/>
-<input id="password" type="password" [(ngModel)]="password" placeholder="Password"/>
+<div class="back">
+<input class="log" id="username" [(ngModel)]="username" placeholder="Username"/>
+<input class="log" id="password" type="password" [(ngModel)]="password" placeholder="Password"/>
+<div>
 <button id="forgot-password" (click)="resetPassword()">Forgot Password?</button>
 <button id="login" (click)="login()">Login</button>
+</div>
+</div>
