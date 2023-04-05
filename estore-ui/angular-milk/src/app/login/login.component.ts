@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
 
   async resetPassword() {
     if (await this.LoginService.resetPassword(this.username!) != null) {
+      this.ShoppingCartService.deleteShoppingCart(this.username!).subscribe(shoppingCart => this.shoppingCart = shoppingCart);
       this.username = "";
       this.password = "";
       this.error = "Password reset!"

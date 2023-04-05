@@ -196,4 +196,14 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public void deleteShoppingCart(String userName) throws IOException{
+        synchronized(shoppingCart){
+            shoppingCart.remove(userName);
+            save();
+        }
+    }
+
 }    

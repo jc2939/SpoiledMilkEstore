@@ -78,4 +78,13 @@ public interface ShoppingCartDAO {
      * @throws IOException if an issue with underlying storage
      */
     ShoppingCart emptyShoppingCart(String userName) throws IOException;
+
+    /**
+     * Deletes the {@linkplain ShoppingCart cart} with the given userName
+     * 
+     * @param userName The userName of the {@link ShoppingCart cart} to get
+     * 
+     * @throws IOException if an issue with underlying storage
+     */
+    void deleteShoppingCart(String userName) throws IOException;
 }    

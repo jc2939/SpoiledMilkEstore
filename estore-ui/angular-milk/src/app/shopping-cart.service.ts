@@ -39,7 +39,7 @@ export class ShoppingCartService {
     );
   }
 
-  /** DELETE shoppingCart by userName. */
+  /** PUT shoppingCart by userName. */
   emptyShoppingCart(userName: string): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}/empty`;
     return this.http.put<ShoppingCart>(url, this.httpOptions).pipe(
@@ -47,7 +47,7 @@ export class ShoppingCartService {
     );
   }
 
-  /** POST a milk object to a shopping cart specified by username */
+  /** PUT a milk object to a shopping cart specified by username */
   incrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
     return this.http.put<ShoppingCart>(url, milk, this.httpOptions).pipe(
@@ -63,7 +63,7 @@ export class ShoppingCartService {
     );
   }
 
-  /** DELETE a milk object from the shoppingCart specified by the id and username */
+  /** PUT a milk object from the shoppingCart specified by the id and username */
   decrementMilk(id: number, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}/${id}`;
     return this.http.put<ShoppingCart>(url, this.httpOptions).pipe(

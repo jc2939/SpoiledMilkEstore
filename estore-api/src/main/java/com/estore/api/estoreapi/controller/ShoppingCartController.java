@@ -112,17 +112,16 @@ public class ShoppingCartController {
     }
 
     /**
-     * Responds to the GET request for one {@linkplain ShoppingCart cart}
+     * Responds to the DELETE request for one {@linkplain ShoppingCart cart}
      * 
-     * @return ResponseEntity with array of {@link ShoppingCart cart} object (may be empty) and
-     * HTTP status of OK<br>
+     * @return ResponseEntity with HTTP status of OK<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{username}")
     public ResponseEntity<ShoppingCart> deleteShoppingCart(@PathVariable String username) {
         LOG.info("DELETE /cart/" + username);
         try {
-            ShoppingCart cart = shoppingCartDAO.getShoppingCart(username);
+            shoppingCartDAO.deleteShoppingCart(username);
             return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
         }
         catch(IOException e) {
