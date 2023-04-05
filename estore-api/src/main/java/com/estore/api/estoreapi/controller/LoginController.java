@@ -30,10 +30,8 @@ public class LoginController {
         LOG.info("POST /login");
         String result = loginDAO.login(loginData);
         if (result != null) {
-            System.out.println("here");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            System.out.println("here2");
             return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
         }
     }
@@ -53,10 +51,8 @@ public class LoginController {
     public ResponseEntity<Boolean> resetPassword(@PathVariable String username) throws IOException {
         LOG.info("DELETE /login/"+username);
         if (loginDAO.resetPassword(username)) {
-            System.out.println("here");
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        System.out.println("here2");
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 }

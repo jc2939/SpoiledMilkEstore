@@ -34,9 +34,7 @@ export class LoginComponent implements OnInit {
 
   async signup() {
     const login = {"username": this.username!, "password": this.password!} as Login
-    console.log("Before if statement")
     if (await this.LoginService.signup(login)) {
-      console.log(login.username)
       this.ShoppingCartService.createNewCart(login.username).subscribe(shoppingCart => this.shoppingCart = shoppingCart);
       localStorage.setItem("username", this.username!);
       this._router.navigateByUrl("/dashboard")

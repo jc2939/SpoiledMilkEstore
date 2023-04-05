@@ -101,7 +101,6 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     private boolean save() throws IOException {
         ShoppingCart[] shoppingCartArray = getShoppingCartArray();
-        //System.out.println(shoppingCartArray[0].toString());
 
         // Serializes the Java Objects to JSON objects into the file
         // writeValue will thrown an IOException if there is an issue

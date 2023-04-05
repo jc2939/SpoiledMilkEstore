@@ -32,9 +32,7 @@ export class LoginService {
   }
 
   async resetPassword(username: string): Promise<boolean> {
-    console.log(username)
     let res: boolean = await firstValueFrom<boolean>(this.http.delete<boolean>(`${this.loginUrl}/${username}`, this.httpOptions).pipe(catchError(this.handleError<boolean>())))
-    console.log(res)
     return res;
   }
 

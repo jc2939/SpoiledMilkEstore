@@ -39,14 +39,12 @@ export class MilkDetailComponent implements OnInit {
     let me = this;
     let file = event.target!.files[0];
     me.imageType = event.target!.files[0].type;
-    console.log(this.imageType);
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
       me.base64code = reader.result!.toString().split(',')[1];
     };
     reader.onerror = function (error) {
-      console.log('Error: ', error);
     };
   }
 
