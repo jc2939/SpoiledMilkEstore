@@ -33,5 +33,28 @@ export class MilkDetailCustomerComponent implements OnInit {
     this.location.back();
   }
 
+  rateMilk(rating: number): void {
+    if (this.milk != undefined) {
+      var newRatings: number[] = this.milk.rating;
+      var len: number;
+      var sum: number = 0;
+      if (newRatings == null) {
+        newRatings = [rating];
+        len = 1;
+      } else {
+        len = newRatings.push(rating);
+      }
+      this.milk.rating = newRatings;
+      for (let i = 0; i < len; i++) {
+        sum += this.milk.rating[i];
+      }
+      this.milk.calcRating = Math.round((sum/len) * 10) / 10;
+      this.MilkService.updateMilk(this.milk)
+        .subscribe(milk => this.milk = milk);
+      //window.location.reload();
+    }
+  
+  }
+
 
 }

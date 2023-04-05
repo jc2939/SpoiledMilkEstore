@@ -15,8 +15,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -33,8 +34,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -50,8 +52,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -67,8 +70,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -84,8 +88,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -101,15 +106,16 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
         ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
         ArrayList<Milk> secondListOfMilks = new ArrayList<Milk>();
-        secondListOfMilks.add(new Milk(29, "almond", "strawberry", 4.7, 8, 5.99, "../assets/images/glass-o-milk.jpg"));
-        secondListOfMilks.add(new Milk(30, "soy", "walnut", 3.2, 18, 3.89, "../assets/images/glass-o-milk.jpg"));
+        secondListOfMilks.add(new Milk(29, "almond", "strawberry", 4.7, 8, 5.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        secondListOfMilks.add(new Milk(30, "soy", "walnut", 3.2, 18, 3.89, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         //Invoke
         cart.setMilksInCart(secondListOfMilks);
         // Analyze
@@ -121,13 +127,14 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
         ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
-        Milk milk = new Milk(28, "hemp", "cinnamon", 4.3, 27, 5.12, "../assets/images/glass-o-milk.jpg");
+        Milk milk = new Milk(28, "hemp", "cinnamon", 4.3, 27, 5.12, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         cart.setMilksInCart(0, milk);
         // Analyze
@@ -139,8 +146,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -159,8 +167,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
@@ -177,13 +186,14 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
         ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
-        Milk milk = new Milk(20, "coconut", "peach", 3.9, 17, 4.57, "../assets/images/glass-o-milk.jpg");
+        Milk milk = new Milk(20, "coconut", "peach", 3.9, 17, 4.57, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         boolean result = cart.incrementItem(listOfMilks.get(0));
         boolean result2 = cart.incrementItem(milk);
@@ -197,8 +207,9 @@ public class ShoppingCartTest {
     {
         // Setup
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 1, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 1, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(10);
         listOfMilksQuantity.add(1);
@@ -217,8 +228,9 @@ public class ShoppingCartTest {
         // Setup
         String username = "Yaro";
         ArrayList<Milk> listOfMilks = new ArrayList<Milk>();
-        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
         ArrayList<Integer> listOfMilksQuantity = new ArrayList<Integer>();
         listOfMilksQuantity.add(5);
         listOfMilksQuantity.add(4);
