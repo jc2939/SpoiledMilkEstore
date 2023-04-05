@@ -6,7 +6,7 @@ label {
     font-size: 1.2rem;
     margin-top: 1rem;
     margin-bottom: .5rem;
-  
+    color: chartreuse
   }
   input {
     padding: .5rem;
@@ -14,6 +14,11 @@ label {
     max-width: 600px;
     box-sizing: border-box;
     display: block;
+    text-align: auto;
+  }
+  .input
+  {
+    text-align: center;
   }
   
   input:focus {
@@ -29,16 +34,17 @@ label {
     border-right: 1px solid gray;
     display: inline-block;
     width: 100%;
-    max-width: 600px;
+    max-width: 400px;
     padding: .5rem;
     box-sizing: border-box;
     text-decoration: none;
-    color: black;
+    background-color: orange;
+    color: brown;
   }
   
   .search-result li a:hover {
-    background-color: #435A60;
-    color: white;
+    background-color: yellow;
+    color: black;
   }
   
   ul.search-result {
