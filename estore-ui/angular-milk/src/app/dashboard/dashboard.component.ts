@@ -4,7 +4,6 @@ import { LoginService } from '../login.service';
 import { Milk } from '../milk';
 import { MilkService } from '../milk.service';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { ShoppingCartDataService } from '../shopping-cart-data.service';
 import { ShoppingCart } from '../shoppingCart';
 
 
@@ -20,7 +19,7 @@ export class DashboardComponent implements OnInit {
 
 
   constructor(private MilkService: MilkService, private ShoppingCartService: ShoppingCartService,
-    private loginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService) { }
+    private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getMilks();
@@ -28,7 +27,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getShoppingCart(): void {
-    this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
+    this.currUsername = localStorage.getItem("username")!;
     this.ShoppingCartService.getShoppingCart(this.currUsername!)
     .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }

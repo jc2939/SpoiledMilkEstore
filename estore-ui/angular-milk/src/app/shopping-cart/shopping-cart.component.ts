@@ -5,7 +5,7 @@ import { ShoppingCart } from '../shoppingCart';
 import { Milk } from '../milk';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
-import { ShoppingCartDataService } from '../shopping-cart-data.service';
+
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,7 +19,7 @@ export class ShoppingCartComponent implements OnInit{
   deliveryAddress: string = '';
   total: number = 0;
 
-  constructor(private ShoppingCartService: ShoppingCartService, private ShoppingCartDataService: ShoppingCartDataService, private MilkService: MilkService,
+  constructor(private ShoppingCartService: ShoppingCartService, private MilkService: MilkService,
     private loginService: LoginService, private _router: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class ShoppingCartComponent implements OnInit{
   }
 
   getShoppingCart(): void {
-    this.ShoppingCartDataService.currentMessage.subscribe(message => (this.currUsername = message));
+    this.currUsername = localStorage.getItem("username")!;
     this.ShoppingCartService.getShoppingCart(this.currUsername!)
      .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
   }

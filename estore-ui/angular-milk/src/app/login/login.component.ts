@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from '../login';
-import { ShoppingCartDataService } from '../shopping-cart-data.service';
 import { ShoppingCartService } from '../shopping-cart.service';
 
 
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
         this._router.navigateByUrl("/milks")
       } else {
         this._router.navigateByUrl("/dashboard")
-        this.ShoppingCartDataService.changeMessage(this.username!);
+        localStorage.setItem("username", this.username!);
       }
     } else {
       this.username = "";
@@ -39,7 +38,7 @@ export class LoginComponent implements OnInit {
     if (await this.LoginService.signup(login)) {
       console.log(login.username)
       this.ShoppingCartService.createNewCart(login.username).subscribe(shoppingCart => this.shoppingCart = shoppingCart);
-      this.ShoppingCartDataService.changeMessage(this.username!);
+      localStorage.setItem("username", this.username!);
       this._router.navigateByUrl("/dashboard")
     } else {
       this.username = "";
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  constructor(private LoginService: LoginService, private _router: Router, private ShoppingCartDataService: ShoppingCartDataService ,private ShoppingCartService: ShoppingCartService) {}
+  constructor(private LoginService: LoginService, private _router: Router,private ShoppingCartService: ShoppingCartService) {}
 
   username: string | undefined;
   password: string | undefined;
