@@ -40,16 +40,17 @@ public class ShoppingCartFileDAOTest {
         testCarts = new ShoppingCart[2];
         // Setup
         ArrayList<Milk> listOfMilks1 = new ArrayList<Milk>();
-        listOfMilks1.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks1.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        double[] rating = {4.0};
+        listOfMilks1.add(new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks1.add(new Milk(26, "goat", "peach", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
 
         ArrayList<Integer> listOfQuantities1 = new ArrayList<Integer>();
         listOfQuantities1.add(2);
         listOfQuantities1.add(3);
 
         ArrayList<Milk> listOfMilks2 = new ArrayList<Milk>();
-        listOfMilks2.add(new Milk(2, "cowsss", "bananazas", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg"));
-        listOfMilks2.add(new Milk(23, "goat", "peaches", 5.8, 6, 6.24, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks2.add(new Milk(2, "cowsss", "bananazas", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
+        listOfMilks2.add(new Milk(23, "goat", "peaches", 5.8, 6, 6.24, rating, 4.0, "../assets/images/glass-o-milk.jpg"));
 
         ArrayList<Integer> listOfQuantities2 = new ArrayList<Integer>();
         listOfQuantities2.add(3);
@@ -102,7 +103,8 @@ public class ShoppingCartFileDAOTest {
 
     @Test
     public void testAddMilkExisting() throws IOException{
-        Milk milk = new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0};
+        Milk milk = new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         boolean result = assertDoesNotThrow(() -> shoppingCartFileDAO.addMilk(milk, "Testing1"),
                             "Unexpected exception thrown");
@@ -119,7 +121,8 @@ public class ShoppingCartFileDAOTest {
 
     @Test
     public void testAddMilkNonExisting() throws IOException{
-        Milk milk = new Milk(99, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0};
+        Milk milk = new Milk(99, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         boolean result = assertDoesNotThrow(() -> shoppingCartFileDAO.addMilk(milk, "Testing1"),
                             "Unexpected exception thrown");
@@ -137,7 +140,8 @@ public class ShoppingCartFileDAOTest {
 
     @Test
     public void testDecrementMilkExisting() throws IOException{
-        Milk milk = new Milk(25, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0};
+        Milk milk = new Milk(25, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         boolean result = assertDoesNotThrow(() -> shoppingCartFileDAO.decrementMilk(milk.getId(), "Testing1"),
                             "Unexpected exception thrown");
@@ -154,7 +158,8 @@ public class ShoppingCartFileDAOTest {
 
     @Test
     public void testDecrementMilkNonExisting() throws IOException{
-        Milk milk = new Milk(99, "cow", "banana", 2.4, 10, 2.99, "../assets/images/glass-o-milk.jpg");
+        double[] rating = {4.0};
+        Milk milk = new Milk(99, "cow", "banana", 2.4, 10, 2.99, rating, 4.0, "../assets/images/glass-o-milk.jpg");
         // Invoke
         boolean result = assertDoesNotThrow(() -> shoppingCartFileDAO.decrementMilk(99, "Testing1"),
                             "Unexpected exception thrown");

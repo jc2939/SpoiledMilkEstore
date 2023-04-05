@@ -22,7 +22,7 @@
           <button type="button" class="delete" title="Delete One"
             (click)="deleteOne(milk, milk.id, shoppingCart.username)">-</button>
           {{ shoppingCart.milksInCartQuantity[i] }} &nbsp; &nbsp; <!-- The &nbsp; is a space -->
-          <button type="button" class="add" title="Add one"
+          <button type="button" class="add" title="Add one" [disabled]="milk.quantity == 0"
             (click)="addOne(milk, shoppingCart.username)">+</button>   
         </p>
         </div>
@@ -32,5 +32,12 @@
 <br>
 <br>
 
+
 <button class="buttons" (click)="purchase()">Purchase</button>
+<label for="delivery-address">Delivery Address:</label>
+<input type="text" id="delivery-address" name="delivery-address" [(ngModel)]="deliveryAddress">
+
+<p id="purchase">Purchase Total: ${{ calculateTotal() }}</p>
+
+<button type="button" class="add-button" (click)="purchase()">Purchase</button>
 </div>

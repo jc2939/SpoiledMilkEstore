@@ -26,6 +26,16 @@
   <!-- (click) passes input value to add() and then clears the input -->
   <button class="buttons" type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
     stringToInt(milkQuantity.value), stringToInt(milkPrice.value))">
+
+  <label for="milk-type">Choose milk image: </label>
+  <input type="file" (change)="fileSelected($event)"/>
+
+  
+
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(milkType.value, milkFlavor.value, stringToInt(milkVolume.value), 
+    stringToInt(milkQuantity.value), stringToInt(milkPrice.value), [], 0)">
     Add milk
   </button>
 </div>

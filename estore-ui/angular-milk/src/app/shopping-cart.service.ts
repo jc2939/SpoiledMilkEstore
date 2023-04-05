@@ -31,18 +31,42 @@ export class ShoppingCartService {
     );
   }
 
-  /** POST a milk object to a shopping cart specified by username */
+  /** DELETE shoppingCart by userName. */
+  deleteShoppingCart(userName: string): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}`;
+    return this.http.delete<ShoppingCart>(url, this.httpOptions).pipe(
+      catchError(this.handleError<ShoppingCart>('deleteShoppingCart'))
+    );
+  }
+
+  /** PUT shoppingCart by userName. */
+  emptyShoppingCart(userName: string): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}/empty`;
+    return this.http.put<ShoppingCart>(url, this.httpOptions).pipe(
+      catchError(this.handleError<ShoppingCart>('emptyShoppingCart'))
+    );
+  }
+
+  /** PUT a milk object to a shopping cart specified by username */
   incrementMilk(milk: Milk, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}`;
-    return this.http.post<ShoppingCart>(url, milk, this.httpOptions).pipe(
+    return this.http.put<ShoppingCart>(url, milk, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('addMilk'))
     );
   }
 
-  /** DELETE a milk object from the shoppingCart specified by the id and username */
+  /** CREATE a milk object to a shopping cart specified by username */
+  createNewCart(userName: String): Observable<ShoppingCart> {
+    const url = `${this.cartUrl}/${userName}`;
+    return this.http.post<ShoppingCart>(url, this.httpOptions).pipe(
+      catchError(this.handleError<ShoppingCart>('addMilk'))
+    );
+  }
+
+  /** PUT a milk object from the shoppingCart specified by the id and username */
   decrementMilk(id: number, userName: String): Observable<ShoppingCart> {
     const url = `${this.cartUrl}/${userName}/${id}`;
-    return this.http.delete<ShoppingCart>(url, this.httpOptions).pipe(
+    return this.http.put<ShoppingCart>(url, this.httpOptions).pipe(
       catchError(this.handleError<ShoppingCart>('decrementMilk'))
     );
   }
@@ -51,6 +75,7 @@ export class ShoppingCartService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
+
       console.error(error); // log to console instead
 
       // Let the app keep running by returning an empty result.

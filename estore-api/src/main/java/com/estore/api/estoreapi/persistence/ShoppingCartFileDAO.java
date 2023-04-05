@@ -169,4 +169,41 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
             return true;
         }    
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public ShoppingCart createNewCart(String userName) throws IOException{
+        synchronized(shoppingCart){
+            ArrayList<Milk> tempMilkList = new ArrayList<Milk>();
+            ArrayList<Integer> tempMilkQuantityList = new ArrayList<Integer>();
+            ShoppingCart newCart = new ShoppingCart(userName, tempMilkList, tempMilkQuantityList);
+            shoppingCart.put(userName, newCart);
+            save();
+            return newCart;
+            
+        }
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public ShoppingCart emptyShoppingCart(String userName) throws IOException{
+        synchronized(shoppingCart){
+            ShoppingCart newCart = shoppingCart.get(userName).empty();
+            save();
+            return newCart;
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void deleteShoppingCart(String userName) throws IOException{
+        synchronized(shoppingCart){
+            shoppingCart.remove(userName);
+            save();
+        }
+    }
+
 }    

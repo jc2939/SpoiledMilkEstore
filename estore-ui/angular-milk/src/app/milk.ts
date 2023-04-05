@@ -5,5 +5,7 @@ export interface Milk {
     volume: number;
     quantity: number;
     price: number;
+    rating: number[];
+    calcRating: number;
     imageUrl: string;
   }

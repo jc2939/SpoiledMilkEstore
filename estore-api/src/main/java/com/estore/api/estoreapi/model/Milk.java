@@ -1,5 +1,7 @@
 package com.estore.api.estoreapi.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,6 +23,8 @@ public class Milk {
     @JsonProperty("volume") private double volume;
     @JsonProperty("quantity") private int quantity;
     @JsonProperty("price") private double price;
+    @JsonProperty("rating") private double[] rating;
+    @JsonProperty("calcRating") private double calcRating;
     @JsonProperty("imageUrl") String imageUrl;
 
 
@@ -34,13 +38,15 @@ public class Milk {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price, @JsonProperty("imageUrl") String imageUrl) {
+    public Milk(@JsonProperty("id") int id, @JsonProperty("type") String type, @JsonProperty("flavor") String flavor, @JsonProperty("volume") double volume, @JsonProperty("quantity") int quantity, @JsonProperty("price") double price, @JsonProperty("rating") double[] rating, @JsonProperty("calcRating") double calcRating, @JsonProperty("imageUrl") String imageUrl) {
         this.id = id;
         this.type = type;
         this.flavor = flavor;
         this.volume = volume;
         this.quantity = quantity;
         this.price = price;
+        this.rating = rating;
+        this.calcRating = calcRating;
         this.imageUrl = imageUrl;
     }
 
@@ -109,6 +115,50 @@ public class Milk {
      * @return The price of the milk
      */
     public double getPrice() {return price;}
+
+    /**
+     * Adds a rating to the rating array of the milk - necessary for JSON object to Java object deserialization
+     * @param rating The rating of the milk
+     */
+    public void addRating(double rating) {
+        double newRatings[] = new double[this.rating.length + 1];
+        for (int i = 0; i < this.rating.length; i++) {
+            newRatings[i] = this.rating[i];
+        }
+        newRatings[this.rating.length] = rating;
+        this.rating = newRatings;
+    }
+
+    /**
+     * Clears the rating array of the milk - necessary for JSON object to Java object deserialization
+     */
+    public void clearRating() {this.rating = new double[0];}
+
+    /**
+     * Retrieves the rating array of the milk
+     * @return The list of ratings of the milk
+     */
+    public double[] getRating() {return this.rating;}
+
+    /**
+     * Calculates the rating of the milk.
+     * Sets the calculated rating of the milk - necessary for JSON object to Java object deserialization
+     */
+    public void calcRating() {
+        double sum = 0;
+
+        for (int i = 0; i < rating.length; i++) {
+            sum += rating[i];
+        }
+
+        this.calcRating = sum/rating.length;
+    }
+
+    /**
+     * Retrieves the calculated rating of the milk
+     * @return The calculated rating of the milk
+     */
+    public double getCalcRating() {return this.calcRating;}
 
     /**
      * Sets the image url of the milk - necessary for JSON object to Java object deserialization

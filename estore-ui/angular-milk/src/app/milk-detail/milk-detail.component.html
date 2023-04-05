@@ -4,14 +4,23 @@
   <div>
     <label for="milk-type">Milk type: </label>
     <input id="milk-type" [(ngModel)]="milk.type" placeholder="Milk type"/>
+    <br>
     <label for="milk-flavor">Milk flavor: </label>
     <input id="milk-flavor" [(ngModel)]="milk.flavor" placeholder="Milk flavor"/>
+    <br>
     <label for="milk-volume">Unit volume: </label>
     <input id="milk-volume" type="number" [(ngModel)]="milk.volume" placeholder="Milk volume"/>
+    <br>
     <label for="milk-quantity">Units in stock: </label>
     <input id="milk-quantity" type="number" [(ngModel)]="milk.quantity" placeholder="Milk quantity"/>
+    <br>
     <label for="milk-price">Unit price: </label>
     <input id="milk-price" type="number" [(ngModel)]="milk.price" placeholder="Milk price"/>
+    <br>
+    <label id="milk-rating">Milk rating: {{ milk.calcRating }} </label>
+    <button id="milk-rating" type="button" (click)="clearRatings()">Clear Ratings</button>
+    <br>
+    <input type="file" (change)="fileSelected($event)"/>
   </div>
   <button type="button" (click)="goBack()">Go Back</button>
   <button type="button" (click)="save()">Save</button>
