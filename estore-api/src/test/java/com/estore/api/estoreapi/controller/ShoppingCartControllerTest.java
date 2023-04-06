@@ -184,4 +184,25 @@ public class ShoppingCartControllerTest {
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     } 
+
+    @Test
+    public void testCreateNewCart() throws IOException
+    {
+        String username = "yaro";
+        ShoppingCart cart = new ShoppingCart(username, new ArrayList<Milk>(), new ArrayList<Integer>());
+        when(mockShoppingCartDAO.createNewCart(username)).thenReturn(cart);
+        ResponseEntity<ShoppingCart> response = shoppingCartController.createNewCart(username);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(cart, response.getBody());
+    }
+
+    @Test
+    public void testCreateNewCartHandleException() throws IOException
+    {
+        String username = "yaro";
+        //ShoppingCart cart = new ShoppingCart(username, new ArrayList<Milk>(), new ArrayList<Integer>());
+        doThrow(new IOException()).when(mockShoppingCartDAO).createNewCart(username);
+        ResponseEntity<ShoppingCart> response = shoppingCartController.createNewCart(username);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 }

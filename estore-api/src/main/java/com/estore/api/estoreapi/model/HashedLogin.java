@@ -26,8 +26,8 @@ public class HashedLogin {
     @Override
     public boolean equals(Object object) {
         boolean result = false;
-        if (object != null && object instanceof Login) {
-            result = username == ((HashedLogin)object).username && passwordHash == ((HashedLogin)object).passwordHash;
+        if (object != null && object instanceof HashedLogin) {
+            result = username.equals(((HashedLogin)object).username) && passwordHash.equals(((HashedLogin)object).passwordHash);
         }
         return result;
     }
