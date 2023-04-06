@@ -1,7 +1,7 @@
 ---
 geometry: margin=1in
 ---
-# PROJECT Design Documentation
+# Spoiled Milk Design Documentation
 ​
 ## Team Information
 * Team name: Spoiled Milk
@@ -22,7 +22,19 @@ geometry: margin=1in
 ### Glossary and Acronyms
 ​
 >| Term | Definition |
-  | SPA | Single Page |
+
+>| SPA | Single Page |
+
+>| MVP | Minimum Viable Product |
+
+>| UI | User Interface |
+
+>| MVVM | Model-View-ViewModel |
+
+>| HTML | HyperText Markup Language |
+
+>| CSS | Cascading Style Sheets |
+
 ​
 ​
 ## Requirements
@@ -57,11 +69,11 @@ This section describes the application domain.
 ​
 ## Architecture and Design
 ​
-This section describes the application architecture.
+>This section describes the application architecture.
 ​
 ### Summary
 ​
-The following Tiers/Layers model shows a high-level view of the webapp's architecture.
+>The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 ​
 ![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
 ​
@@ -76,7 +88,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 ​
 ### Overview of User Interface
 ​
-This section describes the web interface flow; this is how the user views and interacts
+>This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 ​
 > _Provide a summary of the application's user interface.  Describe, from
@@ -96,7 +108,7 @@ with the e-store application.
 ## OO Design Principles
 **Controller**
 
-When it comes to our estore, we should be using more than just one controller. Several
+>When it comes to our estore, we should be using more than just one controller. Several
 functions don’t relate to each other well enough to be contained within just one, so our current
 design will be implementing several. One section of our store that should use its own controller
 is the log-in page. The UI controller would communicate with a log-in controller to perform
@@ -149,20 +161,15 @@ and edited. Below is a rough example of what a review object would look like.
 
 **Open/Closed**
 
-The principle of open/closed states that software entities should be open for extension but
+>The principle of open/closed states that software entities should be open for extension but
 closed for modification. A good example of this is inheritance, interfaces, and polymorphism. A
 class should only be designed for one purpose (as stated by single responsibility) and should be
 polished to do that one thing. Adding or changing things to it would not make it closed for
-modification. If many people were using a library and the owner of that library modified the base
-code for it, essentially changing its function then that would lead to disaster. However if the
-owner instead built things on top of that code and inherited from it, then that is what we are
-looking for. In our spoiled milk e-store project we are designing it in such a way that we do not
+modification. In our spoiled milk e-store project we are designing it in such a way that we do not
 create redundant code and instead make use of OOP and OOD principles. For example, we will
 have a general product class that will define base things like price, quantity, and name. From that
 ,we can create children classes that will build upon that adding other special product qualities. In
-this way, we do not modify the base class but instead, open it up for extension. If possible,
-making use of polymorphism will also be great to adhere to this principle. Perhaps we as a team
-should consider creating an abstract class that defines the final prices for each product. This way
+this way, we do not modify the base class but instead, open it up for extension. The extension of making multiple milk objects is possible without modifying the base class. If possible, making use of polymorphism will also be great to adhere to this principle. Perhaps we as a team should consider creating an abstract class that defines the final prices for each product. This way
 in a different class we can call upon the price class without modifying anything else in that
 different class. Adding these little changes will help our project be better and adhere to this
 principle.
@@ -170,12 +177,12 @@ principle.
 
 **Pure Fabrication**
 
-Pure fabrication principle states that in order to support single responsibility and low
+>Pure fabrication principle states that in order to support single responsibility and low
 coupling, a non-domain entity should be created when necessary. This principle focuses on
 creating artificial entities (when necessary) that are not necessarily part of the domain object but
 instead do some of the work that the domain objects should not. This will be vital when storing
 inventory data of our products. We do not want the product classes to also perform storage of the
-data. This should be done by a separate class called perhaps “StoreProducts” or something
+data. This should be done by a separate class where we can store our milk objects in a file or something
 similar. This helps enable our entities to stay within their single responsibility domains, and
 encourages low coupling. I think for our current design we should definitely consider adding
 more stories on trello for entities such as these. The inventory entity is one example, but we
