@@ -36,7 +36,7 @@
 <label for="delivery-address">Delivery Address:</label>
 <input type="text" id="delivery-address" name="delivery-address" [(ngModel)]="deliveryAddress">
 <p id="purchase">Purchase Total: ${{ calculateTotal() }}</p>
-<button class="buttons" (click)="purchase()">Purchase</button>
+<button class="buttons" (click)="purchase()" onclick="document.getElementById('delivery-address').value = ''">Purchase</button>
 </div>
 
 </div>

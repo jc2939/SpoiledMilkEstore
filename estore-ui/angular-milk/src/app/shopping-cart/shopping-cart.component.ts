@@ -42,8 +42,9 @@ export class ShoppingCartComponent implements OnInit{
   }
 
   purchase() {
-    const totalStr = this.total.toFixed(2);
-    document.getElementById('purchase')!.innerHTML = 'Purchase total: $' + totalStr;
+    const totalStr = this.calculateTotal().toFixed(2);
+    alert("Delivery Address: " + this.deliveryAddress + "\nTotal Price: $" + totalStr);
+    
     this.ShoppingCartService.emptyShoppingCart(this.currUsername!)
      .subscribe(shoppingCart => this.shoppingCart = shoppingCart);
     }
