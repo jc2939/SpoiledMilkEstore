@@ -44,7 +44,7 @@ public class MilkFileDAOTest {
         // the mock object mapper will return the hero array above
         when(mockObjectMapper.readValue(new File("random.txt"), Milk[].class))
             .thenReturn(testMilks);
-        milkFileDAO = new MilkFileDAO("random.txt", "random2.txt", mockObjectMapper);
+        milkFileDAO = new MilkFileDAO("random.txt", mockObjectMapper);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class MilkFileDAOTest {
     {
         Milk[] milks = milkFileDAO.searchMilks("oat");
         // Analyze
-        assertEquals(milks.length, 2);
+        assertEquals(2, milks.length);
         assertEquals(milks[0], testMilks[1]);
         assertEquals(milks[1], testMilks[2]);
     }
@@ -84,7 +84,7 @@ public class MilkFileDAOTest {
         // Invoke
         Milk milk = milkFileDAO.getMilk(42);
         // Analyze
-        assertEquals(milk, null);
+        assertEquals(null,milk);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class MilkFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, true);
+        assertEquals(true, result);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private
@@ -108,7 +108,7 @@ public class MilkFileDAOTest {
         // Invoke
         boolean result = assertDoesNotThrow(() -> milkFileDAO.deleteMilk(42), "Unexpected exception thrown");
         // Analyze
-        assertEquals(result, false);
+        assertEquals(false, result);
         assertEquals(milkFileDAO.milks.size(), testMilks.length);
     }
 

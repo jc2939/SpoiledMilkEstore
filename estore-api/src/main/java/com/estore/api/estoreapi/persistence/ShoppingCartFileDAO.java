@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +24,6 @@ import com.estore.api.estoreapi.model.ShoppingCart;
  */
 @Component
 public class ShoppingCartFileDAO implements ShoppingCartDAO {
-    private static final Logger LOG = Logger.getLogger(ShoppingCartDAO.class.getName());
     Map<String,ShoppingCart> shoppingCart;   // Provides a local cache of the milk objects
                                 // so that we don't need to read from the file
                                 // each time
@@ -174,8 +172,8 @@ public class ShoppingCartFileDAO implements ShoppingCartDAO {
      */
     public ShoppingCart createNewCart(String userName) throws IOException{
         synchronized(shoppingCart){
-            ArrayList<Milk> tempMilkList = new ArrayList<Milk>();
-            ArrayList<Integer> tempMilkQuantityList = new ArrayList<Integer>();
+            ArrayList<Milk> tempMilkList = new ArrayList<>();
+            ArrayList<Integer> tempMilkQuantityList = new ArrayList<>();
             ShoppingCart newCart = new ShoppingCart(userName, tempMilkList, tempMilkQuantityList);
             shoppingCart.put(userName, newCart);
             save();

@@ -60,7 +60,7 @@ public class MilkController {
         try {
             Milk milk = milkDao.getMilk(id);
             if (milk != null)
-                return new ResponseEntity<Milk>(milk,HttpStatus.OK);
+                return new ResponseEntity<>(milk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -81,8 +81,8 @@ public class MilkController {
     public ResponseEntity<Milk[]> getMilks() {
         LOG.info("GET /milks");
         try {
-            Milk listOfMilks[] = milkDao.getMilks();
-            return new ResponseEntity<Milk[]>(listOfMilks,HttpStatus.OK);
+            Milk[] listOfMilks = milkDao.getMilks();
+            return new ResponseEntity<>(listOfMilks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -104,8 +104,8 @@ public class MilkController {
     public ResponseEntity<Milk[]> searchMilks(@RequestParam String type) {
         LOG.info("GET /milks/?type="+type);
         try {
-            Milk milks[] = milkDao.searchMilks(type);
-            return new ResponseEntity<Milk[]>(milks,HttpStatus.OK);
+            Milk[] milks = milkDao.searchMilks(type);
+            return new ResponseEntity<>(milks,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -127,7 +127,7 @@ public class MilkController {
         LOG.info("POST /milks " + milk);
         try {
             Milk newMilk = milkDao.createMilk(milk);
-            return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
+            return new ResponseEntity<>(newMilk,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -150,7 +150,7 @@ public class MilkController {
         try {
             Milk newMilk = milkDao.updateMilk(milk);
             if (newMilk != null)
-                return new ResponseEntity<Milk>(newMilk,HttpStatus.OK);
+                return new ResponseEntity<>(newMilk,HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

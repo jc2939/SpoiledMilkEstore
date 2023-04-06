@@ -1,9 +1,5 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Logger;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a Milk entity
@@ -12,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Jeremy Smart
  */
 public class Milk {
-    private static final Logger LOG = Logger.getLogger(Milk.class.getName());
-
     // Package private for tests
     static final String STRING_FORMAT = "Milk [id=%d, name=%s]";
 
@@ -121,10 +115,8 @@ public class Milk {
      * @param rating The rating of the milk
      */
     public void addRating(double rating) {
-        double newRatings[] = new double[this.rating.length + 1];
-        for (int i = 0; i < this.rating.length; i++) {
-            newRatings[i] = this.rating[i];
-        }
+        double[] newRatings = new double[this.rating.length + 1];
+        System.arraycopy(this.rating, 0, newRatings, 0, this.rating.length);
         newRatings[this.rating.length] = rating;
         this.rating = newRatings;
     }
@@ -178,12 +170,17 @@ public class Milk {
     {
         boolean sameSame = false;
 
-        if (object != null && object instanceof Milk)
+        if (object instanceof Milk)
         {
             sameSame = this.id == ((Milk) object).id;
         }
 
         return sameSame;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 
     /**

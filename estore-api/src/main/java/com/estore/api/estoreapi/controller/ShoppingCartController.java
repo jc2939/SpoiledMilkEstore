@@ -59,7 +59,7 @@ public class ShoppingCartController {
         LOG.info("PUT /" + milk.toString() + "/" + userName);
         try {
             shoppingCartDAO.addMilk(milk, userName);
-            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -80,11 +80,11 @@ public class ShoppingCartController {
         LOG.info("POST /" + "creating" + "/" + userName);
         try {
             ShoppingCart cart = shoppingCartDAO.createNewCart(userName);
-            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -103,7 +103,7 @@ public class ShoppingCartController {
         LOG.info("PUT /" + id + "/" + userName);
         try {
             shoppingCartDAO.decrementMilk(id, userName);
-            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -122,11 +122,11 @@ public class ShoppingCartController {
         LOG.info("DELETE /cart/" + username);
         try {
             shoppingCartDAO.deleteShoppingCart(username);
-            return new ResponseEntity<ShoppingCart>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -142,11 +142,11 @@ public class ShoppingCartController {
         LOG.info("PUT /empty cart/" + username);
         try {
             ShoppingCart cart = shoppingCartDAO.emptyShoppingCart(username);
-            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<ShoppingCart>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -162,8 +162,8 @@ public class ShoppingCartController {
     public ResponseEntity<ShoppingCart[]> getShoppingCarts() {
         LOG.info("GET /carts");
         try {
-            ShoppingCart listOfCarts[] = shoppingCartDAO.getShoppingCarts();
-            return new ResponseEntity<ShoppingCart[]>(listOfCarts, HttpStatus.OK);
+            ShoppingCart[]  listOfCarts = shoppingCartDAO.getShoppingCarts();
+            return new ResponseEntity<>(listOfCarts, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -183,7 +183,7 @@ public class ShoppingCartController {
         LOG.info("GET /cart/" + name);
         try {
             ShoppingCart cart = shoppingCartDAO.getShoppingCart(name);
-            return new ResponseEntity<ShoppingCart>(cart, HttpStatus.OK);
+            return new ResponseEntity<>(cart, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

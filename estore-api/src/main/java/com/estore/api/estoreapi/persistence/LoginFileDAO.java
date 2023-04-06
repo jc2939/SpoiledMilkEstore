@@ -41,7 +41,7 @@ public class LoginFileDAO implements LoginDAO {
     }
 
     private HashedLogin[] getHashedLogins() {
-        ArrayList<HashedLogin> loginArrayList = new ArrayList<HashedLogin>();
+        ArrayList<HashedLogin> loginArrayList = new ArrayList<>();
         
         for (Map.Entry<String,String> entry : logins.entrySet()) {
             HashedLogin hl = new HashedLogin(entry.getKey(), entry.getValue());

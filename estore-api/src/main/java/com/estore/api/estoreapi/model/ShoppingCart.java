@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.model;
-import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.IOException;
 /**
@@ -8,11 +9,9 @@ import java.io.IOException;
  * @author SpoiledMilk Team
  */
 public class ShoppingCart {
-    private static final Logger LOG = Logger.getLogger(ShoppingCart.class.getName());
-
     @JsonProperty("username") private String username;
-    @JsonProperty("milksInCart") private ArrayList<Milk> milksInCart;
-    @JsonProperty("milksInCartQuantity") private ArrayList<Integer> milksInCartQuantity;
+    @JsonProperty("milksInCart") private List<Milk> milksInCart;
+    @JsonProperty("milksInCartQuantity") private List<Integer> milksInCartQuantity;
 
     /**
      * Create a ShoppingCart with the given username and list of milks and quantities
@@ -25,7 +24,7 @@ public class ShoppingCart {
      * is not provided in the JSON object, the Java field gets the default Java
      * value, i.e. 0 for int
      */
-    public ShoppingCart(@JsonProperty("username") String username,  @JsonProperty("milksInCart") ArrayList<Milk> milksInCart,@JsonProperty("milksInCartQuantity") ArrayList<Integer> milksInCartQuantity) {
+    public ShoppingCart(@JsonProperty("username") String username,  @JsonProperty("milksInCart") List<Milk> milksInCart,@JsonProperty("milksInCartQuantity") List<Integer> milksInCartQuantity) {
         this.username = username;
         this.milksInCart = milksInCart;
         this.milksInCartQuantity = milksInCartQuantity;
@@ -60,7 +59,7 @@ public class ShoppingCart {
      * Retrieves the list of milks in the ShoppingCart
      * @return The list of milks in the ShoppingCart
      */
-    public ArrayList<Milk> getMilksInCart() {return milksInCart;}
+    public List<Milk> getMilksInCart() {return milksInCart;}
 
     /**
      * Retrieves a milk in the ShoppingCart at a specific index
@@ -85,7 +84,7 @@ public class ShoppingCart {
      * Retrieves the list of milk quantities in the ShoppingCart
      * @return The list of milk quantities in the ShoppingCart
      */
-    public ArrayList<Integer> getMilksInCartQuantity() {return milksInCartQuantity;}
+    public List<Integer> getMilksInCartQuantity() {return milksInCartQuantity;}
 
     /**
      * Retrieves a milk quantity in the ShoppingCart at a specific index
@@ -97,7 +96,7 @@ public class ShoppingCart {
      * Either creates or increments a specified milk in the ShoppingCart
      * @param Milk The milk that needs to be incremented or created
      */
-    public boolean incrementItem(Milk milk) throws IOException{
+    public boolean incrementItem(Milk milk) {
         synchronized(this){
             if(milksInCart.contains(milk)){
                 milksInCartQuantity.set(milksInCart.indexOf(milk), milksInCartQuantity.get(milksInCart.indexOf(milk)) + 1);
@@ -117,7 +116,7 @@ public class ShoppingCart {
      * Either deletes or decrements a specified milk in the ShoppingCart based on the id
      * @param id The id of the milk that needs to be deleted or decremented
      */
-    public boolean decrementItem(int id) throws IOException{
+    public boolean decrementItem(int id) {
         synchronized(this){
             int indexCounter = 0;
             for (Milk milk : milksInCart) {

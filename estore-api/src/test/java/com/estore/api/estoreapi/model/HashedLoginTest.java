@@ -16,8 +16,8 @@ public class HashedLoginTest {
         HashedLogin login3 = new HashedLogin("yaro", "hello");
         boolean result = login1.equals(login2);
         boolean result2 = login1.equals(login3);
-        assertEquals(result, true);
-        assertEquals(result2, false);
+        assertEquals(true, result);
+        assertEquals(false, result2);
     }
     
 }

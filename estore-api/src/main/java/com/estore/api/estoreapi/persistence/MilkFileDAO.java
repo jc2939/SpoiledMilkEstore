@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +23,6 @@ import com.estore.api.estoreapi.model.Milk;
  */
 @Component
 public class MilkFileDAO implements MilkDAO {
-    private static final Logger LOG = Logger.getLogger(MilkFileDAO.class.getName());
     Map<Integer,Milk> milks;   // Provides a local cache of the milk objects
                                 // so that we don't need to read from the file
                                 // each time
@@ -42,7 +40,7 @@ public class MilkFileDAO implements MilkDAO {
      * 
      * @throws IOException when file cannot be accessed or read from
      */
-    public MilkFileDAO(@Value("${milk.file}") String filename, @Value("${logins.file}") String loginFilename, ObjectMapper objectMapper) throws IOException {
+    public MilkFileDAO(@Value("${milk.file}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the milks from the file
@@ -53,7 +51,7 @@ public class MilkFileDAO implements MilkDAO {
      * 
      * @return The next id
      */
-    private synchronized static int nextId() {
+    private static synchronized int nextId() {
         int id = nextId;
         ++nextId;
         return id;
@@ -191,7 +189,7 @@ public class MilkFileDAO implements MilkDAO {
     @Override
     public Milk updateMilk(Milk milk) throws IOException {
         synchronized(milks) {
-            if (milks.containsKey(milk.getId()) == false)
+            if (!milks.containsKey(milk.getId()))
                 return null;  // milk does not exist
 
             milks.put(milk.getId(),milk);

@@ -1,12 +1,8 @@
 package com.estore.api.estoreapi.model;
 
-import java.util.logging.Logger;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Login {
-    private static final Logger LOG = Logger.getLogger(Milk.class.getName());
-
     @JsonProperty("username") private String username;
     @JsonProperty("password") private String password;
 
@@ -26,9 +22,14 @@ public class Login {
     @Override
     public boolean equals(Object object) {
         boolean result = false;
-        if (object != null && object instanceof Login) {
+        if (object instanceof Login) {
             result = username == ((Login)object).username && password == ((Login)object).password;
         }
         return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode() + password.hashCode();
     }
 }

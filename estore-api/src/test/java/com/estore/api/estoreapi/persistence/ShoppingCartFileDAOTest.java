@@ -2,8 +2,6 @@ package com.estore.api.estoreapi.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -18,7 +16,6 @@ import com.estore.api.estoreapi.model.Milk;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.test.context.transaction.TestContextTransactionUtils;
 
 
 @Tag("Persistence-tier")
@@ -98,7 +95,7 @@ public class ShoppingCartFileDAOTest {
         ShoppingCart cart = shoppingCartFileDAO.getShoppingCart("not there");
 
         // Analyze
-        assertEquals(cart,null);
+        assertEquals(null, cart);
     }
 
     @Test
@@ -110,13 +107,13 @@ public class ShoppingCartFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, true);
+        assertEquals(true, result);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private
         // we can access it directly
 
-        assertEquals(shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(0), 3);
+        assertEquals(3, shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(0));
     }
 
     @Test
@@ -128,14 +125,14 @@ public class ShoppingCartFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, true);
+        assertEquals(true, result);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private
         // we can access it directly
 
-        assertEquals(shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(2), 1);
-        assertEquals(shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCart().get(2), milk);
+        assertEquals(1, shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(2));
+        assertEquals(milk, shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCart().get(2));
     }
 
     @Test
@@ -147,13 +144,13 @@ public class ShoppingCartFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, true);
+        assertEquals(true, result);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private
         // we can access it directly
 
-        assertEquals(shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(0), 1);
+        assertEquals(1, shoppingCartFileDAO.getShoppingCart("Testing1").getMilksInCartQuantity().get(0));
     }
 
     @Test
@@ -165,7 +162,7 @@ public class ShoppingCartFileDAOTest {
                             "Unexpected exception thrown");
 
         // Analyze
-        assertEquals(result, true);
+        assertEquals(true, result);
         // We check the internal tree map size against the length
         // of the test milks array - 1 (because of the delete)
         // Because milks attribute of MilkFileDAO is package private

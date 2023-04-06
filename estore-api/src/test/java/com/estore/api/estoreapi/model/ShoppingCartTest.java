@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class ShoppingCartTest {
         listOfMilksQuantity.add(4);
         ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
         // Invoke
-        ArrayList<Milk> actual = cart.getMilksInCart();
+        List<Milk> actual = cart.getMilksInCart();
         // Analyze
         assertEquals(actual, listOfMilks);
     }
@@ -62,7 +63,7 @@ public class ShoppingCartTest {
         // Invoke
         Milk actual = cart.getMilksInCart(0);
         // Analyze
-        assertEquals(actual, listOfMilks.get(0));
+        assertEquals(listOfMilks.get(0), actual);
     }
 
     @Test
@@ -78,9 +79,9 @@ public class ShoppingCartTest {
         listOfMilksQuantity.add(4);
         ShoppingCart cart = new ShoppingCart("Yaro", listOfMilks, listOfMilksQuantity);
         // Invoke
-        ArrayList<Integer> actual = cart.getMilksInCartQuantity();
+        List<Integer> actual = cart.getMilksInCartQuantity();
         // Analyze
-        assertEquals(actual, listOfMilksQuantity);
+        assertEquals(listOfMilksQuantity, actual);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class ShoppingCartTest {
         // Invoke
         Integer actual = cart.getMilksInCartQuantity(0);
         // Analyze
-        assertEquals(actual, listOfMilksQuantity.get(0));
+        assertEquals(listOfMilksQuantity.get(0), actual);
     }
 
     @Test
@@ -198,8 +199,8 @@ public class ShoppingCartTest {
         boolean result = cart.incrementItem(listOfMilks.get(0));
         boolean result2 = cart.incrementItem(milk);
         // Analyze
-        assertEquals(result, true);
-        assertEquals(result2, true);
+        assertEquals(true, result);
+        assertEquals(true, result2);
     }
 
     @Test
@@ -218,8 +219,8 @@ public class ShoppingCartTest {
         boolean result = cart.decrementItem(listOfMilks.get(0).getId());
         boolean result2 = cart.decrementItem(listOfMilks.get(1).getId());
         // Analyze
-        assertEquals(result, true);
-        assertEquals(result2, true);   
+        assertEquals(true, result);
+        assertEquals(true, result2);
     }
 
     @Test
