@@ -99,7 +99,9 @@ with the e-store application.
 > Will be implemented in a later Sprint
 ​
 ### ViewModel Tier
-> Will be implemented in a later Sprint
+> We have a Controller class for Login, Milk, and Shopping Cart routes. Their UML diagrams are shown below.
+>
+![ViewModel](ControllersUML.png)
 ​
 ### Model Tier
 > We have a model for login, shopping cart, and the milk object itself. The Milk UML diagram is shown below.
