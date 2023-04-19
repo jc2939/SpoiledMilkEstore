@@ -45,18 +45,23 @@ geometry: margin=1in
   >* A customer will have an option to purchase the products they add to their shopping cart.
 ​
 ### Definition of MVP
->For Sprint 2, these are our definition of MVP:
-  
-  >* Minimal authentication - an admin signs in with the reserved username admin, and any other username is seen as a customer
-  >* Customer Functionality - customers should be able to search for a product and add/remove products from their shopping cart
-  >* E-store Owner Functionality - admins should be able to add, remove, and update products in the inventory
+  >* A user is able to log in to the e-store using a username and password
+  >* A customer is able to purchase milks from the e-store. 
+  >* An admin can edit the inventory based on which milks are available to purchase
 ​
 ### MVP Features
-> Will be implemented in a later Sprint
+>* Minimal Authentication for customer/owner login.
+  >* Customer can see list of products.
+  >* Customer can search for a product.
+  >* Customer can add/remove an item to their shopping cart.
+  >* Customer can proceed to check out their items for purchase.
+  >* E-Store owner can add, remove or delete items in the inventory.
+  >* Implementation of enhancements
 ​
 ### Enhancements
-> Will be implemented in a later Sprint.
-> We plan on doing a password system as well as a rating system
+> We have two enhancements:
+  >* A rating system, where customers can rate a products out of 5
+  >* A password system, where a customer or admin can log in with a username and password
 ​
 ​
 ## Application Domain
@@ -106,7 +111,7 @@ with the e-store application.
 ### Model Tier
 > We have a model for login, shopping cart, and the milk object itself. The UML diagrams is shown below.
 > 
-![Model](Model.png)
+![Model](Milk.png)
 ![Model](ExtraModel.png)
 ![Model](Persistence.png)
 ## OO Design Principles
@@ -138,7 +143,7 @@ made. Below is an image of the different controllers that could interact with th
 
 **Single Responsibility**
 
-With single responsibility, many classes will be made to perform specific tasks. One
+>With single responsibility, many classes will be made to perform specific tasks. One
 quickly distinguishable class is the Product class. This class specifically holds the data for
 products, including the flavor, size, and age of the product. As also stated earlier, specific classes
 for controlling the site can also be used. Site navigation can be limited to at least one class, and
