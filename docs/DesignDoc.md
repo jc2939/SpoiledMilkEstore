@@ -96,9 +96,6 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 >This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 ​
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
-​
 ​
 ### View Tier
 > We have components for App, Dashboard, Login, Milk-detail, Milk-detail-customer, Milk-search, Milks, and Shopping Cart.
@@ -122,6 +119,9 @@ with the e-store application.
 > The sequence diagram for the Login function is shown below
 >
 ![View](LoginSequenceDiagram.png)
+> The sequence diagram for adding an item to a cart is shown below.
+
+![View](AddToCart.png)
 ​
 ### ViewModel Tier
 > We have a Controller class for Login, Milk, and Shopping Cart routes. Their UML diagrams are shown below.
