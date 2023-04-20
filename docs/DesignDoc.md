@@ -118,6 +118,10 @@ with the e-store application.
 > Milk-detail displays several text boxes, each holding one detil of the milk, and several buttons: Clear Ratings, Choose File, Go Back, and Save. Save and Go Back both send the admin back to Milks. The text boxes, Clear Ratings, and Choose File don't lead anywhere and only modify details of the milk.
 > 
 > Entering information into the text boxes in Milks and clicking Add milk creates a new milk product with those details. The Logout button logs the user out, sending them back to Login.
+> 
+> The sequence diagram for the Login function is shown below
+>
+![View](LoginSequenceDiagram.png)
 ​
 ### ViewModel Tier
 > We have a Controller class for Login, Milk, and Shopping Cart routes. Their UML diagrams are shown below.
