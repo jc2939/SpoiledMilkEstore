@@ -101,7 +101,23 @@ with the e-store application.
 ​
 ​
 ### View Tier
-> Will be implemented in a later Sprint
+> We have components for App, Dashboard, Login, Milk-detail, Milk-detail-customer, Milk-search, Milks, and Shopping Cart.
+>
+> Upon opening up the program, the user is greeted with the Login page. This displays the text boxes to enter the username and the password and three buttons: Forgot Password?, Login, and Sign Up. Forgot Password? and Login and Sign Up, if the information entered is invalid, will not leave the page.
+>
+> If a **customer** successfully signs up or logs in, they are sent to Dashboard. This displays three buttons (Dashboard, Logout, and a Shopping Cart), a search bar from Milk-search, and all available milk items as a card, each with an Add to Cart button, some details about the item, including quantity in stock, and a picture.
+>
+> Clicking on the milk will send the customer to Milk-detail-customer for this milk. This presents some more information about the milk, including the rating, id, type, flavor, volume per unit, units available, and price per unit. The picture is shown under it and below are buttons to rate the milk and to Go Back. The rating buttons add a rating and the displayed rating will changed depending on the ratings, but will remain on the page. Go Back will send the customer back to the Dashboard.
+>
+> The Dashboard button on the top sends the user back to the Dashboard from whatever page they are on. The Add to Cart button in the milk card removes a milk from the available quantity and adds it to the customer's cart, greying out if there are no more milks left to buy. The shopping cart button sends the customer to Shopping Cart.
+>
+> Shopping Cart displays any milks currently in the customer's shopping cart with buttons to increment or decrement the quantity, a text box to input a delivery address, the total cost of the cart, and a Purchase button. Decrementing the entire quantity of a milk in the cart will remove it from view, and clicking the Purchase button will show an alert with the details of the address and the price of the purchase before removing all items from the cart. Both keep the user on the page.
+>
+> Logout will send the user back to Login. If the **admin** successfully logs in, they are sent to Milks. Milks displays a Milks button and Logout button on the top, which sends the admin to the Milks page or logs them out respectively, several text boxes for each detail of a milk, a Choose File button, an Add milk button, and all milks currently in the system with an X button. The X button will delete that milk from the store and clicking on the milk will send the admin to Milk-detail.
+> 
+> Milk-detail displays several text boxes, each holding one detil of the milk, and several buttons: Clear Ratings, Choose File, Go Back, and Save. Save and Go Back both send the admin back to Milks. The text boxes, Clear Ratings, and Choose File don't lead anywhere and only modify details of the milk.
+> 
+> Entering information into the text boxes in Milks and clicking Add milk creates a new milk product with those details. The Logout button logs the user out, sending them back to Login.
 ​
 ### ViewModel Tier
 > We have a Controller class for Login, Milk, and Shopping Cart routes. Their UML diagrams are shown below.
