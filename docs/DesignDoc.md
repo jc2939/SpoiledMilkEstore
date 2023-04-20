@@ -17,7 +17,7 @@ geometry: margin=1in
 >We will make a functional e-store with different features based on whether the user is an admin or a customer.
 ​
 ### Purpose
->This project will allow users to access a spoiled milk e-store. An admin will be able to update products in the inventory, and the customer will be able to view and add spoiled milks in their shopping cart
+>This project will allow users to access a spoiled milk e-store. An admin will be able to edit products in the inventory as well as add and remove products from the inventory. The customer will be able to view items from the dashboard and add/delete spoiled milks in their shopping cart. They will also be able to purchase these products.
 ​
 ### Glossary and Acronyms
 ​
@@ -214,9 +214,9 @@ stuff without thinking ahead, so we want to discourage that when working on our 
 > and the results of the testing._
 ​
 ### Acceptance Testing
->Most of the user stories have passed their acceptance tests, but an acceptance criteria that did not pass was to have a message saying "No products available" when there are no items in the inventory. This is not a huge concern and we will fix that next Sprint.
+> All of our user stories have passed the acceptance tests.
 ​
 ### Unit Testing and Code Coverage
-> We have included unit testing for the Milk object, shopping cart, and login. We have not finished the unit testing for the login page, but we will do that in the next Sprint.
+> We have included unit testing for our model, persistence, and controller. Our code coverage is 88%. We could have done some more unit testing on the shopping cart classes to bring the code coverage higher.
 ​
 ![Code Coverage](CodeCoverage.png)
