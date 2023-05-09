@@ -168,14 +168,14 @@ public class Milk {
     @Override
     public boolean equals(Object object)
     {
-        boolean sameSame = false;
+        boolean result = false;
 
         if (object instanceof Milk)
         {
-            sameSame = this.id == ((Milk) object).id;
+            result = this.id == ((Milk) object).id;
         }
 
-        return sameSame;
+        return result;
     }
 
     @Override
